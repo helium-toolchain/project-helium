@@ -1,2 +1,2 @@
-# helium-minecraft
+# project-helium
 coming soon :p
