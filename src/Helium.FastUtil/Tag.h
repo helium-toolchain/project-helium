@@ -10,10 +10,10 @@ namespace Helium {
 		namespace Nbt {
 			class __declspec(dllexport) Tag {
 				public:
-					ChatFormatting SyntaxHighlighting_Key = Aqua;
-					ChatFormatting SyntaxHighlighting_String = Green;
-					ChatFormatting SyntaxHighlighting_Number = Orange;
-					ChatFormatting SyntaxHighlighting_NumberType = Red;
+					ChatFormatting SyntaxHighlighting_Key = ChatFormatting::Aqua;
+					ChatFormatting SyntaxHighlighting_String = ChatFormatting::Green;
+					ChatFormatting SyntaxHighlighting_Number = ChatFormatting::Orange;
+					ChatFormatting SyntaxHighlighting_NumberType = ChatFormatting::Red;
 					short int Id;
 
 					virtual void Write(string Filename);

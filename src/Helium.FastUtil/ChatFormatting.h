@@ -1,7 +1,7 @@
 #pragma once
 namespace Helium {
 	namespace FastUtil {
-		enum __declspec(dllexport) ChatFormatting {
+		enum class __declspec(dllexport) ChatFormatting {
 			Black = 0,
 			DarkBlue = 1,
 			DarkGreen = 2,
