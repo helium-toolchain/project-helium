@@ -17,7 +17,7 @@ namespace Helium.Utility.Chat
             if (ResetBefore)
                 returnValue += "§r";
 
-            for(Byte c = 0; ; c++)
+            for(Byte c = 0; Formatting != 0; c++)
             {
                 Value = (Int32)Pow(2, c);
 
@@ -31,9 +31,6 @@ namespace Helium.Utility.Chat
                         //TODO: actually log the error :b
                     }
                 }
-
-                if (Formatting == 0)
-                    break;
             }
 
             return returnValue;
