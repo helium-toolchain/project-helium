@@ -4,4 +4,13 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Datatypes\Collections\" />
+    <Folder Include="Serialization\Aether\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Helium.Utility\Helium.Utility.csproj" />
+  </ItemGroup>
+
 </Project>
