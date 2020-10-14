@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Datatypes\Collections\" />
     <Folder Include="Serialization\Aether\" />
   </ItemGroup>
 
