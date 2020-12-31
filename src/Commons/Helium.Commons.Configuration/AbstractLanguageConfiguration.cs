@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Helium.Commons.Configuration
 {
+    /// <summary>
+    /// Part of the Helium Toolchain API. Abstract base class for Language configurations.
+    /// </summary>
     public abstract class AbstractLanguageConfiguration : IConfiguration<String, String>
     {
         public String ConfigurationName { get; init; }

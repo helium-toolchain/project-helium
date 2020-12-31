@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 
 namespace Helium.Commons.Configuration
 {
+
+    /// <summary>
+    /// Part of the Helium Toolchain API. Abstract base class for JSON-serialized Language configurations
+    /// </summary>
     public abstract class AbstractJsonLanguageConfiguration : AbstractLanguageConfiguration
     {
         public override void Serialize()
