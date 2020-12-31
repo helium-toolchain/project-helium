@@ -9,10 +9,11 @@ namespace Helium.Commons.Logging
     /// <summary>
     /// Part of the Helium Toolchain API. Serves as data structure for additional logging data.
     /// </summary>
+#nullable enable
     public struct EventData
     {
         internal EventIdentifier identifier { get; set; }
-        internal String name { get; set; }
+        internal String? name { get; set; }
 
         /// <summary>
         /// Creates a new EventData instance
@@ -22,7 +23,7 @@ namespace Helium.Commons.Logging
         /// <param name="ClassId">Numeral, custom class identifier</param>
         /// <param name="EventId">Numeral, custom method call identifier</param>
         /// <param name="name">Name of the code location the logger is called from</param>
-        public EventData(Int16 PackageId, Int16 NamespaceId, Int16 ClassId, Int16 EventId, String name)
+        public EventData(Int16 PackageId, Int16 NamespaceId, Int16 ClassId, Int16 EventId, String? name)
         {
             identifier = new EventIdentifier
             {
@@ -38,6 +39,7 @@ namespace Helium.Commons.Logging
         /// Returns the full Event data string of the given instance
         /// </summary>
         public override String ToString()
-            => $"[{identifier}/{name}]";
+            => $"[{identifier}/{name ?? ""}]";
     }
+#nullable disable
 }
