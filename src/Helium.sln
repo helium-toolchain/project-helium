@@ -34,7 +34,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Commons", "Commons", "{635D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helium.Commons.Logging", "Commons\Helium.Commons.Logging\Helium.Commons.Logging.csproj", "{091CC977-F090-4CC3-8B97-500DA3202D64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helium.Commons.Configuration", "Commons\Helium.Commons.Configuration\Helium.Commons.Configuration.csproj", "{5BBBC9AA-8874-4DE4-AA78-E4095C6BAEC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helium.Commons.Configuration", "Commons\Helium.Commons.Configuration\Helium.Commons.Configuration.csproj", "{5BBBC9AA-8874-4DE4-AA78-E4095C6BAEC4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helium.Commons.Exceptions", "Commons\Helium.Commons.Exceptions\Helium.Commons.Exceptions.csproj", "{1624A35C-F501-4726-ADB8-E4F028926AEF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -202,6 +204,18 @@ Global
 		{5BBBC9AA-8874-4DE4-AA78-E4095C6BAEC4}.Release|x64.Build.0 = Release|Any CPU
 		{5BBBC9AA-8874-4DE4-AA78-E4095C6BAEC4}.Release|x86.ActiveCfg = Release|Any CPU
 		{5BBBC9AA-8874-4DE4-AA78-E4095C6BAEC4}.Release|x86.Build.0 = Release|Any CPU
+		{1624A35C-F501-4726-ADB8-E4F028926AEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1624A35C-F501-4726-ADB8-E4F028926AEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1624A35C-F501-4726-ADB8-E4F028926AEF}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{1624A35C-F501-4726-ADB8-E4F028926AEF}.Debug|x64.Build.0 = Debug|Any CPU
+		{1624A35C-F501-4726-ADB8-E4F028926AEF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1624A35C-F501-4726-ADB8-E4F028926AEF}.Debug|x86.Build.0 = Debug|Any CPU
+		{1624A35C-F501-4726-ADB8-E4F028926AEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1624A35C-F501-4726-ADB8-E4F028926AEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1624A35C-F501-4726-ADB8-E4F028926AEF}.Release|x64.ActiveCfg = Release|Any CPU
+		{1624A35C-F501-4726-ADB8-E4F028926AEF}.Release|x64.Build.0 = Release|Any CPU
+		{1624A35C-F501-4726-ADB8-E4F028926AEF}.Release|x86.ActiveCfg = Release|Any CPU
+		{1624A35C-F501-4726-ADB8-E4F028926AEF}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -209,6 +223,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{091CC977-F090-4CC3-8B97-500DA3202D64} = {635D8B03-32F3-4E12-8071-C266FE099FCC}
 		{5BBBC9AA-8874-4DE4-AA78-E4095C6BAEC4} = {635D8B03-32F3-4E12-8071-C266FE099FCC}
+		{1624A35C-F501-4726-ADB8-E4F028926AEF} = {635D8B03-32F3-4E12-8071-C266FE099FCC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {905E50AD-16B2-4090-839B-70F4D255AB8C}
