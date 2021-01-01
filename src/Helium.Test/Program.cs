@@ -2,6 +2,7 @@
 using Helium.Commons.Logging.Default;
 
 using System;
+using System.IO;
 
 namespace Helium.Test
 {
