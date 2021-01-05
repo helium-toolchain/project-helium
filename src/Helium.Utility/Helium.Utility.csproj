@@ -4,4 +4,8 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="SimdJsonSharp.Bindings" Version="1.7.0" />
+  </ItemGroup>
+
 </Project>
