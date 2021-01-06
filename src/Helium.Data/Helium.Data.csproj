@@ -4,4 +4,11 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Datapack\Compat\" />
+    <Folder Include="Datapack\HeliumFormat\" />
+    <Folder Include="Resource\Compat\" />
+    <Folder Include="Resource\HeliumFormat\" />
+  </ItemGroup>
+
 </Project>
