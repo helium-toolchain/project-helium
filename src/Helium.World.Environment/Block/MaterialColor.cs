@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Helium.World.Environment.Block
 {
-    public enum MaterialColor
+    public record MaterialColor
     {
+        public UInt16 Id { get; init; }
+        public UInt32 Color { get; init; }
     }
 }
