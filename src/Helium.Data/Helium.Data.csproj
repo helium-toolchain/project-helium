@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Datapack\Compat\" />
     <Folder Include="Datapack\HeliumFormat\" />
     <Folder Include="Resource\Compat\" />
     <Folder Include="Resource\HeliumFormat\" />

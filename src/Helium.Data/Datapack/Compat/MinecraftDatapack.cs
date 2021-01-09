@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Helium.Data.Datapack
+namespace Helium.Data.Datapack.Compat
 {
-    public interface IDatapack
+    public class MinecraftDatapack : IDatapack
     {
         public Byte PackVersion { get; set; }
         public String Description { get; set; }

@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace Helium.Data.Datapack
 {
-    public interface IDatapack
+    public interface IAdvancement
     {
-        public Byte PackVersion { get; set; }
-        public String Description { get; set; }
     }
 }
