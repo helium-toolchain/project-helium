@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,12 +16,15 @@ namespace Helium.Commons.Logging.Default
         /// </summary>
         public LogLevel MinimalLevel { get; set; }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void LogMessage(String message) 
             => LogInformation(message);
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void LogMessage(LogLevel level, String message)
             => LogMessage(new EventData(0, 0, 0, 0, null), level, message);
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void LogMessage(EventData data, LogLevel level, String message)
         {
             switch(level) {
@@ -52,11 +56,15 @@ namespace Helium.Commons.Logging.Default
         }
 
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void LogDebug(String message) 
             => LogDebug(new EventData(0, 0, 0, 0, null), message);
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void LogDebug(EventData data, String message)
         {
+            if(MinimalLevel > LogLevel.Debug)
+                return;
             Console.Write($"[{DateTimeOffset.Now}] ");
             Console.ForegroundColor = DefaultFormatting.Debug.ForegroundColor;
             Console.Write(String.Format("{0:-5}", $"[{DefaultFormatting.Debug.LogName}]"));
@@ -64,10 +72,13 @@ namespace Helium.Commons.Logging.Default
             Console.WriteLine($" {data}: {message}");
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void LogTrace(String message)
             => LogTrace(new EventData(0, 0, 0, 0, null), message);
         public void LogTrace(EventData data, String message)
         {
+            if(MinimalLevel > LogLevel.Trace)
+                return;
             Console.Write($"[{DateTimeOffset.Now}] ");
             Console.ForegroundColor = DefaultFormatting.Trace.ForegroundColor;
             Console.Write(String.Format("{0:-5}", $"[{DefaultFormatting.Trace.LogName}]"));
@@ -75,10 +86,14 @@ namespace Helium.Commons.Logging.Default
             Console.WriteLine($" {data}: {message}");
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void LogInformation(String message)
             => LogInformation(new EventData(0, 0, 0, 0, null), message);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void LogInformation(EventData data, String message)
         {
+            if(MinimalLevel > LogLevel.Info)
+                return;
             Console.Write($"[{DateTimeOffset.Now}] ");
             Console.ForegroundColor = DefaultFormatting.Info.ForegroundColor;
             Console.Write(String.Format("{0:-5}", $"[{DefaultFormatting.Info.LogName}]"));
@@ -86,10 +101,14 @@ namespace Helium.Commons.Logging.Default
             Console.WriteLine($" {data}: {message}");
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void LogWarning(String message)
             => LogWarning(new EventData(0, 0, 0, 0, null), message);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void LogWarning(EventData data, String message)
         {
+            if(MinimalLevel > LogLevel.Warning)
+                return;
             Console.Write($"[{DateTimeOffset.Now}] ");
             Console.ForegroundColor = DefaultFormatting.Warn.ForegroundColor;
             Console.Write(String.Format("{0:-5}", $"[{DefaultFormatting.Warn.LogName}]"));
@@ -97,10 +116,14 @@ namespace Helium.Commons.Logging.Default
             Console.WriteLine($" {data}: {message}");
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void LogError(String message)
             => LogError(new EventData(0, 0, 0, 0, null), message);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void LogError(EventData data, String message)
         {
+            if(MinimalLevel > LogLevel.Error)
+                return;
             Console.Write($"[{DateTimeOffset.Now}] ");
             Console.ForegroundColor = DefaultFormatting.Error.ForegroundColor;
             Console.Write(String.Format("{0:-5}", $"[{DefaultFormatting.Error.LogName}]"));
@@ -108,10 +131,14 @@ namespace Helium.Commons.Logging.Default
             Console.WriteLine($" {data}: {message}");
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void LogCritical(String message)
             => LogCritical(new EventData(0, 0, 0, 0, null), message);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void LogCritical(EventData data, String message)
         {
+            if(MinimalLevel > LogLevel.Critical)
+                return;
             Console.Write($"[{DateTimeOffset.Now}] ");
             Console.ForegroundColor = DefaultFormatting.Crit.ForegroundColor;
             Console.Write(String.Format("{0:-5}", $"[{DefaultFormatting.Crit.LogName}]"));
@@ -119,8 +146,10 @@ namespace Helium.Commons.Logging.Default
             Console.WriteLine($" {data}: {message}");
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void LogFatal(String message)
             => LogFatal(new EventData(0, 0, 0, 0, null), message);
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void LogFatal(EventData data, String message)
         {
             Console.Write($"[{DateTimeOffset.Now}] ");
