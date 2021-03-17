@@ -2,90 +2,56 @@ root = true
 
 [*.cs]
 
+indent_style = tab
+tab_width = 4
 
-#Core editorconfig formatting - indentation
+end_of_line = crlf
+insert_final_newline = true
 
-#use soft tabs (spaces) for indentation
-indent_style = space
-indent_size = 4
-
-#Formatting - new line options
-
-#place catch statements on the same line
-csharp_new_line_before_catch = true
-#require members of object intializers to be on separate lines
-csharp_new_line_before_members_in_object_initializers = true
-#require braces to be on a new line for methods, object_collection_array_initializers, and types (also known as "Allman" style)
-csharp_new_line_before_open_brace = methods, object_collection_array_initializers, types
-
-#Formatting - organize using options
 dotnet_separate_import_directive_groups = true
-dotnet_sort_system_directives_first = false
+dotnet_sort_system_directives_first = true
 
- #zef, if you want you can define a file header here
+dotnet_style_qualification_for_event = true:silent
+dotnet_style_qualification_for_field = true:silent
+dotnet_style_qualification_for_method = true:silent
+dotnet_style_qualification_for_property = true:silent
 
-#Language keywords
 dotnet_style_predefined_type_for_locals_parameters_members = false:suggestion
 dotnet_style_predefined_type_for_member_access = false:suggestion
 
-#require NO space between a cast and the value
-csharp_space_after_cast = false
-#require a space before the colon for bases or interfaces in a type declaration
-csharp_space_after_colon_in_inheritance_clause = true
-#require NO space after a keyword in a control flow statement such as a for loop
-csharp_space_after_keywords_in_control_flow_statements = false
-#require a space before the colon for bases or interfaces in a type declaration
-csharp_space_before_colon_in_inheritance_clause = true
-#remove space between method call name and opening parenthesis
-csharp_space_between_method_call_name_and_opening_parenthesis = false
-#do not place space characters after the opening parenthesis and before the closing parenthesis of a method call
-csharp_space_between_method_call_parameter_list_parentheses = false
-#remove space within empty parameter list parentheses for a method declaration
-csharp_space_between_method_declaration_empty_parameter_list_parentheses = false
-#place a space character after the opening parenthesis and before the closing parenthesis of a method declaration parameter list.
-csharp_space_between_method_declaration_parameter_list_parentheses = false
+dotnet_style_parentheses_in_arithmetic_binary_operators = always_for_clarity:silent
+dotnet_style_parentheses_in_other_binary_operators = always_for_clarity:silent
+dotnet_style_parentheses_in_other_operators = always_for_clarity:silent
+dotnet_style_parentheses_in_relational_binary_operators = always_for_clarity:silent
 
-#Formatting - wrapping options
+dotnet_style_require_accessibility_modifiers = always:suggestion
 
-#leave code block on single line
-csharp_preserve_single_line_blocks = true
-
-#Style - Code block preferences
-
-#prefer no curly braces if allowed
-csharp_prefer_braces = false:suggestion
-
-#Style - expression bodied member options
-
-#prefer expression-bodied members for methods
-csharp_style_expression_bodied_methods = true:suggestion
-
-#Style - Expression-level  preferences
-
-#prefer objects to be initialized using object initializers when possible
+dotnet_style_coalesce_expression = true:suggestion
+dotnet_style_collection_initializer = true:suggestion
+dotnet_style_explicit_tuple_names = true:suggestion
+dotnet_style_null_propagation = true:suggestion
 dotnet_style_object_initializer = true:suggestion
+dotnet_style_prefer_auto_properties = true:silent
+dotnet_style_prefer_compound_assignment = true:suggestion
+dotnet_style_prefer_conditional_expression_over_assignment = true:silent
+dotnet_style_prefer_conditional_expression_over_return = true:silent
+dotnet_style_prefer_inferred_anonymous_type_member_names = true:suggestion
+dotnet_style_prefer_inferred_tuple_names = true:suggestion
+dotnet_style_prefer_is_null_check_over_reference_equality_method = true:suggestion
+dotnet_style_prefer_simplified_boolean_expressions = true:suggestion
+dotnet_style_prefer_simplified_interpolation = true:suggestion
 
-#Style - implicit and explicit types
+dotnet_style_readonly_field = true:suggestion
+dotnet_code_quality_unused_parameters = all:silent
+dotnet_remove_unnecessary_suppression_exclusions = none:silent
 
-#prefer explicit type over var in all cases, unless overridden by another code style rule
-csharp_style_var_elsewhere = false:suggestion
-#prefer explicit type over var to declare variables with built-in system types such as int
-csharp_style_var_for_built_in_types = false:suggestion
-
-#Style - modifier options
-
-#prefer accessibility modifiers to be declared except for public interface members. This will currently not differ from always and will act as future proofing for if C# adds default interface methods.
-dotnet_style_require_accessibility_modifiers = for_non_interface_members:suggestion
-
-#Style - Modifier preferences
-
-#when this rule is set to a list of modifiers, prefer the specified ordering.
-csharp_preferred_modifier_order = public,internal,protected,private,override,abstract,static,virtual:suggestion
-
-#Style - qualification options
-
-#prefer properties not to be prefaced with this. or Me. in Visual Basic
-dotnet_style_qualification_for_property = false:suggestion
+csharp_new_line_before_catch = false
+csharp_new_line_before_else = false
+csharp_new_line_before_finally = false
+csharp_new_line_before_members_in_anonymous_types = true
+csharp_new_line_before_members_in_object_initializers = true
+csharp_new_line_before_open_brace = all
+csharp_new_line_between_query_expression_clauses = true
 
 #Naming Rules
 
@@ -109,3 +75,7 @@ dotnet_naming_style.pascal_case.capitalization = pascal_case
 
 dotnet_naming_style.begins_with_i.required_prefix = I
 dotnet_naming_style.begins_with_i.capitalization = pascal_case
+
+[*.json]
+
+indent_style = tab
