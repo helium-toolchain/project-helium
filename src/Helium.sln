@@ -16,7 +16,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helium.Commons.Configuratio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helium.Commons.Exceptions", "Commons\Helium.Commons.Exceptions\Helium.Commons.Exceptions.csproj", "{1624A35C-F501-4726-ADB8-E4F028926AEF}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Startup", "Startup", "{56EA37E2-E618-426B-98D7-B27AEC651F0A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{56EA37E2-E618-426B-98D7-B27AEC651F0A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{4E0146F9-F079-403D-8CB2-B619CAC3CEF7}"
 EndProject
@@ -34,49 +34,49 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helium.Network.Api", "Heliu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helium.Network.Api.Vanilla", "Helium.Network.Api.Vanilla\Helium.Network.Api.Vanilla.csproj", "{E33A90FB-9E78-42D0-8DC0-3DA805FD815C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helium.Core", "Helium.Core\Helium.Core.csproj", "{A8EFEF42-EE2D-4D6D-976A-C96335AABC37}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helium.Core", "Helium.Core\Helium.Core.csproj", "{A8EFEF42-EE2D-4D6D-976A-C96335AABC37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helium.Core.Api", "Helium.Core.Api\Helium.Core.Api.csproj", "{DFEEB50D-F208-4276-B59E-26E57EC6790C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helium.Core.Api", "Helium.Core.Api\Helium.Core.Api.csproj", "{DFEEB50D-F208-4276-B59E-26E57EC6790C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helium.Core.Api.Script", "Helium.Core.Api.Script\Helium.Core.Api.Script.csproj", "{FD0C1DC7-E578-44FF-819D-1EAA0B5330C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helium.Core.Api.Script", "Helium.Core.Api.Script\Helium.Core.Api.Script.csproj", "{FD0C1DC7-E578-44FF-819D-1EAA0B5330C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helium.Core.Api.Mod", "Helium.Core.Api.Mod\Helium.Core.Api.Mod.csproj", "{8A34075B-E1D5-4C23-98BB-D0A0087349E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helium.Core.Api.Mod", "Helium.Core.Api.Mod\Helium.Core.Api.Mod.csproj", "{8A34075B-E1D5-4C23-98BB-D0A0087349E4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helium.Core.Commands", "Helium.Core.Commands\Helium.Core.Commands.csproj", "{D2E1449F-D306-477C-8C27-F8F2FBC56765}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helium.Core.Commands", "Helium.Core.Commands\Helium.Core.Commands.csproj", "{D2E1449F-D306-477C-8C27-F8F2FBC56765}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helium.Core.Compiler", "Helium.Core.Compiler\Helium.Core.Compiler.csproj", "{5BDF0DBF-DE61-4715-821D-3527C6245B48}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helium.Core.Compiler", "Helium.Core.Compiler\Helium.Core.Compiler.csproj", "{5BDF0DBF-DE61-4715-821D-3527C6245B48}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helium.Core.Compiler.Intermediate", "Helium.Core.Compiler.Intermediate\Helium.Core.Compiler.Intermediate.csproj", "{0DFEFF85-20F8-448F-8FCD-7EEBFDFF5561}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helium.Core.Compiler.Intermediate", "Helium.Core.Compiler.Intermediate\Helium.Core.Compiler.Intermediate.csproj", "{0DFEFF85-20F8-448F-8FCD-7EEBFDFF5561}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helium.Core.Compiler.Scripts", "Helium.Core.Compiler.Scripts\Helium.Core.Compiler.Scripts.csproj", "{A1C4CF1B-2EB4-425B-9EAA-747A17F60B01}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helium.Core.Compiler.Scripts", "Helium.Core.Compiler.Scripts\Helium.Core.Compiler.Scripts.csproj", "{A1C4CF1B-2EB4-425B-9EAA-747A17F60B01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helium.Core.Compiler.Datapacks", "Helium.Core.Compiler.Datapacks\Helium.Core.Compiler.Datapacks.csproj", "{B6BCF006-D84C-4EA4-99FD-618F15EC3A4D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helium.Core.Compiler.Datapacks", "Helium.Core.Compiler.Datapacks\Helium.Core.Compiler.Datapacks.csproj", "{B6BCF006-D84C-4EA4-99FD-618F15EC3A4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helium.Core.Data", "Helium.Core.Data\Helium.Core.Data.csproj", "{87ED1B39-622B-42BC-BAF2-9273DF35F288}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helium.Core.Data", "Helium.Core.Data\Helium.Core.Data.csproj", "{87ED1B39-622B-42BC-BAF2-9273DF35F288}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helium.Core.Datapacks", "Helium.Core.Datapacks\Helium.Core.Datapacks.csproj", "{917457A2-84BB-4975-9A6B-238A87727086}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helium.Core.Datapacks", "Helium.Core.Datapacks\Helium.Core.Datapacks.csproj", "{917457A2-84BB-4975-9A6B-238A87727086}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helium.Core.Datapacks.Vanilla", "Helium.Core.Datapacks.Vanilla\Helium.Core.Datapacks.Vanilla.csproj", "{600ACCEB-44C1-4C60-BCC1-20A97E9884FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helium.Core.Datapacks.Vanilla", "Helium.Core.Datapacks.Vanilla\Helium.Core.Datapacks.Vanilla.csproj", "{600ACCEB-44C1-4C60-BCC1-20A97E9884FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helium.Core.Diagnostics", "Helium.Core.Diagnostics\Helium.Core.Diagnostics.csproj", "{3614C542-8B1B-479A-BBA0-550BB6A7D586}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helium.Core.Diagnostics", "Helium.Core.Diagnostics\Helium.Core.Diagnostics.csproj", "{3614C542-8B1B-479A-BBA0-550BB6A7D586}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helium.Core.Lighting", "Helium.Core.Lighting\Helium.Core.Lighting.csproj", "{3E5E81B5-8AB0-4C02-9510-B4FE29F78938}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helium.Core.Lighting", "Helium.Core.Lighting\Helium.Core.Lighting.csproj", "{3E5E81B5-8AB0-4C02-9510-B4FE29F78938}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helium.Core.Registry", "Helium.Core.Registry\Helium.Core.Registry.csproj", "{09B0131B-DE28-489C-833B-0A66097A1D91}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helium.Core.Registry", "Helium.Core.Registry\Helium.Core.Registry.csproj", "{09B0131B-DE28-489C-833B-0A66097A1D91}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Helium.Core.Lighting.VirtualMachine", "Helium.Core.Lighting.VirtualMachine\Helium.Core.Lighting.VirtualMachine.vcxproj", "{CFF9BB88-895B-4C50-9645-A702698C89A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helium.Core.Server", "Helium.Core.Server\Helium.Core.Server.csproj", "{5CD55B25-B3A7-4331-8942-B98EF28A74A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helium.Core.Server", "Helium.Core.Server\Helium.Core.Server.csproj", "{5CD55B25-B3A7-4331-8942-B98EF28A74A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helium.Core.Utility", "Helium.Core.Utility\Helium.Core.Utility.csproj", "{172FDF5D-B7F1-4B86-9A72-175B7CF91388}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helium.Core.Utility", "Helium.Core.Utility\Helium.Core.Utility.csproj", "{172FDF5D-B7F1-4B86-9A72-175B7CF91388}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helium.Core.World", "Helium.Core.World\Helium.Core.World.csproj", "{AC13D291-0626-423D-B8BE-E9BAADA30231}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helium.Core.World", "Helium.Core.World\Helium.Core.World.csproj", "{AC13D291-0626-423D-B8BE-E9BAADA30231}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helium.Core.World.Entity", "Helium.Core.World.Entity\Helium.Core.World.Entity.csproj", "{4E299036-A705-437C-A8D8-5744063071D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helium.Core.World.Entity", "Helium.Core.World.Entity\Helium.Core.World.Entity.csproj", "{4E299036-A705-437C-A8D8-5744063071D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helium.Core.World.Environment", "Helium.Core.World.Environment\Helium.Core.World.Environment.csproj", "{486F3BDF-F515-4DF9-852D-FFC59F25B8B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helium.Core.World.Environment", "Helium.Core.World.Environment\Helium.Core.World.Environment.csproj", "{486F3BDF-F515-4DF9-852D-FFC59F25B8B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helium.Core.World.Generation", "Helium.Core.World.Generation\Helium.Core.World.Generation.csproj", "{98EECD74-5BD5-40F1-9AA0-FABAB2BA4AFB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helium.Core.World.Generation", "Helium.Core.World.Generation\Helium.Core.World.Generation.csproj", "{98EECD74-5BD5-40F1-9AA0-FABAB2BA4AFB}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Helium.Core.World.Generation.VirtualMachine", "Helium.Core.World.Generation.VirtualMachine\Helium.Core.World.Generation.VirtualMachine.vcxproj", "{0D5F3C9F-7BD8-4D3F-B09E-272496F375D1}"
 EndProject

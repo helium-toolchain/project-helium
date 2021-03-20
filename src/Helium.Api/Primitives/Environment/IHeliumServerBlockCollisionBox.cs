@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Helium.Api.Primitives
+namespace Helium.Api.Primitives.Environment
 {
-    public interface IHeliumServerBlock 
+	public interface IHeliumServerBlockCollisionBox
 	{
-
-    }
+	}
 }
