@@ -1,6 +1,6 @@
-MIT License
+# Helium Toolchain Common License
 
-Copyright (c) 2020 ExaInsanity
+Copyright (c) 2020-2021 ExaInsanity, Zefyro and contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -11,6 +11,22 @@ furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
+
+The Software, or any part of it, shall not be used in any practice which satisfies
+at least one of the following conditions:
+
+- breaking any applicable license agreements and law, INCLUDING those provided
+  by Mojang Studios or Microsoft Corporation applying to Minecraft: Java Edition, or
+- causing harm, with or without malicious intent, to any other individual
+  or legal entity
+
+Additionally, if your work references the Helium Toolchain in any way, is 
+designed for use with the Helium Toolchain or is based on the Helium Toolchain 
+in any way, it is subject to all requirements of this license, its license
+must be compatible with this license, it must be open and honest about its
+feature and functionality set and it must, under all circumstances, follow
+Mojang Studios and Microsoft Corporation rules in connection to Minecraft:
+Java Edition, save only those not applicable to the Helium Toolchain.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
