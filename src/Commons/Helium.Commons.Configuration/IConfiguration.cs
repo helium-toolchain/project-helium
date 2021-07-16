@@ -12,6 +12,7 @@ namespace Helium.Commons.Configuration
     /// Serialization attributes like [JsonIgnore] or [JsonProperty] should be defined in the inheriting class(es)
     /// </summary>
     public interface IConfiguration<TConfigurationKey, TConfigurationValue>
+		where TConfigurationKey : notnull
     {
         /// <summary>
         /// This should mostly be used for dynamic serialization and backups. Try to not store important data here...
@@ -45,8 +46,10 @@ namespace Helium.Commons.Configuration
                 if(Configuration.ContainsKey(key))
                     return Configuration[key];
                 else
-                    return default;
-            }
+#pragma warning disable CS8603
+					return default;
+#pragma warning restore CS8603
+			}
 
             set {
                 if(Configuration.ContainsKey(key))
