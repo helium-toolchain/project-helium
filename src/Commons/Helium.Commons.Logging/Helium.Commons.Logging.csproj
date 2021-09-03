@@ -6,7 +6,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Company>Helium Toolchain</Company>
     <Copyright>Helium 2020-2021</Copyright>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageLicenseFile>.\LICENSE.md</PackageLicenseFile>
     <RepositoryUrl>https://github.com/ExaInsanity/project-helium</RepositoryUrl>
     <Version>0.0.2</Version>
 	<LangVersion>Preview</LangVersion>
