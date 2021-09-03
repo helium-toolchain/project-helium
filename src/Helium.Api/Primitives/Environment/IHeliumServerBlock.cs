@@ -1,6 +1,5 @@
 ﻿namespace Helium.Api.Primitives.Environment;
 
-using Helium.Api.Primitives.Data;
 using Helium.Api.Primitives.Item;
 
 /// <summary>
@@ -66,12 +65,6 @@ public interface IHeliumServerBlock
 	/// and for communicating with clients using the Notchian network protocol.
 	/// </summary>
 	public static IHeliumServerMockItem Item { get; }
-
-	/// <summary>
-	/// Loot table corresponding to this block. This is only required for clients implementing the
-	/// Helium network protocol.
-	/// </summary>
-	public static IHeliumServerLootTable LootTable { get; set; }
 
 	/// <summary>
 	/// Block hardness, solely used for mining. Same measurement as the Notchian server.
