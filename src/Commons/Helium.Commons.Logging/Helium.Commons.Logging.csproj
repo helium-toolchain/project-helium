@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <Authors>ExaInsanity</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Company>Helium Toolchain</Company>
@@ -9,6 +9,7 @@
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <RepositoryUrl>https://github.com/ExaInsanity/project-helium</RepositoryUrl>
     <Version>0.0.2</Version>
+	<LangVersion>Preview</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

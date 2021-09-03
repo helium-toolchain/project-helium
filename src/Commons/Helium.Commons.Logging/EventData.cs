@@ -1,12 +1,12 @@
-﻿using System;
+﻿namespace Helium.Commons.Logging;
 
-namespace Helium.Commons.Logging
-{
-	/// <summary>
-	/// Part of the Helium Toolchain API. Serves as data structure for additional logging data.
-	/// </summary>
+using System;
+
+/// <summary>
+/// Part of the Helium Toolchain API. Serves as data structure for additional logging data.
+/// </summary>
 #nullable enable
-	public struct EventData
+public struct EventData
 	{
 		internal EventIdentifier identifier { get; set; }
 		internal String? name { get; set; }
@@ -40,4 +40,3 @@ namespace Helium.Commons.Logging
 		}
 	}
 #nullable disable
-}
