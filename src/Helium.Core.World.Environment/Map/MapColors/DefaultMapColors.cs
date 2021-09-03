@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Helium.Core.World.Environment.Map.MapColors 
+﻿namespace Helium.Core.World.Environment.Map.MapColors
 {
-	public static class DefaultMapColors 
+	public static class DefaultMapColors
 	{
 		public static readonly MapColor None = new()
 		{

@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Helium.Api.Primitives.Environment;
 
-namespace Helium.Api.Primitives.Environment
+public interface IHeliumServerBlockCollisionBox
 {
-	public interface IHeliumServerBlockCollisionBox
-	{
-	}
 }

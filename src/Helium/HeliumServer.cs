@@ -1,11 +1,9 @@
-﻿using System;
-
-namespace Helium
+﻿namespace Helium
 {
-    internal class HeliumServer
-    {
-        internal static void Main(String[] args)
-        {
+	internal class HeliumServer
+	{
+		internal static void Main(String[] args)
+		{
 		}
-    }
+	}
 }
