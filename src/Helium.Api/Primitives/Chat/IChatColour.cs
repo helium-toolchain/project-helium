@@ -1,5 +1,7 @@
 ﻿namespace Helium.Api.Primitives.Chat;
 
+using System;
+
 /// <summary>
 /// Base interface for chat colours.
 /// </summary>
