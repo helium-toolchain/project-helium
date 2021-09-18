@@ -1,5 +1,7 @@
 ﻿namespace Helium.Api.Primitives.Chat;
 
+using System;
+
 /// <summary>
 /// Describes a colour gradient. This is unused by the Vanilla Helium Server and
 /// unavailable for versions 1.15.2 and lower of the Notchian protocol. The inherited colour

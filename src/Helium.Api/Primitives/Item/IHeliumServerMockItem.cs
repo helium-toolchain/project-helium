@@ -1,5 +1,7 @@
 ﻿namespace Helium.Api.Primitives.Item;
 
+using System;
+
 /// <summary>
 /// Mock item used to construct the actual item.
 /// </summary>

@@ -1,5 +1,7 @@
 ﻿namespace Helium.Api.Primitives.Item;
 
+using System;
+
 using Helium.Api.Primitives.Chat;
 
 /// <summary>

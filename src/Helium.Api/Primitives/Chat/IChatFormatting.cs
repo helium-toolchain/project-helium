@@ -1,5 +1,7 @@
 ﻿namespace Helium.Api.Primitives.Chat;
 
+using System;
+
 /// <summary>
 /// Extended IChatColour that needs to be handled client-side, allowing some minor performance improvements on both sides.
 /// </summary>

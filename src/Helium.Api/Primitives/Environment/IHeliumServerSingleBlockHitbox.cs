@@ -1,5 +1,7 @@
 ﻿namespace Helium.Api.Primitives.Environment;
 
+using System;
+
 /// <summary>
 /// Singular hitbox. A block hitbox can be composed of multiple of these.
 /// Neither of the contained values can ever exceed 1, Core implementations should make sure of that.

@@ -1,5 +1,7 @@
 ﻿namespace Helium.Api.Primitives.Environment;
 
+using System;
+
 /// <summary>
 /// Base interface for Helium Server Block States. Contains all networking crucial information.
 /// </summary>
