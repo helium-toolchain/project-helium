@@ -52,7 +52,7 @@ public struct VarInt
 	}
 
 	/// <summary>
-	/// Writes a VarInt of up to 5 bytes to the span.
+	/// Writes a VarInt of up to 5 bytes to the stream.
 	/// </summary>
 	/// <param name="stream">The MemoryStream the VarInt will be appended to.</param>
 	public void Write(MemoryStream stream)
