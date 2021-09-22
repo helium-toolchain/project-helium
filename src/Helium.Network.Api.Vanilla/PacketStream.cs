@@ -553,6 +553,9 @@ public class PacketStream : Stream
 		return new(buffer);
 	}
 
+	/// <summary>
+	/// Reads a Guid from the current stream asynchronously; referred to by Mojang as UUID.
+	/// </summary>
 	public async ValueTask<Guid> ReadGuidAsync()
 	{
 		Byte[] buffer = new Byte[16];
