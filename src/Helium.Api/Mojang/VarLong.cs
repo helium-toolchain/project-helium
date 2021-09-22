@@ -7,7 +7,7 @@ using System.IO;
 /// <summary>
 /// VarLong type, for semi-native handling of mojangs usage of VarLong
 /// </summary>
-internal struct VarLong
+public struct VarLong
 {
 	private Int64 __value;
 
