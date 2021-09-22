@@ -3,6 +3,7 @@
 using System;
 using System.Buffers.Binary;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -517,11 +518,47 @@ public class PacketStream : Stream
 	 * Position, see Helium.Api.Mojang.Position
 	 * Angle - unsigned Byte
 	 * UUID - convert to System.Guid
-	 * Optional X - ew, mojang. ew.
 	 * Array of X
 	 * X Enum
 	 * Byte Array
 	*/
+
+	/// <summary>
+	/// Reads a <see cref="Helium.Api.Mojang.Position"/> from the current stream.
+	/// </summary>
+	public Position ReadPosition()
+	{
+		Span<Byte> val = stackalloc Byte[8];
+		BaseStream.Read(val);
+		return MemoryMarshal.Cast<Byte, Position>(val)[0];
+	}
+
+	/// <summary>
+	/// Reads a <see cref="Helium.Api.Mojang.Position"/> from the current stream.
+	/// </summary>
+	public async ValueTask<Position> ReadPositionAsync()
+	{
+		Byte[] val = new Byte[8];
+		await BaseStream.ReadAsync(val);
+		return MemoryMarshal.Cast<Byte, Position>(val)[0];
+	}
+
+	/// <summary>
+	/// Reads a Guid from the current stream; referred to by Mojang as UUID.
+	/// </summary>
+	public Guid ReadGuid()
+	{
+		Span<Byte> buffer = stackalloc Byte[16];
+		BaseStream.Read(buffer);
+		return new(buffer);
+	}
+
+	public async ValueTask<Guid> ReadGuidAsync()
+	{
+		Byte[] buffer = new Byte[16];
+		await BaseStream.ReadAsync(buffer);
+		return new(buffer);
+	}
 
 	#endregion
 }
