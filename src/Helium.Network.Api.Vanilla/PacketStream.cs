@@ -468,7 +468,7 @@ public class PacketStream : Stream
 	/// <summary>
 	/// Reads a String from the current stream.
 	/// </summary>
-	/// <param name="maxLength">Maximum string length. This should never exceed <see cref="Int16.MaxValue"/>.</param>
+	/// <param name="maxLength">Maximum string length. This should never exceed <see cref="Int16.MaxValue"/>, outside of Chat packets.</param>
 	/// <exception cref="ArgumentException"/>
 	public String ReadString(Int32 maxLength = Int16.MaxValue)
 	{
@@ -488,7 +488,7 @@ public class PacketStream : Stream
 	/// <summary>
 	/// Reads a String from the current stream asynchronously.
 	/// </summary>
-	/// <param name="maxLength">Maximum string length. This should never exceed <see cref="Int16.MaxValue"/>.</param>
+	/// <param name="maxLength">Maximum string length. This should never exceed <see cref="Int16.MaxValue"/>, outside of Chat packets.</param>
 	/// <exception cref="ArgumentException"/>
 	public async Task<String> ReadStringAsync(Int32 maxLength = Int16.MaxValue)
 	{
@@ -504,6 +504,24 @@ public class PacketStream : Stream
 
 		return Encoding.UTF8.GetString(buffer);
 	}
+
+	#endregion
+
+	#region Reading complex types
+
+	/* Complex types as listed at https://wiki.vg/Protocol#Data_types. 
+	 * 
+	 * EntityMetadata should be handled separately, via extension methods, as they vary from protocol version to protocol version
+	 * SlotData should be *only implemented for the Mojang protocol*, the Helium protocol should support varying data
+	 * NBT should be implemented via generics.
+	 * Position, see Helium.Api.Mojang.Position
+	 * Angle - unsigned Byte
+	 * UUID - convert to System.Guid
+	 * Optional X - ew, mojang. ew.
+	 * Array of X
+	 * X Enum
+	 * Byte Array
+	*/
 
 	#endregion
 }
