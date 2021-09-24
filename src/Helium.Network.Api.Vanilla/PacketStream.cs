@@ -534,13 +534,33 @@ public class PacketStream : Stream
 	}
 
 	/// <summary>
-	/// Reads a <see cref="Helium.Api.Mojang.Position"/> from the current stream.
+	/// Reads a <see cref="Helium.Api.Mojang.Position"/> from the current stream asynchronously.
 	/// </summary>
 	public async ValueTask<Position> ReadPositionAsync()
 	{
 		Byte[] val = new Byte[8];
 		await BaseStream.ReadAsync(val);
 		return MemoryMarshal.Cast<Byte, Position>(val)[0];
+	}
+
+	/// <summary>
+	/// Reads a <see cref="OldPosition"/> from the current stream.
+	/// </summary>
+	public OldPosition ReadOldPosition()
+	{
+		Span<Byte> val = stackalloc Byte[8];
+		BaseStream.Read(val);
+		return MemoryMarshal.Cast<Byte, OldPosition>(val)[0];
+	}
+
+	/// <summary>
+	/// Reads a <see cref="OldPosition"/> from the current stream asynchronously.
+	/// </summary>
+	public async ValueTask<OldPosition> ReadOldPositionAsync()
+	{
+		Byte[] val = new Byte[8];
+		await BaseStream.ReadAsync(val);
+		return MemoryMarshal.Cast<Byte, OldPosition>(val)[0];
 	}
 
 	/// <summary>
