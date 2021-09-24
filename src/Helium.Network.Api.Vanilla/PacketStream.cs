@@ -515,7 +515,7 @@ public class PacketStream : Stream
 	 * EntityMetadata should be handled separately, via extension methods, as they vary from protocol version to protocol version
 	 * SlotData should be *only implemented for the Mojang protocol*, the Helium protocol should support varying data
 	 * NBT should be implemented via generics.
-	 * Position, see Helium.Api.Mojang.Position
+	 * Position, see Helium.Api.Mojang.Position & Helium.Api.Moang.OldPosition
 	 * Angle - unsigned Byte
 	 * UUID - convert to System.Guid
 	 * Array of X
@@ -581,6 +581,50 @@ public class PacketStream : Stream
 		Byte[] buffer = new Byte[16];
 		await BaseStream.ReadAsync(buffer);
 		return new(buffer);
+	}
+
+	/// <summary>
+	/// Reads a Byte array from the current stream.
+	/// </summary>
+	/// <param name="limit">Array length. This should be specified by preceding packet data or the context.</param>
+	public Byte[] ReadByteArray(Int32 limit)
+	{
+		Byte[] buffer = new Byte[limit];
+		BaseStream.Read(buffer);
+		return buffer;
+	}
+
+	/// <summary>
+	/// Reads an Int16 array from the current stream.
+	/// </summary>
+	/// <param name="limit">Array length. This should be specified by preceding packet data or the context.</param>
+	public Int16[] ReadInt16Array(Int32 limit)
+	{
+		Byte[] buffer = new Byte[limit * 2];
+		BaseStream.Read(buffer);
+		return MemoryMarshal.Cast<Byte, Int16>(buffer).ToArray();
+	}
+
+	/// <summary>
+	/// Reads an Int32 array from the current stream.
+	/// </summary>
+	/// <param name="limit">Array length. This should be specified by preceding packet data or the context.</param>
+	public Int32[] ReadInt32Array(Int32 limit)
+	{
+		Byte[] buffer = new Byte[limit * 4];
+		BaseStream.Read(buffer);
+		return MemoryMarshal.Cast<Byte, Int32>(buffer).ToArray();
+	}
+
+	/// <summary>
+	/// Reads an Int64 array from the current stream.
+	/// </summary>
+	/// <param name="limit">Array length. This should be specified by preceding packet data or the context.</param>
+	public Int64[] ReadInt64Array(Int64 limit)
+	{
+		Byte[] buffer = new Byte[limit * 8];
+		BaseStream.Read(buffer);
+		return MemoryMarshal.Cast<Byte, Int64>(buffer).ToArray();
 	}
 
 	#endregion
