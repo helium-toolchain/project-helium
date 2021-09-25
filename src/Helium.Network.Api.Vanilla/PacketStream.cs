@@ -13,7 +13,7 @@ using Helium.Api.Mojang;
 /// <summary>
 /// Network	stream for minecraft packet serialization. Implements read/write methods for all basic network types required by the protocol.
 /// <para>
-///		Packets should expose an extension method for this class to serialize.
+///		Packets should expose a method for this class to serialize.
 /// </para>
 /// <para>
 ///		Entities intended to be passed over the mojang protocol should expose an extension method for this class to serialize.
@@ -513,8 +513,8 @@ public class PacketStream : Stream
 	/* Complex types as listed at https://wiki.vg/Protocol#Data_types. 
 	 * 
 	 * EntityMetadata should be handled separately, via extension methods, as they vary from protocol version to protocol version
-	 * SlotData should be *only implemented for the Mojang protocol*, the Helium protocol should support varying data
-	 * NBT should be implemented via generics.
+	 * SlotData should be handled separately in some way, shape or form.
+	 * NBT should be handled separately in some way, shape or form. ReadString should suffice here
 	 * Position, see Helium.Api.Mojang.Position & Helium.Api.Moang.OldPosition
 	 * Angle - unsigned Byte
 	 * UUID - convert to System.Guid
@@ -625,6 +625,451 @@ public class PacketStream : Stream
 		Byte[] buffer = new Byte[limit * 8];
 		BaseStream.Read(buffer);
 		return MemoryMarshal.Cast<Byte, Int64>(buffer).ToArray();
+	}
+
+	/// <summary>
+	/// Reads an angle from the current stream.
+	/// </summary>
+	public Single ReadAngle()
+	{
+		return this.ReadByte() / 256 * 360;
+	}
+
+	/// <summary>
+	/// Reads an angle from the current stream asynchronously.
+	/// </summary>
+	public async ValueTask<Single> ReadAngleAsync()
+	{
+		return await this.ReadUnsignedByteAsync() / 256 * 360;
+	}
+
+	#endregion
+
+	#region Writing primitives
+
+	/// <summary>
+	/// Writes an unsigned byte to the current stream.
+	/// </summary>
+	public void WriteUnsignedByte(Byte val)
+	{
+		BaseStream.WriteByte(val);
+	}
+
+	/// <summary>
+	/// Writes an unsigned byte to the current stream asynchronously.
+	/// </summary>
+	public ValueTask WriteUnsignedByteAsync(Byte val)
+	{
+		BaseStream.WriteByte(val);
+		return ValueTask.CompletedTask;
+	}
+
+	/// <summary>
+	/// Writes a signed byte to the current stream.
+	/// </summary>
+	public void WriteSignedByte(SByte val)
+	{
+		BaseStream.WriteByte((Byte)val);
+	}
+
+	/// <summary>
+	/// Writes a signed byte to the current stream asynchronously.
+	/// </summary>
+	public ValueTask WriteSignedByteAsync(SByte val)
+	{
+		BaseStream.WriteByte((Byte)val);
+		return ValueTask.CompletedTask;
+	}
+
+	/// <summary>
+	/// Writes an Int16 to the current stream.
+	/// </summary>
+	public void WriteInt16(Int16 val)
+	{
+		Span<Byte> buffer = stackalloc Byte[2];
+		BinaryPrimitives.WriteInt16BigEndian(buffer, val);
+		BaseStream.Write(buffer);
+	}
+
+	/// <summary>
+	/// Writes an Int16 to the current stream asynchronously.
+	/// </summary>
+	public async ValueTask WriteInt16Async(Int16 val)
+	{
+		Byte[] buffer = new Byte[2];
+		BinaryPrimitives.WriteInt16BigEndian(buffer, val);
+		await BaseStream.WriteAsync(buffer);
+	}
+
+	/// <summary>
+	/// Writes an UInt16 to the current stream.
+	/// </summary>
+	public void WriteUInt16(UInt16 val)
+	{
+		Span<Byte> buffer = stackalloc Byte[2];
+		BinaryPrimitives.WriteUInt16BigEndian(buffer, val);
+		BaseStream.Write(buffer);
+	}
+
+	/// <summary>
+	/// Writes an UInt16 to the current stream asynchronously.
+	/// </summary>
+	public async ValueTask WriteUInt16Async(UInt16 val)
+	{
+		Byte[] buffer = new Byte[2];
+		BinaryPrimitives.WriteUInt16BigEndian(buffer, val);
+		await BaseStream.WriteAsync(buffer);
+	}
+
+	/// <summary>
+	/// Writes an Int32 to the current stream.
+	/// </summary>
+	public void WriteInt32(Int32 val)
+	{
+		Span<Byte> buffer = stackalloc Byte[4];
+		BinaryPrimitives.WriteInt32BigEndian(buffer, val);
+		BaseStream.Write(buffer);
+	}
+
+	/// <summary>
+	/// Writes an Int32 to the current stream asynchronously.
+	/// </summary>
+	public async ValueTask WriteInt32Async(Int32 val)
+	{
+		Byte[] buffer = new Byte[4];
+		BinaryPrimitives.WriteInt32BigEndian(buffer, val);
+		await BaseStream.WriteAsync(buffer);
+	}
+
+	/// <summary>
+	/// Writes an UInt32 to the current stream.
+	/// </summary>
+	public void WriteUInt32(UInt32 val)
+	{
+		Span<Byte> buffer = stackalloc Byte[4];
+		BinaryPrimitives.WriteUInt32BigEndian(buffer, val);
+		BaseStream.Write(buffer);
+	}
+
+	/// <summary>
+	/// Writes an UInt32 to the current stream asynchronously.
+	/// </summary>
+	public async ValueTask WriteUInt32Async(UInt32 val)
+	{
+		Byte[] buffer = new Byte[4];
+		BinaryPrimitives.WriteUInt32BigEndian(buffer, val);
+		await BaseStream.WriteAsync(buffer);
+	}
+
+	/// <summary>
+	/// Writes an Int64 to the current stream.
+	/// </summary>
+	public void WriteInt64(Int64 val)
+	{
+		Span<Byte> buffer = stackalloc Byte[8];
+		BinaryPrimitives.WriteInt64BigEndian(buffer, val);
+		BaseStream.Write(buffer);
+	}
+
+	/// <summary>
+	/// Writes an Int64 to the current stream asynchronously.
+	/// </summary>
+	public async ValueTask WriteInt64Async(Int64 val)
+	{
+		Byte[] buffer = new Byte[8];
+		BinaryPrimitives.WriteInt64BigEndian(buffer, val);
+		await BaseStream.WriteAsync(buffer);
+	}
+
+	/// <summary>
+	/// Writes an UInt64 to the current stream.
+	/// </summary>
+	public void WriteUInt64(UInt64 val)
+	{
+		Span<Byte> buffer = stackalloc Byte[8];
+		BinaryPrimitives.WriteUInt64BigEndian(buffer, val);
+		BaseStream.Write(buffer);
+	}
+
+	/// <summary>
+	/// Writes an UInt64 to the current stream asynchronously.
+	/// </summary>
+	public async ValueTask WriteUInt64Async(UInt64 val)
+	{
+		Byte[] buffer = new Byte[8];
+		BinaryPrimitives.WriteUInt64BigEndian(buffer, val);
+		await BaseStream.WriteAsync(buffer);
+	}
+
+	/// <summary>
+	/// Writes a Single-precision floating point number to the current stream.
+	/// </summary>
+	public void WriteSingle(Single val)
+	{
+		Span<Byte> buffer = stackalloc Byte[4];
+		BinaryPrimitives.WriteSingleBigEndian(buffer, val);
+		BaseStream.Write(buffer);
+	}
+
+	/// <summary>
+	/// Writes a Single-precision floating point number to the current stream asynchronously.
+	/// </summary>
+	public async ValueTask WriteSingleAsync(Single val)
+	{
+		Byte[] buffer = new Byte[4];
+		BinaryPrimitives.WriteSingleBigEndian(buffer, val);
+		await BaseStream.WriteAsync(buffer);
+	}
+
+	/// <summary>
+	/// Writes a Double-precision floating point number to the current stream.
+	/// </summary>
+	public void WriteDouble(Double val)
+	{
+		Span<Byte> buffer = stackalloc Byte[8];
+		BinaryPrimitives.WriteDoubleBigEndian(buffer, val);
+		BaseStream.Write(buffer);
+	}
+
+	/// <summary>
+	/// Writes a Double-precision floating point number to the current stream asynchronously.
+	/// </summary>
+	public async ValueTask WriteDoubleAsync(Double val)
+	{
+		Byte[] buffer = new Byte[8];
+		BinaryPrimitives.WriteDoubleBigEndian(buffer, val);
+		await BaseStream.WriteAsync(buffer);
+	}
+
+	/// <summary>
+	/// Writes a <see cref="VarInt"/> to the current stream.
+	/// </summary>
+	public void WriteVarInt(VarInt val)
+	{
+		val.Write(BaseStream);
+	}
+
+	/// <summary>
+	/// Writes a <see cref="VarInt"/> to the current stream.
+	/// </summary>
+	public ValueTask WriteVarIntAsync(VarInt val)
+	{
+		val.Write(BaseStream);
+		return ValueTask.CompletedTask;
+	}
+
+	/// <summary>
+	/// Writes a <see cref="VarLong"/> to the current stream.
+	/// </summary>
+	public void WriteVarLong(VarLong val)
+	{
+		val.Write(BaseStream);
+	}
+
+	/// <summary>
+	/// Writes a <see cref="VarLong"/> to the current stream.
+	/// </summary>
+	public ValueTask WriteVarLongAsync(VarLong val)
+	{
+		val.Write(BaseStream);
+		return ValueTask.CompletedTask;
+	}
+
+	/// <summary>
+	/// Writes a String to the current stream, prefixed with its length.
+	/// </summary>
+	public void WriteString(String val)
+	{
+		VarInt length = val.Length;
+		length.Write(BaseStream);
+
+		Span<Byte> buffer = Encoding.UTF8.GetBytes(val);
+		BaseStream.Write(buffer);
+	}
+
+	/// <summary>
+	/// Writes a String to the current stream asynchronously, prefixed with its length.
+	/// </summary>
+	public async Task WriteStringAsync(String val)
+	{
+		VarInt length = val.Length;
+		length.Write(BaseStream);
+
+		Byte[] buffer = Encoding.UTF8.GetBytes(val);
+		await BaseStream.WriteAsync(buffer);
+	}
+
+	#endregion
+
+	#region Writing complex types
+
+	/// <summary>
+	/// Writes a <see cref="Helium.Api.Mojang.Position"/> to the current stream.
+	/// </summary>
+	public void WritePosition(Position val)
+	{
+		Span<Byte> buffer = MemoryMarshal.Cast<Position, Byte>(MemoryMarshal.CreateSpan(ref val, 1));
+		BaseStream.Write(buffer);
+	}
+
+	/// <summary>
+	/// Writes a <see cref="Helium.Api.Mojang.Position"/> to the current stream.
+	/// </summary>
+	public async ValueTask WritePositionAsync(Position val)
+	{
+		Byte[] buffer = MemoryMarshal.Cast<Position, Byte>(MemoryMarshal.CreateSpan(ref val, 1)).ToArray();
+		await BaseStream.WriteAsync(buffer);
+	}
+
+	/// <summary>
+	/// Writes a <see cref="OldPosition"/> to the current stream.
+	/// </summary>
+	public void WriteOldPosition(OldPosition val)
+	{
+		Span<Byte> buffer = MemoryMarshal.Cast<OldPosition, Byte>(MemoryMarshal.CreateSpan(ref val, 1));
+		BaseStream.Write(buffer);
+	}
+
+	/// <summary>
+	/// Writes a <see cref="OldPosition"/> to the current stream.
+	/// </summary>
+	public async ValueTask WriteOldPositionAsync(OldPosition val)
+	{
+		Byte[] buffer = MemoryMarshal.Cast<OldPosition, Byte>(MemoryMarshal.CreateSpan(ref val, 1)).ToArray();
+		await BaseStream.WriteAsync(buffer);
+	}
+
+	/// <summary>
+	/// Writes a Guid to the current stream.
+	/// </summary>
+	public void WriteGuid(Guid val)
+	{
+		BaseStream.Write(val.ToByteArray());
+	}
+
+	/// <summary>
+	/// Writes a Guid to the current stream asynchronously.
+	/// </summary>
+	public async ValueTask WriteGuidAsync(Guid val)
+	{
+		await BaseStream.WriteAsync(val.ToByteArray());
+	}
+
+	/// <summary>
+	/// Writes an angle to the current stream.
+	/// </summary>
+	public void WriteAngle(Single val)
+	{
+		BaseStream.WriteByte((Byte)(val / 360 * 256));
+	}
+
+	/// <summary>
+	/// Writes an angle to the current stream asynchronously.
+	/// </summary>
+	public async ValueTask WriteAngleAsync(Single val)
+	{
+		await BaseStream.WriteAsync(new Byte[] { (Byte)(val / 360 * 256) });
+	}
+
+	/// <summary>
+	/// Writes a byte array to the current stream.
+	/// </summary>
+	public void WriteByteArray(Byte[] val)
+	{
+		BaseStream.Write(val);
+	}
+
+	/// <summary>
+	/// Writes a byte array to the current stream asynchronously.
+	/// </summary>
+	public async Task WriteByteArrayAsync(Byte[] val)
+	{
+		await BaseStream.WriteAsync(val);
+	}
+
+	/// <summary>
+	/// Writes an Int16 array to the current stream.
+	/// </summary>
+	public void WriteInt16Array(Int16[] val)
+	{
+		BaseStream.Write(MemoryMarshal.Cast<Int16, Byte>(val.AsSpan()));
+	}
+
+	/// <summary>
+	/// Writes an Int16 array to the current stream asynchronously.
+	/// </summary>
+	public Task WriteInt16ArrayAsync(Int16[] val)
+	{
+		BaseStream.Write(MemoryMarshal.Cast<Int16, Byte>(val.AsSpan()));
+		return Task.CompletedTask;
+	}
+
+	/// <summary>
+	/// Writes an Int32 array to the current stream.
+	/// </summary>
+	public void WriteInt32Array(Int32[] val)
+	{
+		BaseStream.Write(MemoryMarshal.Cast<Int32, Byte>(val.AsSpan()));
+	}
+
+	/// <summary>
+	/// Writes an Int32 array to the current stream asynchronously.
+	/// </summary>
+	public Task WriteInt32ArrayAsync(Int32[] val)
+	{
+		BaseStream.Write(MemoryMarshal.Cast<Int32, Byte>(val.AsSpan()));
+		return Task.CompletedTask;
+	}
+
+	/// <summary>
+	/// Writes an Int64 array to the current stream.
+	/// </summary>
+	public void WriteInt64Array(Int64[] val)
+	{
+		BaseStream.Write(MemoryMarshal.Cast<Int64, Byte>(val.AsSpan()));
+	}
+
+	/// <summary>
+	/// Writes an Int64 array to the current stream asynchronously.
+	/// </summary>
+	public Task WriteInt64ArrayAsync(Int64[] val)
+	{
+		BaseStream.Write(MemoryMarshal.Cast<Int64, Byte>(val.AsSpan()));
+		return Task.CompletedTask;
+	}
+
+	/// <summary>
+	/// Writes a Single array to the current stream.
+	/// </summary>
+	public void WriteSingleArray(Single[] val)
+	{
+		BaseStream.Write(MemoryMarshal.Cast<Single, Byte>(val.AsSpan()));
+	}
+
+	/// <summary>
+	/// Writes a Single array to the current stream asynchronously.
+	/// </summary>
+	public Task WriteSingleArrayAsync(Single[] val)
+	{
+		BaseStream.Write(MemoryMarshal.Cast<Single, Byte>(val.AsSpan()));
+		return Task.CompletedTask;
+	}
+
+	/// <summary>
+	/// Writes a Double array to the current stream.
+	/// </summary>
+	public void WriteDoubleArray(Double[] val)
+	{
+		BaseStream.Write(MemoryMarshal.Cast<Double, Byte>(val.AsSpan()));
+	}
+
+	/// <summary>
+	/// Writes a Double array to the current stream asynchronously.
+	/// </summary>
+	public Task WriteDoubleArrayAsync(Double[] val)
+	{
+		BaseStream.Write(MemoryMarshal.Cast<Double, Byte>(val.AsSpan()));
+		return Task.CompletedTask;
 	}
 
 	#endregion
