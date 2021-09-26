@@ -74,4 +74,25 @@ public struct VarLong
 			stream.WriteByte(temp);
 		} while (unsigned != 0);
 	}
+
+	/// <summary>
+	/// Gets the length of this VarLong were it serialized.
+	/// </summary>
+	public Byte Length
+	{
+		get
+		{
+			UInt64 unsigned = (UInt64)__value;
+			Byte length = 0;
+
+			do
+			{
+				unsigned >>= 7;
+
+				length++;
+			} while (unsigned != 0);
+
+			return length;
+		}
+	}
 }
