@@ -1,4 +1,4 @@
-﻿namespace Helium.Network.Api.Vanilla.Packets;
+﻿namespace Helium.Network.Api.Vanilla;
 
 using Helium.Api.Mojang;
 

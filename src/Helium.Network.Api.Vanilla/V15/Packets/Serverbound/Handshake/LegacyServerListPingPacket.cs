@@ -1,7 +1,9 @@
-﻿namespace Helium.Network.Api.Vanilla.Packets.V15.Serverbound.Handshake;
+﻿namespace Helium.Network.Api.Vanilla.V15.Packets.Serverbound.Handshake;
 
 using System;
 using System.Diagnostics.CodeAnalysis;
+
+using Helium.Network.Api.Vanilla;
 
 /// <summary>
 /// Legacy server-list ping packet. Pre-1.7.2 clients can still send this packet and the server should handle it correctly.

@@ -1,8 +1,9 @@
-﻿namespace Helium.Network.Api.Vanilla.Packets.V15.Serverbound.Handshake;
+﻿namespace Helium.Network.Api.Vanilla.V15.Packets.Serverbound.Handshake;
 
 using System;
 
 using Helium.Api.Mojang;
+using Helium.Network.Api.Vanilla;
 
 public class HandshakePacket : IPacket
 {

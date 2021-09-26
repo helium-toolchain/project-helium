@@ -1,8 +1,9 @@
-﻿namespace Helium.Network.Api.Vanilla.Packets.V15.Clientbound.Status;
+﻿namespace Helium.Network.Api.Vanilla.V15.Packets.Clientbound.Status;
 
 using System;
 
 using Helium.Api.Mojang;
+using Helium.Network.Api.Vanilla;
 
 /// <summary>
 /// Status-C0x01: Clientbound Ping answer packet, identifier 0x01

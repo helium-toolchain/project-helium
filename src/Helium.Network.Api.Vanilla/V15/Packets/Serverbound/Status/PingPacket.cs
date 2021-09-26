@@ -1,6 +1,8 @@
-﻿namespace Helium.Network.Api.Vanilla.Packets.V15.Serverbound.Status;
+﻿namespace Helium.Network.Api.Vanilla.V15.Packets.Serverbound.Status;
 
 using Helium.Api.Mojang;
+using Helium.Network.Api.Vanilla;
+
 using System;
 
 /// <summary>

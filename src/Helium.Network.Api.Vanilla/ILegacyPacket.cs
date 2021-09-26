@@ -1,4 +1,4 @@
-﻿namespace Helium.Network.Api.Vanilla.Packets;
+﻿namespace Helium.Network.Api.Vanilla;
 
 /// <summary>
 /// Base interface for all legacy packets. Specifies basic IO methods.

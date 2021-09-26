@@ -1,8 +1,9 @@
-﻿namespace Helium.Network.Api.Vanilla.Packets.V15.Clientbound.Status;
+﻿namespace Helium.Network.Api.Vanilla.V15.Packets.Clientbound.Status;
 
 using System;
 
 using Helium.Api.Mojang;
+using Helium.Network.Api.Vanilla;
 
 /// <summary>
 /// Status-C0x00: Clientbound Response packet, identifier 0x00.
