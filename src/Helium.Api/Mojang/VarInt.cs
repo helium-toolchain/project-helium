@@ -73,4 +73,25 @@ public struct VarInt
 			stream.WriteByte(temp);
 		} while (unsigned != 0);
 	}
+
+	/// <summary>
+	/// Gets the length of this VarInt were it serialized.
+	/// </summary>
+	public Byte Length
+	{
+		get
+		{
+			UInt32 unsigned = (UInt32)__value;
+			Byte length = 0;
+
+			do
+			{
+				unsigned >>= 7;
+
+				length++;
+			} while (unsigned != 0);
+
+			return length;
+		}
+	}
 }

@@ -643,6 +643,26 @@ public class PacketStream : Stream
 		return await this.ReadUnsignedByteAsync() / 256 * 360;
 	}
 
+	/// <summary>
+	/// Reads a raw string of specified length from the current stream.
+	/// </summary>
+	public String ReadRawString(Int32 length)
+	{
+		Span<Byte> buffer = new Byte[length];
+		BaseStream.Read(buffer);
+		return Encoding.UTF8.GetString(buffer);
+	}
+
+	/// <summary>
+	/// Reads a raw string of specified length from the current stream asynchronously.
+	/// </summary>
+	public async Task<String> ReadRawStringAsync(Int32 length)
+	{
+		Byte[] buffer = new Byte[length];
+		await BaseStream.ReadAsync(buffer);
+		return Encoding.UTF8.GetString(buffer);
+	}
+
 	#endregion
 
 	#region Writing primitives
@@ -1070,6 +1090,24 @@ public class PacketStream : Stream
 	{
 		BaseStream.Write(MemoryMarshal.Cast<Double, Byte>(val.AsSpan()));
 		return Task.CompletedTask;
+	}
+
+	/// <summary>
+	/// Writes a raw string to the current stream.
+	/// </summary>
+	public void WriteRawString(String val)
+	{
+		Span<Byte> buffer = Encoding.UTF8.GetBytes(val);
+		BaseStream.Write(buffer);
+	}
+
+	/// <summary>
+	/// Writes a raw string to the current stream asynchronously.
+	/// </summary>
+	public async Task WriteRawStringAsync(String val)
+	{
+		Byte[] buffer = Encoding.UTF8.GetBytes(val);
+		await BaseStream.WriteAsync(buffer);
 	}
 
 	#endregion
