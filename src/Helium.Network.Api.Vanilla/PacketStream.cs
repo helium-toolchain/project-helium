@@ -701,6 +701,17 @@ public class PacketStream : Stream
 		return ValueTask.CompletedTask;
 	}
 
+	public void WriteBoolean(Boolean val)
+	{
+		BaseStream.WriteByte((Byte)(val ? 0x01 : 0x00));
+	}
+
+	public ValueTask WriteBooleanAsync(Boolean val)
+	{
+		BaseStream.WriteByte((Byte)(val ? 0x01 : 0x00));
+		return ValueTask.CompletedTask;
+	}
+
 	/// <summary>
 	/// Writes an Int16 to the current stream.
 	/// </summary>
