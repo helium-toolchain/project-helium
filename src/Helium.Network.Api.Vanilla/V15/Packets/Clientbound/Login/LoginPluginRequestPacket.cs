@@ -36,7 +36,7 @@ public class LoginPluginRequestPacket : IPacket
 	{
 		MessageId = stream.ReadVarInt();
 		PluginChannel = stream.ReadString();
-		RemainingData = stream.ReadByteArray(MessageId.Length + ((VarInt)PluginChannel.Length).Length + PluginChannel.Length);
+		RemainingData = stream.ReadByteArray(PacketLength - (MessageId.Length + ((VarInt)PluginChannel.Length).Length + PluginChannel.Length));
 	}
 
 	public void Write(PacketStream stream)
