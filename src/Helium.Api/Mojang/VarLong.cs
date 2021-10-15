@@ -28,15 +28,13 @@ public struct VarLong
 	public void Read(MemoryStream stream)
 	{
 		Int64 result = 0;
-		Int32 tv;
 		Byte current, readCounter = 0;
 
 		do
 		{
 			current = (Byte)stream.ReadByte();
 
-			tv = current & 0b0111_1111;
-			result |= (UInt16)(tv << (7 * readCounter++));
+			result |= (current & 0b0111_1111u) << (7 * readCounter++);
 
 			if (readCounter > 10)
 			{

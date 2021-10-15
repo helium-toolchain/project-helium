@@ -27,15 +27,14 @@ public struct VarInt
 	/// <param name="stream">A MemoryStream starting with the first byte of the VarInt.</param>
 	public void Read(MemoryStream stream)
 	{
-		Int32 readCounter = 0, result = 0, tv = 0;
+		Int32 readCounter = 0, result = 0;
 		Byte current;
 
 		do
 		{
 			current = (Byte)stream.ReadByte();
 
-			tv = current & 0b0111_1111;
-			result |= tv << (7 * readCounter++);
+			result |= (current & 0b0111_1111) << (7 * readCounter++);
 
 			if (readCounter > 5)
 			{
