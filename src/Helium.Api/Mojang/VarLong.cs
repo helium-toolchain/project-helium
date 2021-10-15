@@ -25,23 +25,16 @@ public struct VarLong
 	/// Reads a VarLong from up to 10 bytes from the stream. The stream will advance to the start of the next element.
 	/// </summary>
 	/// <param name="stream">A MemoryStream starting with the first byte of the VarInt.</param>
-
-	[SuppressMessage("Reliability", "CA2014", Justification = "The loop can only run ten times, no stackoverflow will happen here")]
 	public void Read(MemoryStream stream)
 	{
 		Int64 result = 0;
-		Int32 tv;
 		Byte current, readCounter = 0;
 
 		do
 		{
-			Span<Byte> buffer = stackalloc Byte[1];
-			stream.Read(buffer);
+			current = (Byte)stream.ReadByte();
 
-			current = buffer[0];
-
-			tv = current & 0b0111_1111;
-			result |= (UInt16)(tv << (7 * readCounter++));
+			result |= (current & 0b0111_1111u) << (7 * readCounter++);
 
 			if (readCounter > 10)
 			{

@@ -25,22 +25,16 @@ public struct VarInt
 	/// Reads a VarInt from up to 5 bytes from the stream. The stream will advance to the start of the next element.
 	/// </summary>
 	/// <param name="stream">A MemoryStream starting with the first byte of the VarInt.</param>
-	
-	[SuppressMessage("Reliability", "CA2014", Justification = "The loop can only run five times, no stackoverflow will happen here")]
 	public void Read(MemoryStream stream)
 	{
-		Int32 readCounter = 0, result = 0, tv = 0;
+		Int32 readCounter = 0, result = 0;
 		Byte current;
 
 		do
 		{
-			Span<Byte> buffer = stackalloc Byte[1];
-			stream.Read(buffer);
+			current = (Byte)stream.ReadByte();
 
-			current = buffer[0];
-
-			tv = current & 0b0111_1111;
-			result |= tv << (7 * readCounter++);
+			result |= (current & 0b0111_1111) << (7 * readCounter++);
 
 			if (readCounter > 5)
 			{
