@@ -8,7 +8,7 @@ using System;
 /// <summary>
 /// Status-S0x01: Serverbound Ping answer packet, identifier 0x01
 /// </summary>
-public class PingPacket : IPacket
+public struct PingPacket : IPacket
 {
 	public VarInt Id => 0x01;
 

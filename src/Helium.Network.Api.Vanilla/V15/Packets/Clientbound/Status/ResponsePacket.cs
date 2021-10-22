@@ -8,7 +8,7 @@ using Helium.Network.Api.Vanilla;
 /// <summary>
 /// Status-C0x00: Clientbound Response packet, identifier 0x00.
 /// </summary>
-public class ResponsePacket : IPacket
+public struct ResponsePacket : IPacket
 {
 	public VarInt Id => 0x00;
 

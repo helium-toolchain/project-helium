@@ -7,7 +7,7 @@ using Helium.Api.Mojang;
 /// <summary>
 /// Login-S0x01: Serverbound login flow start packet.
 /// </summary>
-public class LoginStartPacket : IPacket
+public struct LoginStartPacket : IPacket
 {
 	public VarInt Id => 0x00;
 

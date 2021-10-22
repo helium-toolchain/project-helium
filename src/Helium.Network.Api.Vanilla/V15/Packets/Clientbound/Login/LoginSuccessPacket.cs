@@ -7,7 +7,7 @@ using Helium.Api.Mojang;
 /// <summary>
 /// Login-C0x02: Clientbound login success packet
 /// </summary>
-internal class LoginSuccessPacket : IPacket
+internal struct LoginSuccessPacket : IPacket
 {
 	public VarInt Id => 0x02;
 

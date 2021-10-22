@@ -5,7 +5,7 @@ using Helium.Api.Mojang;
 /// <summary>
 /// Login-C0x03: Clientbound set compression packet. Wholly unused by Helium networking.
 /// </summary>
-public class SetCompressionPacket : IPacket
+public struct SetCompressionPacket : IPacket
 {
 	public VarInt Id => 0x03;
 
