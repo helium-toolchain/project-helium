@@ -1,7 +1,6 @@
 ﻿namespace Helium.Api.Mojang;
 
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.IO;
 
 /// <summary>
