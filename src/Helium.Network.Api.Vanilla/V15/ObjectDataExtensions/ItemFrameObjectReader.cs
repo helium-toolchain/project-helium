@@ -3,7 +3,7 @@
 using System;
 
 /// <summary>
-/// Extensions to convert C0x00.Data fields for Item Frames (C0x00.Type 71)
+/// Extensions to convert C0x00.Data fields for Item Frames (C0x00.Type 36)
 /// </summary>
 public static class ItemFrameObjectReader
 {

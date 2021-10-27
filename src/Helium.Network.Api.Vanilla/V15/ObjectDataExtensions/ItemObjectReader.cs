@@ -3,7 +3,7 @@
 using System;
 
 /// <summary>
-/// Extensions to convert C0x00.Data fields for items (C0x00.Type 2)
+/// Extensions to convert C0x00.Data fields for items (C0x00.Type 35)
 /// </summary>
 public static class ItemObjectReader
 {

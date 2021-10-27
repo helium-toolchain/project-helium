@@ -3,7 +3,7 @@
 using System;
 
 /// <summary>
-/// Extensions to convert C0x00.Data fields for Item Frames (C0x00.Type 71)
+/// Extensions to convert C0x00.Data fields for Arrows (C0x00.Type 2 and 72)
 /// </summary>
 public static class ArrowObjectReader
 {

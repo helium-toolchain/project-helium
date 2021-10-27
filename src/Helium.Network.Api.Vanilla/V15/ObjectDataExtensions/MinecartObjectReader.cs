@@ -3,7 +3,7 @@
 using System;
 
 /// <summary>
-/// Extensions to convert C0x00.Data fields for Minecarts (C0x00.Type 10)
+/// Extensions to convert C0x00.Data fields for Minecarts (C0x00.Type 42)
 /// </summary>
 public static class MinecartObjectReader
 {
