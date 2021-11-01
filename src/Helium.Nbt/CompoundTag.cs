@@ -21,6 +21,12 @@ public class CompoundTag : NbtTag, ICollection
 		this.Children = children;
 	}
 
+	public CompoundTag()
+	{
+		Name = Array.Empty<Byte>();
+		Children = new();
+	}
+
 	public Int32 Count => Children.Count;
 
 	public Boolean IsSynchronized => false;

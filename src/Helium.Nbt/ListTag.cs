@@ -12,75 +12,77 @@ using System.Runtime.Versioning;
 /// It is prefixed with one byte signifying the tag types it contains and a signed 32-bit integer signifying the length.
 /// </remarks>
 [RequiresPreviewFeatures]
-public class ListTag<TPrimitive> : NbtTag, IList<TPrimitive>
+public class ListTag<TPrimitive> : NbtTag, IList<TPrimitive>, ITypelessList
 {
-	private readonly List<TPrimitive> content;
+	public List<TPrimitive> Content { get; set; }
+	public new Int32 Length { get; set; }
 
 	public static new Byte Declarator => 0x09;
 
-	public ListTag(Byte[] name, List<TPrimitive> content)
+	public ListTag(Byte[] name, List<TPrimitive> content, Int32 length)
 	{
 		this.Name = name;
-		this.content = content;
+		this.Content = content;
+		this.Length = length;
 	}
 
 	public TPrimitive this[Int32 index]
 	{
-		get => content[index];
-		set => content[index] = value;
+		get => Content[index];
+		set => Content[index] = value;
 	}
 
-	public Int32 Count => content.Count;
+	public Int32 Count => Content.Count;
 
 	public Boolean IsReadOnly => false;
 
 	public void Add(TPrimitive item)
 	{
-		content.Add(item);
+		Content.Add(item);
 	}
 
 	public void Clear()
 	{
-		content.Clear();
+		Content.Clear();
 	}
 
 	public Boolean Contains(TPrimitive item)
 	{
-		return content.Contains(item);
+		return Content.Contains(item);
 	}
 
 	public void CopyTo(TPrimitive[] array, Int32 arrayIndex)
 	{
-		content.CopyTo(array, arrayIndex);
+		Content.CopyTo(array, arrayIndex);
 	}
 
 	public IEnumerator<TPrimitive> GetEnumerator()
 	{
-		return content.GetEnumerator();
+		return Content.GetEnumerator();
 	}
 
 	public Int32 IndexOf(TPrimitive item)
 	{
-		return content.IndexOf(item);
+		return Content.IndexOf(item);
 	}
 
 	public void Insert(Int32 index, TPrimitive item)
 	{
-		content.Insert(index, item);
+		Content.Insert(index, item);
 	}
 
 	public Boolean Remove(TPrimitive item)
 	{
-		return content.Remove(item);
+		return Content.Remove(item);
 	}
 
 	public void RemoveAt(Int32 index)
 	{
-		content.RemoveAt(index);
+		Content.RemoveAt(index);
 	}
 
 	IEnumerator IEnumerable.GetEnumerator()
 	{
-		return content.GetEnumerator();
+		return Content.GetEnumerator();
 	}
 }

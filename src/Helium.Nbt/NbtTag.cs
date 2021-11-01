@@ -14,5 +14,7 @@ public abstract class NbtTag : INbtToken
 
 	public static Int32 Length => 0;
 
+	public NbtTag? Parent { get; set; }
+
 	public virtual Byte[] Name { get; init; } = null!;
 }

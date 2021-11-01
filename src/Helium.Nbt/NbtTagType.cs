@@ -1,6 +1,11 @@
 ﻿namespace Helium.Nbt;
 
-public enum NbtTagType
+using System;
+
+/// <summary>
+/// Lists every single NBT tag type by its binary ID
+/// </summary>
+public enum NbtTagType : Int32
 {
 	End,
 	Byte,
