@@ -279,22 +279,22 @@ public class BinaryNbtReader
 			switch(default(T))
 			{
 				case NbtByteToken:
-					token.Children.Add(ReadByteToken(stream));
+					token.Children.Add(ReadByteToken(stream) with { Parent = activeToken });
 					break;
 				case NbtInt16Token:
-					token.Children.Add(ReadInt16Token(stream));
+					token.Children.Add(ReadInt16Token(stream) with { Parent = activeToken });
 					break;
 				case NbtInt32Token:
-					token.Children.Add(ReadInt32Token(stream));
+					token.Children.Add(ReadInt32Token(stream) with { Parent = activeToken });
 					break;
 				case NbtInt64Token:
-					token.Children.Add(ReadInt64Token(stream));
+					token.Children.Add(ReadInt64Token(stream) with { Parent = activeToken });
 					break;
 				case NbtSingleToken:
-					token.Children.Add(ReadSingleToken(stream));
+					token.Children.Add(ReadSingleToken(stream) with { Parent = activeToken });
 					break;
 				case NbtDoubleToken:
-					token.Children.Add(ReadDoubleToken(stream));
+					token.Children.Add(ReadDoubleToken(stream) with { Parent = activeToken });
 					break;
 				case NbtByteArrayToken:
 					token.Children.Add(ReadByteArrayToken(ReadName()));
