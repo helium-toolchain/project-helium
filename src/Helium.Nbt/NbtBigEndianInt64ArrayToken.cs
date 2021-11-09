@@ -15,7 +15,7 @@ using Helium.Nbt.Internal;
 /// The prefix is a signed 32-bit integer.
 /// </remarks>
 [RequiresPreviewFeatures]
-public sealed class NbtInt64BigEndianArrayToken : IValuedComplexNbtToken<Int64BigEndian>, IList<Int64BigEndian>
+public sealed class NbtBigEndianInt64ArrayToken : IValuedComplexNbtToken<Int64BigEndian>, IList<Int64BigEndian>
 {
 	private readonly List<Int64BigEndian> elements;
 
@@ -27,7 +27,7 @@ public sealed class NbtInt64BigEndianArrayToken : IValuedComplexNbtToken<Int64Bi
 
 	public static Byte Declarator => 0x0C;
 
-	public NbtInt64BigEndianArrayToken(Byte[] name, Span<Int64BigEndian> values, IComplexNbtToken parent)
+	public NbtBigEndianInt64ArrayToken(Byte[] name, Span<Int64BigEndian> values, IComplexNbtToken parent)
 	{
 		this.Name = name;
 		this.elements = values.ToArray().ToList();
