@@ -4,10 +4,10 @@ using System;
 using System.Runtime.Versioning;
 
 /// <summary>
-/// Represents a signed, big endian 64-bit integer tag
+/// Represents a signed, big endian 64-bit integer token
 /// </summary>
 [RequiresPreviewFeatures]
-public struct Int64Tag : IValuedNbtToken<Int64>
+public record struct NbtInt64Token : IValuedNbtToken<Int64>
 {
 	public static Byte Declarator => 0x04;
 
@@ -17,9 +17,12 @@ public struct Int64Tag : IValuedNbtToken<Int64>
 
 	public Byte[] Name { get; init; }
 
-	public Int64Tag(Byte[] name, Int64 value)
+	public IComplexNbtToken Parent { get; set; }
+
+	public NbtInt64Token(Byte[] name, Int64 value, IComplexNbtToken parent)
 	{
 		this.Name = name;
 		this.Value = value;
+		this.Parent = parent;
 	}
 }

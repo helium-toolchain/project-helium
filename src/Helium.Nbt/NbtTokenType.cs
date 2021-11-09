@@ -3,9 +3,9 @@
 using System;
 
 /// <summary>
-/// Lists every single NBT tag type by its binary ID
+/// Lists every single NBT token type by its binary ID
 /// </summary>
-public enum NbtTagType : Int32
+public enum NbtTokenType : Byte
 {
 	End,
 	Byte,

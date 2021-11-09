@@ -6,24 +6,27 @@ using System.Collections.Generic;
 using System.Runtime.Versioning;
 
 /// <summary>
-/// Represents a length-prefixed array of any NBT tag.
+/// Represents a length-prefixed array of any NBT token.
 /// </summary>
 /// <remarks>
-/// It is prefixed with one byte signifying the tag types it contains and a signed 32-bit integer signifying the length.
+/// It is prefixed with one byte signifying the token types it contains and a signed 32-bit integer signifying the length.
 /// </remarks>
 [RequiresPreviewFeatures]
-public class ListTag<TPrimitive> : NbtTag, IList<TPrimitive>, ITypelessList
+public sealed class NbtListToken<TPrimitive> : 
+	IValuedComplexNbtToken<TPrimitive>, IList<TPrimitive>, ITypelessList
 {
 	public List<TPrimitive> Content { get; set; }
-	public new Int32 Length { get; set; }
 
-	public static new Byte Declarator => 0x09;
+	public Int32 TargetLength { get; set; }
 
-	public ListTag(Byte[] name, List<TPrimitive> content, Int32 length)
+	public static Byte Declarator => 0x09;
+
+	public NbtListToken(Byte[] name, List<TPrimitive> content, IComplexNbtToken parent, Int32 targetLength)
 	{
 		this.Name = name;
 		this.Content = content;
-		this.Length = length;
+		this.Parent = parent;
+		this.TargetLength = targetLength;
 	}
 
 	public TPrimitive this[Int32 index]
@@ -35,6 +38,12 @@ public class ListTag<TPrimitive> : NbtTag, IList<TPrimitive>, ITypelessList
 	public Int32 Count => Content.Count;
 
 	public Boolean IsReadOnly => false;
+
+	public Byte[] Name { get; set; }
+
+	public IComplexNbtToken Parent { get; set; }
+
+	public static Int32 Length => 0;
 
 	public void Add(TPrimitive item)
 	{
@@ -84,5 +93,10 @@ public class ListTag<TPrimitive> : NbtTag, IList<TPrimitive>, ITypelessList
 	IEnumerator IEnumerable.GetEnumerator()
 	{
 		return Content.GetEnumerator();
+	}
+
+	public void AddChild(TPrimitive token)
+	{
+		throw new NotImplementedException();
 	}
 }

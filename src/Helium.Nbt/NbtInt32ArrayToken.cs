@@ -13,7 +13,7 @@ using System.Runtime.Versioning;
 /// The prefix is a signed 32-bit integer.
 /// </remarks>
 [RequiresPreviewFeatures]
-public class Int32ArrayTag : NbtTag, IList<Int32>
+public sealed class NbtInt32ArrayToken : IValuedComplexNbtToken<Int32>, IList<Int32>
 {
 	private readonly List<Int32> elements;
 
@@ -23,17 +23,24 @@ public class Int32ArrayTag : NbtTag, IList<Int32>
 		set => elements[index] = value;
 	}
 
-	public static new Byte Declarator => 0x0B;
+	public static Byte Declarator => 0x0B;
 
-	public Int32ArrayTag(Byte[] name, Span<Int32> values)
+	public NbtInt32ArrayToken(Byte[] name, Span<Int32> values, IComplexNbtToken parent)
 	{
 		this.Name = name;
 		this.elements = values.ToArray().ToList();
+		this.Parent = parent;
 	}
 
 	public Int32 Count => elements.Count;
 
 	public Boolean IsReadOnly => false;
+
+	public static Int32 Length => 0;
+
+	public Byte[] Name { get; private set; }
+
+	public IComplexNbtToken Parent { get; set; }
 
 	public void Add(Int32 item)
 	{
@@ -83,6 +90,11 @@ public class Int32ArrayTag : NbtTag, IList<Int32>
 	IEnumerator IEnumerable.GetEnumerator()
 	{
 		return elements.GetEnumerator();
+	}
+
+	public void AddChild(Int32 token)
+	{
+		
 	}
 }
 

@@ -13,7 +13,7 @@ using System.Runtime.Versioning;
 /// The prefix is a signed 32-bit integer.
 /// </remarks>
 [RequiresPreviewFeatures]
-public class Int64ArrayTag : NbtTag, IList<Int64>
+public sealed class NbtInt64ArrayToken : IValuedComplexNbtToken<Int64>, IList<Int64>
 {
 	private readonly List<Int64> elements;
 
@@ -23,17 +23,24 @@ public class Int64ArrayTag : NbtTag, IList<Int64>
 		set => elements[index] = value;
 	}
 
-	public static new Byte Declarator => 0x0C;
+	public static Byte Declarator => 0x0C;
 
-	public Int64ArrayTag(Byte[] name, Span<Int64> values)
+	public NbtInt64ArrayToken(Byte[] name, Span<Int64> values, IComplexNbtToken parent)
 	{
 		this.Name = name;
 		this.elements = values.ToArray().ToList();
+		this.Parent = parent;
 	}
 
 	public Int32 Count => elements.Count;
 
 	public Boolean IsReadOnly => false;
+
+	public static Int32 Length => 0;
+
+	public Byte[] Name { get; set; }
+
+	public IComplexNbtToken Parent { get; set; }
 
 	public void Add(Int64 item)
 	{
@@ -83,5 +90,10 @@ public class Int64ArrayTag : NbtTag, IList<Int64>
 	IEnumerator IEnumerable.GetEnumerator()
 	{
 		return elements.GetEnumerator();
+	}
+
+	public void AddChild(Int64 token)
+	{
+		this.Add(token);
 	}
 }

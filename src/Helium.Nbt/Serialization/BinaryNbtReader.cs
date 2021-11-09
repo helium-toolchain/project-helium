@@ -10,80 +10,79 @@ using System.Text;
 using Helium.Nbt.Exceptions;
 
 /// <summary>
-/// Provides methods for reading a binary NBT stream into a <see cref="CompoundTag"/>
+/// Provides methods for reading a binary NBT stream into a <see cref="NbtCompoundToken"/>
 /// </summary>
 [RequiresPreviewFeatures]
 public class BinaryNbtReader
 {
-	public CompoundTag ReadNbtStream(Stream stream)
+	public NbtCompoundToken ReadNbtStream(Stream stream)
 	{
-		CompoundTag root = new();
+		NbtCompoundToken root = new();
 		Int16 nameLength = 0, depth = 1;
-		NbtTag? activeTag = root;
-		NbtTagType listTagType = NbtTagType.End;
+		IComplexNbtToken? activeTag = root;
+		NbtTokenType listTagType = NbtTokenType.End;
 		Int32 listLength = 0;
 
 		do
 		{
 			if(activeTag is not ITypelessList)
 			{
-				switch((NbtTagType)stream.ReadByte())
+				switch((NbtTokenType)stream.ReadByte())
 				{
-					case NbtTagType.End:
+					case NbtTokenType.End:
 						depth -= 1;
 						FinalizeTag();
 						break;
-					case NbtTagType.Byte:
-						AppendTag<ByteTag>();
+					case NbtTokenType.Byte:
+						AppendTag<NbtByteToken>();
 						break;
-					case NbtTagType.Short:
-						AppendTag<Int16Tag>();
+					case NbtTokenType.Short:
+						AppendTag<NbtInt16Token>();
 						break;
-					case NbtTagType.Int:
-						AppendTag<Int32Tag>();
+					case NbtTokenType.Int:
+						AppendTag<NbtInt32Token>();
 						break;
-					case NbtTagType.Long:
-						AppendTag<Int64Tag>();
+					case NbtTokenType.Long:
+						AppendTag<NbtInt64Token>();
 						break;
-					case NbtTagType.Float:
-						AppendTag<FloatTag>();
+					case NbtTokenType.Float:
+						AppendTag<NbtSingleToken>();
 						break;
-					case NbtTagType.Double:
-						AppendTag<DoubleTag>();
+					case NbtTokenType.Double:
+						AppendTag<NbtDoubleToken>();
 						break;
-					case NbtTagType.ByteArray:
-						AppendTag<ByteArrayTag>();
+					case NbtTokenType.ByteArray:
+						AppendTag<NbtByteArrayToken>();
 						break;
-					case NbtTagType.IntArray:
-						AppendTag<Int32ArrayTag>();
+					case NbtTokenType.IntArray:
+						AppendTag<NbtInt32ArrayToken>();
 						break;
-					case NbtTagType.LongArray:
-						AppendTag<Int64ArrayTag>();
+					case NbtTokenType.LongArray:
+						AppendTag<NbtInt64ArrayToken>();
 						break;
-					case NbtTagType.List:
+					case NbtTokenType.List:
 						AppendListTag(ReadName());
 						break;
-					case NbtTagType.String:
+					case NbtTokenType.String:
 						AppendStringTag(ReadName());
 						break;
-					case NbtTagType.Compound:
+					case NbtTokenType.Compound:
 						AppendCompoundTag(ReadName());
 						break;
 					default:
-						throw new MalformedNbtException("Invalid declared tag type");
+						throw new MalformedNbtException("Invalid declared token type");
 				}
-			} 
-			else
+			} else
 			{
 				if(activeTag is not ITypelessList list)
 				{
-					throw new MalformedNbtException("Schrodinger's List tag discovered");
+					throw new MalformedNbtException("Schrodinger's List token discovered");
 				}
 
 				Span<Byte> buffer;
 				switch(activeTag)
 				{
-					case ListTag<Byte> b:
+					case NbtListToken<Byte> b:
 						buffer = new Byte[listLength];
 						listLength = 0;
 
@@ -94,7 +93,7 @@ public class BinaryNbtReader
 						FinalizeListTag();
 						continue;
 
-					case ListTag<Int16> i16:
+					case NbtListToken<Int16> i16:
 						buffer = new Byte[listLength * 2];
 						listLength = 0;
 
@@ -105,7 +104,7 @@ public class BinaryNbtReader
 						FinalizeListTag();
 						continue;
 
-					case ListTag<Int32> i32:
+					case NbtListToken<Int32> i32:
 						buffer = new Byte[listLength * 4];
 						listLength = 0;
 
@@ -116,7 +115,7 @@ public class BinaryNbtReader
 						FinalizeListTag();
 						continue;
 
-					case ListTag<Int64> i64:
+					case NbtListToken<Int64> i64:
 						buffer = new Byte[listLength * 8];
 						listLength = 0;
 
@@ -127,7 +126,7 @@ public class BinaryNbtReader
 						FinalizeListTag();
 						continue;
 
-					case ListTag<Single> s:
+					case NbtListToken<Single> s:
 						buffer = new Byte[listLength * 4];
 						listLength = 0;
 
@@ -137,7 +136,7 @@ public class BinaryNbtReader
 
 						FinalizeListTag();
 						continue;
-					case ListTag<Double> s:
+					case NbtListToken<Double> s:
 						buffer = new Byte[listLength * 8];
 						listLength = 0;
 
@@ -153,48 +152,48 @@ public class BinaryNbtReader
 
 				switch(activeTag)
 				{
-					case ListTag<StringTag> s:
-						if(s.Length <= s.Count)
+					case NbtListToken<NbtStringToken> s:
+						if(s.TargetLength <= s.Count)
 						{
 							FinalizeListTag();
 						}
 
 						AppendStringTag(Encoding.UTF8.GetBytes($"{s.Count}"));
 						break;
-					case ListTag<ByteArrayTag> ba:
-						if(ba.Length <= ba.Count)
+					case NbtListToken<NbtByteArrayToken> ba:
+						if(ba.TargetLength <= ba.Count)
 						{
 							FinalizeListTag();
 						}
 
 						ba.Add(ReadByteArrayTag(Encoding.UTF8.GetBytes($"{ba.Count}")));
 						break;
-					case ListTag<Int32ArrayTag> i32a:
-						if(i32a.Length <= i32a.Count)
+					case NbtListToken<NbtInt32ArrayToken> i32a:
+						if(i32a.TargetLength <= i32a.Count)
 						{
 							FinalizeListTag();
 						}
 
 						i32a.Add(ReadInt32ArrayTag(Encoding.UTF8.GetBytes($"{i32a.Count}")));
 						break;
-					case ListTag<Int64ArrayTag> i64a:
-						if(i64a.Length <= i64a.Count)
+					case NbtListToken<NbtInt64ArrayToken> i64a:
+						if(i64a.TargetLength <= i64a.Count)
 						{
 							FinalizeListTag();
 						}
 
 						i64a.Add(ReadInt64ArrayTag(Encoding.UTF8.GetBytes($"{i64a.Count}")));
 						break;
-					case ListTag<ITypelessList> tl:
-						if(tl.Length <= tl.Count)
+					case NbtListToken<ITypelessList> tl:
+						if(tl.TargetLength <= tl.Count)
 						{
 							FinalizeListTag();
 						}
 
 						AppendListTag(Encoding.UTF8.GetBytes($"{tl.Count}"));
 						break;
-					case ListTag<CompoundTag> c:
-						if(c.Length <= c.Count)
+					case NbtListToken<NbtCompoundToken> c:
+						if(c.TargetLength <= c.Count)
 						{
 							FinalizeListTag();
 						}
@@ -202,7 +201,7 @@ public class BinaryNbtReader
 						AppendCompoundTag(Encoding.UTF8.GetBytes($"{c.Count}"));
 						break;
 					default:
-						throw new MalformedNbtException("Invalid List tag data discovered");
+						throw new MalformedNbtException("Invalid List token data discovered");
 				}
 
 				FinalizeListTag();
@@ -213,18 +212,18 @@ public class BinaryNbtReader
 
 		void FinalizeTag()
 		{
-			if(activeTag is not CompoundTag tag)
+			if(activeTag is not NbtCompoundToken token)
 			{
 				throw new MalformedNbtException("EndTag discovered outside of a CompoundTag");
 			}
 
-			tag.Children.Add(new EndTag());
-			activeTag = tag.Parent;
+			token.Children.Add(new NbtEndToken());
+			activeTag = token.Parent;
 		}
 
 		void FinalizeListTag()
 		{
-			if(activeTag is not ITypelessList tag)
+			if(activeTag is not ITypelessList token)
 			{
 				throw new MalformedNbtException("End of ListTag discovered outside of a ListTag");
 			}
@@ -235,39 +234,39 @@ public class BinaryNbtReader
 		void AppendTag<T>()
 			where T : INbtToken
 		{
-			if(activeTag is not CompoundTag tag)
+			if(activeTag is not NbtCompoundToken token)
 			{
-				throw new MalformedNbtException("Named Binary Tag discovered outside of a CompoundTag");
+				throw new MalformedNbtException("Named Binary Token discovered outside of a CompoundTag");
 			}
 
 			switch(default(T))
 			{
-				case ByteTag:
-					tag.Children.Add(ReadByteTag(stream));
+				case NbtByteToken:
+					token.Children.Add(ReadByteTag(stream));
 					break;
-				case Int16Tag:
-					tag.Children.Add(ReadInt16Tag(stream));
+				case NbtInt16Token:
+					token.Children.Add(ReadInt16Tag(stream));
 					break;
-				case Int32Tag:
-					tag.Children.Add(ReadInt32Tag(stream));
+				case NbtInt32Token:
+					token.Children.Add(ReadInt32Tag(stream));
 					break;
-				case Int64Tag:
-					tag.Children.Add(ReadInt64Tag(stream));
+				case NbtInt64Token:
+					token.Children.Add(ReadInt64Tag(stream));
 					break;
-				case FloatTag:
-					tag.Children.Add(ReadFloatTag(stream));
+				case NbtSingleToken:
+					token.Children.Add(ReadSingleTag(stream));
 					break;
-				case DoubleTag:
-					tag.Children.Add(ReadDoubleTag(stream));
+				case NbtDoubleToken:
+					token.Children.Add(ReadDoubleTag(stream));
 					break;
-				case ByteArrayTag:
-					tag.Children.Add(ReadByteArrayTag(ReadName()));
+				case NbtByteArrayToken:
+					token.Children.Add(ReadByteArrayTag(ReadName()));
 					break;
-				case Int32ArrayTag:
-					tag.Children.Add(ReadInt32ArrayTag(ReadName()));
+				case NbtInt32ArrayToken:
+					token.Children.Add(ReadInt32ArrayTag(ReadName()));
 					break;
-				case Int64ArrayTag:
-					tag.Children.Add(ReadInt64ArrayTag(ReadName()));
+				case NbtInt64ArrayToken:
+					token.Children.Add(ReadInt64ArrayTag(ReadName()));
 					break;
 				default:
 					throw new MalformedNbtException("Unknown malformed NBT data.");
@@ -286,7 +285,7 @@ public class BinaryNbtReader
 			return name.ToArray();
 		}
 
-		ByteArrayTag ReadByteArrayTag(Byte[] name)
+		NbtByteArrayToken ReadByteArrayTag(Byte[] name)
 		{
 			Span<Byte> buffer = stackalloc Byte[4], array;
 			Int32 arrayLength;
@@ -297,10 +296,10 @@ public class BinaryNbtReader
 			array = new Byte[arrayLength];
 			stream.Read(array);
 
-			return new(name, array);
+			return new(name, array, activeTag);
 		}
 
-		Int32ArrayTag ReadInt32ArrayTag(Byte[] name)
+		NbtInt32ArrayToken ReadInt32ArrayTag(Byte[] name)
 		{
 			Span<Byte> buffer = stackalloc Byte[4], array;
 			Int32 arrayLength;
@@ -311,10 +310,10 @@ public class BinaryNbtReader
 			array = new Byte[arrayLength * 4];
 			stream.Read(array);
 
-			return new(name, MemoryMarshal.Cast<Byte, Int32>(array));
+			return new(name, MemoryMarshal.Cast<Byte, Int32>(array), activeTag);
 		}
 
-		Int64ArrayTag ReadInt64ArrayTag(Byte[] name)
+		NbtInt64ArrayToken ReadInt64ArrayTag(Byte[] name)
 		{
 			Span<Byte> buffer = stackalloc Byte[4], array;
 			Int32 arrayLength;
@@ -325,7 +324,7 @@ public class BinaryNbtReader
 			array = new Byte[arrayLength * 8];
 			stream.Read(array);
 
-			return new(name, MemoryMarshal.Cast<Byte, Int64>(array));
+			return new(name, MemoryMarshal.Cast<Byte, Int64>(array), activeTag);
 		}
 
 		void AppendListTag(Byte[] name)
@@ -335,77 +334,76 @@ public class BinaryNbtReader
 			stream.Read(type);
 			stream.Read(length);
 
-			listTagType = (NbtTagType)type[0];
+			listTagType = (NbtTokenType)type[0];
 			listLength = BinaryPrimitives.ReadInt32BigEndian(length);
 
-			NbtTag listTag;
+			IComplexNbtToken listTag;
 
 			switch(listTagType)
 			{
-				case NbtTagType.End:
+				case NbtTokenType.End:
 					if(listLength > 0)
 					{
 						throw new MalformedNbtException("List of End tags discovered");
 					}
-					listTag = new ListTag<EndTag>(name, new(), listLength);
+					listTag = new NbtListToken<NbtEndToken>(name, new(), activeTag, listLength);
 					break;
-				case NbtTagType.Byte:
-					listTag = new ListTag<Byte>(name, new(), listLength);
+				case NbtTokenType.Byte:
+					listTag = new NbtListToken<Byte>(name, new(), activeTag, listLength);
 					break;
-				case NbtTagType.Short:
-					listTag = new ListTag<Int16>(name, new(), listLength);
+				case NbtTokenType.Short:
+					listTag = new NbtListToken<Int16>(name, new(), activeTag, listLength);
 					break;
-				case NbtTagType.Int:
-					listTag = new ListTag<Int32>(name, new(), listLength);
+				case NbtTokenType.Int:
+					listTag = new NbtListToken<Int32>(name, new(), activeTag, listLength);
 					break;
-				case NbtTagType.Long:
-					listTag = new ListTag<Int64>(name, new(), listLength);
+				case NbtTokenType.Long:
+					listTag = new NbtListToken<Int64>(name, new(), activeTag, listLength);
 					break;
-				case NbtTagType.Float:
-					listTag = new ListTag<Single>(name, new(), listLength);
+				case NbtTokenType.Float:
+					listTag = new NbtListToken<Single>(name, new(), activeTag, listLength);
 					break;
-				case NbtTagType.Double:
-					listTag = new ListTag<Double>(name, new(), listLength);
+				case NbtTokenType.Double:
+					listTag = new NbtListToken<Double>(name, new(), activeTag, listLength);
 					break;
-				case NbtTagType.ByteArray:
-					listTag = new ListTag<ByteArrayTag>(name, new(), listLength);
+				case NbtTokenType.ByteArray:
+					listTag = new NbtListToken<NbtByteArrayToken>(name, new(), activeTag, listLength);
 					break;
-				case NbtTagType.String:
-					listTag = new ListTag<StringTag>(name, new(), listLength);
+				case NbtTokenType.String:
+					listTag = new NbtListToken<NbtStringToken>(name, new(), activeTag, listLength);
 					break;
-				case NbtTagType.List:
-					listTag = new ListTag<ITypelessList>(name, new(), listLength);
+				case NbtTokenType.List:
+					listTag = new NbtListToken<ITypelessList>(name, new(), activeTag, listLength);
 					break;
-				case NbtTagType.Compound:
-					listTag = new ListTag<CompoundTag>(name, new(), listLength);
+				case NbtTokenType.Compound:
+					listTag = new NbtListToken<NbtCompoundToken>(name, new(), activeTag, listLength);
 					break;
-				case NbtTagType.IntArray:
-					listTag = new ListTag<Int32ArrayTag>(name, new(), listLength);
+				case NbtTokenType.IntArray:
+					listTag = new NbtListToken<NbtInt32ArrayToken>(name, new(), activeTag, listLength);
 					break;
-				case NbtTagType.LongArray:
-					listTag = new ListTag<Int64ArrayTag>(name, new(), listLength);
+				case NbtTokenType.LongArray:
+					listTag = new NbtListToken<NbtInt64ArrayToken>(name, new(), activeTag, listLength);
 					break;
 				default:
-					throw new MalformedNbtException("Invalid tag type declaring a List tag");
+					throw new MalformedNbtException("Invalid token type declaring a List token");
 			}
 
-			if(activeTag is not CompoundTag tag)
+			if(activeTag is not NbtCompoundToken token)
 			{
-				throw new MalformedNbtException("Named list tag discovered outside of a CompoundTag");
+				throw new MalformedNbtException("Named list token discovered outside of a CompoundTag");
 			}
 
-			tag.Children.Add(listTag);
+			token.Children.Add(listTag);
 
-			listTag.Parent = activeTag;
 			activeTag = listTag;
 			depth++;
 		}
 
 		void AppendStringTag(Byte[] name)
 		{
-			if(activeTag is not CompoundTag tag)
+			if(activeTag is not NbtCompoundToken token)
 			{
-				throw new MalformedNbtException("Named string tag discovered outside of a CompoundTag");
+				throw new MalformedNbtException("Named string token discovered outside of a CompoundTag");
 			}
 
 			Span<Byte> buffer = stackalloc Byte[2], array;
@@ -417,20 +415,20 @@ public class BinaryNbtReader
 
 			stream.Read(array);
 
-			tag.Children.Add(new StringTag(name, array));
+			token.Children.Add(new NbtStringToken(name, array, activeTag));
 		}
 
 		void AppendCompoundTag(Byte[] name)
 		{
-			CompoundTag compound = new(name, new());
+			NbtCompoundToken compound = new(name, new(), activeTag);
 			compound.Parent = activeTag;
 
-			if(activeTag is not CompoundTag tag)
+			if(activeTag is not NbtCompoundToken token)
 			{
-				throw new MalformedNbtException("Named compound tag discovered outside of a CompoundTag");
+				throw new MalformedNbtException("Named compound token discovered outside of a CompoundTag");
 			}
 
-			tag.Children.Add(compound);
+			token.Children.Add(compound);
 
 			activeTag = compound;
 
@@ -441,10 +439,10 @@ public class BinaryNbtReader
 	#region Reading primitives
 
 	/// <summary>
-	/// Reads one <see cref="ByteTag"/> from the current stream.
+	/// Reads one <see cref="NbtByteToken"/> from the current stream.
 	/// </summary>
 	/// <param name="stream">A stream containing valid NBT data.</param>
-	public ByteTag ReadByteTag(Stream stream)
+	public NbtByteToken ReadByteTag(Stream stream)
 	{
 		Span<Byte> name = stackalloc Byte[0], nameLengthBuffer = stackalloc Byte[2], payload = stackalloc Byte[1];
 		Int16 nameLength;
@@ -457,14 +455,18 @@ public class BinaryNbtReader
 		stream.Read(name);
 		stream.Read(payload);
 
-		return new(name.ToArray(), payload[0]);
+		return new()
+		{
+			Name = name.ToArray(),
+			Value = payload[0]
+		};
 	}
 
 	/// <summary>
-	/// Reads one <see cref="Int16Tag"/> from the current stream.
+	/// Reads one <see cref="NbtInt16Token"/> from the current stream.
 	/// </summary>
 	/// <param name="stream">A stream containing valid NBT data.</param>
-	public Int16Tag ReadInt16Tag(Stream stream)
+	public NbtInt16Token ReadInt16Tag(Stream stream)
 	{
 		Span<Byte> name = stackalloc Byte[0], nameLengthBuffer = stackalloc Byte[2], payload = stackalloc Byte[2];
 		Int16 nameLength;
@@ -477,14 +479,18 @@ public class BinaryNbtReader
 		stream.Read(name);
 		stream.Read(payload);
 
-		return new(name.ToArray(), BinaryPrimitives.ReadInt16BigEndian(payload));
+		return new() 
+		{ 
+			Name = name.ToArray(),
+			Value = BinaryPrimitives.ReadInt16BigEndian(payload) 
+		};
 	}
 
 	/// <summary>
-	/// Reads one <see cref="Int32Tag"/> from the current stream.
+	/// Reads one <see cref="NbtInt32Token"/> from the current stream.
 	/// </summary>
 	/// <param name="stream">A stream containing valid NBT data.</param>
-	public Int32Tag ReadInt32Tag(Stream stream)
+	public NbtInt32Token ReadInt32Tag(Stream stream)
 	{
 		Span<Byte> name = stackalloc Byte[0], nameLengthBuffer = stackalloc Byte[2], payload = stackalloc Byte[4];
 		Int16 nameLength;
@@ -497,14 +503,18 @@ public class BinaryNbtReader
 		stream.Read(name);
 		stream.Read(payload);
 
-		return new(name.ToArray(), BinaryPrimitives.ReadInt32BigEndian(payload));
+		return new()
+		{
+			Name = name.ToArray(),
+			Value = BinaryPrimitives.ReadInt32BigEndian(payload)
+		};
 	}
 
 	/// <summary>
-	/// Reads one <see cref="Int64Tag"/> from the current stream.
+	/// Reads one <see cref="NbtInt64Token"/> from the current stream.
 	/// </summary>
 	/// <param name="stream">A stream containing valid NBT data.</param>
-	public Int64Tag ReadInt64Tag(Stream stream)
+	public NbtInt64Token ReadInt64Tag(Stream stream)
 	{
 		Span<Byte> name = stackalloc Byte[0], nameLengthBuffer = stackalloc Byte[2], payload = stackalloc Byte[8];
 		Int16 nameLength;
@@ -517,14 +527,18 @@ public class BinaryNbtReader
 		stream.Read(name);
 		stream.Read(payload);
 
-		return new(name.ToArray(), BinaryPrimitives.ReadInt64BigEndian(payload));
+		return new()
+		{
+			Name = name.ToArray(),
+			Value = BinaryPrimitives.ReadInt64BigEndian(payload)
+		};
 	}
 
 	/// <summary>
-	/// Reads one <see cref="FloatTag"/> from the current stream.
+	/// Reads one <see cref="NbtSingleToken"/> from the current stream.
 	/// </summary>
 	/// <param name="stream">A stream containing valid NBT data.</param>
-	public FloatTag ReadFloatTag(Stream stream)
+	public NbtSingleToken ReadSingleTag(Stream stream)
 	{
 		Span<Byte> name = stackalloc Byte[0], nameLengthBuffer = stackalloc Byte[2], payload = stackalloc Byte[4];
 		Int16 nameLength;
@@ -537,14 +551,18 @@ public class BinaryNbtReader
 		stream.Read(name);
 		stream.Read(payload);
 
-		return new(name.ToArray(), BinaryPrimitives.ReadSingleBigEndian(payload));
+		return new()
+		{
+			Name = name.ToArray(),
+			Value = BinaryPrimitives.ReadSingleBigEndian(payload)
+		};
 	}
 
 	/// <summary>
-	/// Reads one <see cref="DoubleTag"/> from the current stream.
+	/// Reads one <see cref="NbtDoubleToken"/> from the current stream.
 	/// </summary>
 	/// <param name="stream">A stream containing valid NBT data.</param>
-	public DoubleTag ReadDoubleTag(Stream stream)
+	public NbtDoubleToken ReadDoubleTag(Stream stream)
 	{
 		Span<Byte> name = stackalloc Byte[0], nameLengthBuffer = stackalloc Byte[2], payload = stackalloc Byte[8];
 		Int16 nameLength;
@@ -557,7 +575,11 @@ public class BinaryNbtReader
 		stream.Read(name);
 		stream.Read(payload);
 
-		return new(name.ToArray(), BinaryPrimitives.ReadDoubleBigEndian(payload));
+		return new()
+		{
+			Name = name.ToArray(),
+			Value = BinaryPrimitives.ReadDoubleBigEndian(payload)
+		};
 	}
 
 	#endregion

@@ -4,14 +4,16 @@ using System;
 using System.Runtime.Versioning;
 
 /// <summary>
-/// Represents a NBT end tag
+/// Represents a NBT end token
 /// </summary>
 [RequiresPreviewFeatures]
-public class EndTag : INbtToken
+public sealed class NbtEndToken : INbtToken
 {
 	public static Byte Declarator => 0x00;
 
 	public static Int32 Length => 0;
 
 	public Byte[] Name => null!;
+
+	public IComplexNbtToken Parent { get; init; } = null!;
 }

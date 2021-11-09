@@ -6,25 +6,27 @@ using System.Collections.Generic;
 using System.Runtime.Versioning;
 
 /// <summary>
-/// Represents a NBT compound tag.
+/// Represents a NBT compound token.
 /// </summary>
 [RequiresPreviewFeatures]
-public class CompoundTag : NbtTag, ICollection
+public sealed class NbtCompoundToken : IComplexNbtToken, ICollection
 {
-	public static new Byte Declarator => 0x0A;
+	public static Byte Declarator => 0x0A;
 
 	public List<INbtToken> Children { get; set; }
 
-	public CompoundTag(Byte[] name, List<INbtToken> children)
+	public NbtCompoundToken(Byte[] name, List<INbtToken> children, IComplexNbtToken parent)
 	{
 		this.Name = name;
 		this.Children = children;
+		this.Parent = parent;
 	}
 
-	public CompoundTag()
+	public NbtCompoundToken()
 	{
 		Name = Array.Empty<Byte>();
 		Children = new();
+		this.Parent = null!;
 	}
 
 	public Int32 Count => Children.Count;
@@ -32,6 +34,12 @@ public class CompoundTag : NbtTag, ICollection
 	public Boolean IsSynchronized => false;
 
 	public Object SyncRoot => null!;
+
+	public static Int32 Length => 0;
+
+	public Byte[] Name { get; init; }
+
+	public IComplexNbtToken Parent { get; set; }
 
 	public void CopyTo(Array array, Int32 index)
 	{
@@ -41,5 +49,10 @@ public class CompoundTag : NbtTag, ICollection
 	public IEnumerator GetEnumerator()
 	{
 		return Children.GetEnumerator();
+	}
+
+	public void AddChild(INbtToken token)
+	{
+		throw new NotImplementedException();
 	}
 }

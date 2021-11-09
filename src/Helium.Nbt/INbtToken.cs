@@ -10,17 +10,22 @@ using System.Runtime.Versioning;
 public interface INbtToken
 {
 	/// <summary>
-	/// Gets the byte that declares this tag type.
+	/// Gets the byte that declares this token type.
 	/// </summary>
 	public abstract static Byte Declarator { get; }
 
 	/// <summary>
-	/// Gets the binary-encoded length of this tag type. 0 indicates a variable-length token.
+	/// Gets the binary-encoded length of this token type. 0 indicates a variable-length token.
 	/// </summary>
 	public abstract static Int32 Length { get; }
 
 	/// <summary>
-	/// Name of this Named Binary Data Tag.
+	/// Name of this Named Binary Data Token.
 	/// </summary>
 	public Byte[] Name { get; }
+
+	/// <summary>
+	/// Defines the parent of this token
+	/// </summary>
+	public IComplexNbtToken Parent { get; }
 }

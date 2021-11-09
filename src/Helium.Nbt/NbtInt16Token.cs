@@ -4,10 +4,10 @@ using System;
 using System.Runtime.Versioning;
 
 /// <summary>
-/// Represents a signed, big endian 16-bit integer tag
+/// Represents a signed, big endian 16-bit integer token
 /// </summary>
 [RequiresPreviewFeatures]
-public struct Int16Tag : IValuedNbtToken<Int16>
+public record struct NbtInt16Token : IValuedNbtToken<Int16>
 {
 	public static Byte Declarator => 0x02;
 
@@ -17,9 +17,12 @@ public struct Int16Tag : IValuedNbtToken<Int16>
 
 	public Byte[] Name { get; init; }
 
-	public Int16Tag(Byte[] name, Int16 value)
+	public IComplexNbtToken Parent { get; set; }
+
+	public NbtInt16Token(Byte[] name, Int16 value, IComplexNbtToken parent)
 	{
 		this.Name = name;
 		this.Value = value;
+		this.Parent = parent;
 	}
 }

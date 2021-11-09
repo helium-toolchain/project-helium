@@ -4,10 +4,10 @@ using System;
 using System.Runtime.Versioning;
 
 /// <summary>
-/// Represents a big-endian IEEE-754 single-precision floating point tag.
+/// Represents a big-endian IEEE-754 single-precision floating point token.
 /// </summary>
 [RequiresPreviewFeatures]
-public struct FloatTag : IValuedNbtToken<Single>
+public record struct NbtSingleToken : IValuedNbtToken<Single>
 {
 	public static Byte Declarator => 0x05;
 
@@ -17,9 +17,12 @@ public struct FloatTag : IValuedNbtToken<Single>
 
 	public Byte[] Name { get; init; }
 
-	public FloatTag(Byte[] name, Single value)
+	public IComplexNbtToken Parent { get; set; }
+
+	public NbtSingleToken(Byte[] name, Single value, IComplexNbtToken parent)
 	{
 		this.Name = name;
 		this.Value = value;
+		this.Parent = parent;
 	}
 }
