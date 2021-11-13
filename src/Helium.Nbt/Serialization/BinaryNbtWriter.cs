@@ -12,7 +12,14 @@ using System.Runtime.Versioning;
 public class BinaryNbtWriter
 {
 	public void WriteNbtStream(Stream stream, NbtCompoundToken root) 
-	{ 
+	{
+		IComplexNbtToken currentToken = root;
+		Boolean writeStart = true;
+
+		do
+		{
+			
+		} while(true);
 	}
 
 	/// <summary>

@@ -27,6 +27,51 @@ public sealed class NbtListToken<TPrimitive> :
 		this.Content = content;
 		this.Parent = parent;
 		this.TargetLength = targetLength;
+
+		switch(default(TPrimitive))
+		{
+			case NbtBigEndianInt32ArrayToken:
+			case NbtInt32ArrayToken:
+				this.ListTokenType = NbtTokenType.IntArray;
+				break;
+			case NbtBigEndianInt64ArrayToken:
+			case NbtInt64ArrayToken:
+				this.ListTokenType = NbtTokenType.LongArray;
+				break;
+			case NbtByteArrayToken:
+				this.ListTokenType = NbtTokenType.ByteArray;
+				break;
+			case Byte:
+				this.ListTokenType = NbtTokenType.Byte;
+				break;
+			case NbtCompoundToken:
+				this.ListTokenType = NbtTokenType.Compound;
+				break;
+			case Double:
+				this.ListTokenType = NbtTokenType.Double;
+				break;
+			case Int16:
+				this.ListTokenType = NbtTokenType.Short;
+				break;
+			case Int32:
+				this.ListTokenType = NbtTokenType.Int;
+				break;
+			case Int64:
+				this.ListTokenType = NbtTokenType.Long;
+				break;
+			case ITypelessList:
+				this.ListTokenType = NbtTokenType.List;
+				break;
+			case Single:
+				this.ListTokenType = NbtTokenType.Float;
+				break;
+			case NbtStringToken:
+				this.ListTokenType = NbtTokenType.String;
+				break;
+			case NbtEndToken:
+				this.ListTokenType = NbtTokenType.End;
+				break;
+		}
 	}
 
 	public TPrimitive this[Int32 index]
@@ -44,6 +89,8 @@ public sealed class NbtListToken<TPrimitive> :
 	public IComplexNbtToken Parent { get; set; }
 
 	public static Int32 Length => 0;
+
+	public NbtTokenType ListTokenType { get; set; }
 
 	public void Add(TPrimitive item)
 	{
