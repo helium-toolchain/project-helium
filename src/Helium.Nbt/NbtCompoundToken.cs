@@ -15,18 +15,16 @@ public sealed class NbtCompoundToken : IComplexNbtToken, ICollection
 
 	public List<INbtToken> Children { get; set; }
 
-	public NbtCompoundToken(Byte[] name, List<INbtToken> children, IComplexNbtToken parent)
+	public NbtCompoundToken(Byte[] name, List<INbtToken> children)
 	{
 		this.Name = name;
 		this.Children = children;
-		this.Parent = parent;
 	}
 
 	public NbtCompoundToken()
 	{
 		Name = Array.Empty<Byte>();
 		Children = new();
-		this.Parent = null!;
 	}
 
 	public Int32 Count => Children.Count;
@@ -38,8 +36,6 @@ public sealed class NbtCompoundToken : IComplexNbtToken, ICollection
 	public static Int32 Length => 0;
 
 	public Byte[] Name { get; init; }
-
-	public IComplexNbtToken Parent { get; set; }
 
 	public void CopyTo(Array array, Int32 index)
 	{

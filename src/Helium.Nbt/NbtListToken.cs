@@ -12,69 +12,25 @@ using System.Runtime.Versioning;
 /// It is prefixed with one byte signifying the token types it contains and a signed 32-bit integer signifying the length.
 /// </remarks>
 [RequiresPreviewFeatures]
-public sealed class NbtListToken<TPrimitive> : 
-	IValuedComplexNbtToken<TPrimitive>, IList<TPrimitive>, ITypelessList
+public sealed class NbtListToken : 
+	IValuedComplexNbtToken<INbtToken>, IList<INbtToken>, ITypelessList
 {
-	public List<TPrimitive> Content { get; set; }
+	public List<INbtToken> Content { get; set; }
 
 	public Int32 TargetLength { get; set; }
 
 	public static Byte Declarator => 0x09;
 
-	public NbtListToken(Byte[] name, List<TPrimitive> content, IComplexNbtToken parent, Int32 targetLength)
+	public NbtListToken(Byte[] name, List<INbtToken> content, Int32 targetLength, NbtTokenType tokenType)
 	{
 		this.Name = name;
 		this.Content = content;
-		this.Parent = parent;
 		this.TargetLength = targetLength;
 
-		switch(default(TPrimitive))
-		{
-			case NbtBigEndianInt32ArrayToken:
-			case NbtInt32ArrayToken:
-				this.ListTokenType = NbtTokenType.IntArray;
-				break;
-			case NbtBigEndianInt64ArrayToken:
-			case NbtInt64ArrayToken:
-				this.ListTokenType = NbtTokenType.LongArray;
-				break;
-			case NbtByteArrayToken:
-				this.ListTokenType = NbtTokenType.ByteArray;
-				break;
-			case Byte:
-				this.ListTokenType = NbtTokenType.Byte;
-				break;
-			case NbtCompoundToken:
-				this.ListTokenType = NbtTokenType.Compound;
-				break;
-			case Double:
-				this.ListTokenType = NbtTokenType.Double;
-				break;
-			case Int16:
-				this.ListTokenType = NbtTokenType.Short;
-				break;
-			case Int32:
-				this.ListTokenType = NbtTokenType.Int;
-				break;
-			case Int64:
-				this.ListTokenType = NbtTokenType.Long;
-				break;
-			case ITypelessList:
-				this.ListTokenType = NbtTokenType.List;
-				break;
-			case Single:
-				this.ListTokenType = NbtTokenType.Float;
-				break;
-			case NbtStringToken:
-				this.ListTokenType = NbtTokenType.String;
-				break;
-			case NbtEndToken:
-				this.ListTokenType = NbtTokenType.End;
-				break;
-		}
+		this.ListTokenType = tokenType;
 	}
 
-	public TPrimitive this[Int32 index]
+	public INbtToken this[Int32 index]
 	{
 		get => Content[index];
 		set => Content[index] = value;
@@ -86,13 +42,11 @@ public sealed class NbtListToken<TPrimitive> :
 
 	public Byte[] Name { get; set; }
 
-	public IComplexNbtToken Parent { get; set; }
-
 	public static Int32 Length => 0;
 
 	public NbtTokenType ListTokenType { get; set; }
 
-	public void Add(TPrimitive item)
+	public void Add(INbtToken item)
 	{
 		Content.Add(item);
 	}
@@ -102,32 +56,32 @@ public sealed class NbtListToken<TPrimitive> :
 		Content.Clear();
 	}
 
-	public Boolean Contains(TPrimitive item)
+	public Boolean Contains(INbtToken item)
 	{
 		return Content.Contains(item);
 	}
 
-	public void CopyTo(TPrimitive[] array, Int32 arrayIndex)
+	public void CopyTo(INbtToken[] array, Int32 arrayIndex)
 	{
 		Content.CopyTo(array, arrayIndex);
 	}
 
-	public IEnumerator<TPrimitive> GetEnumerator()
+	public IEnumerator<INbtToken> GetEnumerator()
 	{
 		return Content.GetEnumerator();
 	}
 
-	public Int32 IndexOf(TPrimitive item)
+	public Int32 IndexOf(INbtToken item)
 	{
 		return Content.IndexOf(item);
 	}
 
-	public void Insert(Int32 index, TPrimitive item)
+	public void Insert(Int32 index, INbtToken item)
 	{
 		Content.Insert(index, item);
 	}
 
-	public Boolean Remove(TPrimitive item)
+	public Boolean Remove(INbtToken item)
 	{
 		return Content.Remove(item);
 	}
@@ -142,7 +96,7 @@ public sealed class NbtListToken<TPrimitive> :
 		return Content.GetEnumerator();
 	}
 
-	public void AddChild(TPrimitive token)
+	public void AddChild(INbtToken token)
 	{
 		throw new NotImplementedException();
 	}

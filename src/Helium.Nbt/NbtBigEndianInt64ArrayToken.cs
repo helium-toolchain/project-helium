@@ -27,11 +27,10 @@ public sealed class NbtBigEndianInt64ArrayToken : IValuedComplexNbtToken<Int64Bi
 
 	public static Byte Declarator => 0x0C;
 
-	public NbtBigEndianInt64ArrayToken(Byte[] name, Span<Int64BigEndian> values, IComplexNbtToken parent)
+	public NbtBigEndianInt64ArrayToken(Byte[] name, Span<Int64BigEndian> values)
 	{
 		this.Name = name;
 		this.elements = values.ToArray().ToList();
-		this.Parent = parent;
 	}
 
 	public Int32 Count => elements.Count;
@@ -41,8 +40,6 @@ public sealed class NbtBigEndianInt64ArrayToken : IValuedComplexNbtToken<Int64Bi
 	public static Int32 Length => 0;
 
 	public Byte[] Name { get; set; }
-
-	public IComplexNbtToken Parent { get; set; }
 
 	public void Add(Int64BigEndian item)
 	{

@@ -18,12 +18,15 @@ public sealed class NbtStringToken : IValuedNbtToken<String>
 
 	public Byte[] Name { get; set; }
 
-	public IComplexNbtToken Parent { get; set; }
-
-	public NbtStringToken(Byte[] name, Span<Byte> value, IComplexNbtToken parent)
+	public NbtStringToken(Byte[] name, Span<Byte> value)
 	{
 		this.Name = name;
 		this.Value = Encoding.UTF8.GetString(value);
-		this.Parent = parent;
+	}
+
+	public NbtStringToken(Byte[] name, String value)
+	{
+		this.Name = name;
+		this.Value = value;
 	}
 }

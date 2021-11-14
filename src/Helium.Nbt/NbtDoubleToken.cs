@@ -17,12 +17,9 @@ public record struct NbtDoubleToken : IValuedNbtToken<Double>
 
 	public Byte[] Name { get; init; }
 
-	public IComplexNbtToken Parent { get; set; }
-
-	public NbtDoubleToken(Byte[] name, Double value, IComplexNbtToken parent)
+	public NbtDoubleToken(Byte[] name, Double value)
 	{
 		this.Name = name;
 		this.Value = value;
-		this.Parent = parent;
 	}
 }

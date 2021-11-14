@@ -23,9 +23,4 @@ public interface INbtToken
 	/// Name of this Named Binary Data Token.
 	/// </summary>
 	public Byte[] Name { get; }
-
-	/// <summary>
-	/// Defines the parent of this token
-	/// </summary>
-	public IComplexNbtToken Parent { get; }
 }

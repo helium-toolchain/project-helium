@@ -17,12 +17,9 @@ public record struct NbtByteToken : IValuedNbtToken<Byte>
 
 	public Byte Value { get; init; }
 
-	public IComplexNbtToken Parent { get; set; }
-
-	public NbtByteToken(Byte[] name, Byte value, IComplexNbtToken parent)
+	public NbtByteToken(Byte[] name, Byte value)
 	{
 		this.Name = name;
 		this.Value = value;
-		this.Parent = parent;
 	}
 }

@@ -25,11 +25,10 @@ public sealed class NbtInt64ArrayToken : IValuedComplexNbtToken<Int64>, IList<In
 
 	public static Byte Declarator => 0x0C;
 
-	public NbtInt64ArrayToken(Byte[] name, Span<Int64> values, IComplexNbtToken parent)
+	public NbtInt64ArrayToken(Byte[] name, List<Int64> values)
 	{
 		this.Name = name;
-		this.elements = values.ToArray().ToList();
-		this.Parent = parent;
+		this.elements = values;
 	}
 
 	public Int32 Count => elements.Count;
@@ -39,8 +38,6 @@ public sealed class NbtInt64ArrayToken : IValuedComplexNbtToken<Int64>, IList<In
 	public static Int32 Length => 0;
 
 	public Byte[] Name { get; set; }
-
-	public IComplexNbtToken Parent { get; set; }
 
 	public void Add(Int64 item)
 	{

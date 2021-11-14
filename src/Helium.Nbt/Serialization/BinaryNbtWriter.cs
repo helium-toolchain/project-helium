@@ -5,6 +5,8 @@ using System.Buffers.Binary;
 using System.IO;
 using System.Runtime.Versioning;
 
+using Helium.Nbt.Exceptions;
+
 /// <summary>
 /// Provides methods for writing a <see cref="NbtCompoundToken"/> to NBT
 /// </summary>
@@ -15,10 +17,29 @@ public class BinaryNbtWriter
 	{
 		IComplexNbtToken currentToken = root;
 		Boolean writeStart = true;
+		Span<Byte> listLength = stackalloc Byte[4];
 
 		do
 		{
-			
+			if(writeStart)
+			{
+				switch(currentToken)
+				{
+					case NbtCompoundToken:
+						stream.WriteByte(NbtCompoundToken.Declarator);
+						break;
+					case ITypelessList l:
+						stream.WriteByte(NbtListToken.Declarator);
+						stream.WriteByte((Byte)l.ListTokenType);
+
+						BinaryPrimitives.WriteInt32BigEndian(listLength, l.TargetLength);
+
+						stream.Write(listLength);
+						break;
+					default:
+						throw new MalformedDataException("Tried to write the start of a non-complex tag");
+				}
+			}
 		} while(true);
 	}
 

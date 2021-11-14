@@ -14,6 +14,4 @@ public sealed class NbtEndToken : INbtToken
 	public static Int32 Length => 0;
 
 	public Byte[] Name => null!;
-
-	public IComplexNbtToken Parent { get; init; } = null!;
 }

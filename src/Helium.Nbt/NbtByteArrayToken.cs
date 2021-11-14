@@ -25,11 +25,10 @@ public sealed class NbtByteArrayToken : IValuedComplexNbtToken<Byte>, IList<Byte
 
 	public static Byte Declarator => 0x07;
 
-	public NbtByteArrayToken(Byte[] name, Span<Byte> values, IComplexNbtToken parent)
+	public NbtByteArrayToken(Byte[] name, Span<Byte> values)
 	{
 		this.Name = name;
 		this.elements = values.ToArray().ToList();
-		this.Parent = parent;
 	}
 
 	public Int32 Count => elements.Count;
@@ -39,8 +38,6 @@ public sealed class NbtByteArrayToken : IValuedComplexNbtToken<Byte>, IList<Byte
 	public static Int32 Length => 0;
 
 	public Byte[] Name { get; init; }
-
-	public IComplexNbtToken Parent { get; set; }
 
 	public void Add(Byte item)
 	{
