@@ -15,12 +15,12 @@ using System.Runtime.Versioning;
 [RequiresPreviewFeatures]
 public sealed class NbtByteArrayToken : IValuedComplexNbtToken<Byte>, IList<Byte>
 {
-	private readonly List<Byte> elements;
+	public List<Byte> Elements { get; set; }
 
 	public Byte this[Int32 index]
 	{
-		get => elements[index];
-		set => elements[index] = value;
+		get => Elements[index];
+		set => Elements[index] = value;
 	}
 
 	public static Byte Declarator => 0x07;
@@ -28,10 +28,10 @@ public sealed class NbtByteArrayToken : IValuedComplexNbtToken<Byte>, IList<Byte
 	public NbtByteArrayToken(Byte[] name, Span<Byte> values)
 	{
 		this.Name = name;
-		this.elements = values.ToArray().ToList();
+		this.Elements = values.ToArray().ToList();
 	}
 
-	public Int32 Count => elements.Count;
+	public Int32 Count => Elements.Count;
 
 	public Boolean IsReadOnly => false;
 
@@ -41,52 +41,52 @@ public sealed class NbtByteArrayToken : IValuedComplexNbtToken<Byte>, IList<Byte
 
 	public void Add(Byte item)
 	{
-		elements.Add(item);
+		Elements.Add(item);
 	}
 
 	public void Clear()
 	{
-		elements.Clear();
+		Elements.Clear();
 	}
 
 	public Boolean Contains(Byte item)
 	{
-		return elements.Contains(item);
+		return Elements.Contains(item);
 	}
 
 	public void CopyTo(Byte[] array, Int32 arrayIndex)
 	{
-		elements.CopyTo(array, arrayIndex);
+		Elements.CopyTo(array, arrayIndex);
 	}
 
 	public IEnumerator<Byte> GetEnumerator()
 	{
-		return elements.GetEnumerator();
+		return Elements.GetEnumerator();
 	}
 
 	public Int32 IndexOf(Byte item)
 	{
-		return elements.IndexOf(item);
+		return Elements.IndexOf(item);
 	}
 
 	public void Insert(Int32 index, Byte item)
 	{
-		elements.Insert(index, item);
+		Elements.Insert(index, item);
 	}
 
 	public Boolean Remove(Byte item)
 	{
-		return elements.Remove(item);
+		return Elements.Remove(item);
 	}
 
 	public void RemoveAt(Int32 index)
 	{
-		elements.RemoveAt(index);
+		Elements.RemoveAt(index);
 	}
 
 	IEnumerator IEnumerable.GetEnumerator()
 	{
-		return elements.GetEnumerator();
+		return Elements.GetEnumerator();
 	}
 
 	public void AddChild(Byte token)

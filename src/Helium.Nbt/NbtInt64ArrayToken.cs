@@ -15,12 +15,12 @@ using System.Runtime.Versioning;
 [RequiresPreviewFeatures]
 public sealed class NbtInt64ArrayToken : IValuedComplexNbtToken<Int64>, IList<Int64>
 {
-	private readonly List<Int64> elements;
+	public List<Int64> Elements { get; set; }
 
 	public Int64 this[Int32 index]
 	{
-		get => elements[index];
-		set => elements[index] = value;
+		get => Elements[index];
+		set => Elements[index] = value;
 	}
 
 	public static Byte Declarator => 0x0C;
@@ -28,10 +28,10 @@ public sealed class NbtInt64ArrayToken : IValuedComplexNbtToken<Int64>, IList<In
 	public NbtInt64ArrayToken(Byte[] name, List<Int64> values)
 	{
 		this.Name = name;
-		this.elements = values;
+		this.Elements = values;
 	}
 
-	public Int32 Count => elements.Count;
+	public Int32 Count => Elements.Count;
 
 	public Boolean IsReadOnly => false;
 
@@ -41,52 +41,52 @@ public sealed class NbtInt64ArrayToken : IValuedComplexNbtToken<Int64>, IList<In
 
 	public void Add(Int64 item)
 	{
-		elements.Add(item);
+		Elements.Add(item);
 	}
 
 	public void Clear()
 	{
-		elements.Clear();
+		Elements.Clear();
 	}
 
 	public Boolean Contains(Int64 item)
 	{
-		return elements.Contains(item);
+		return Elements.Contains(item);
 	}
 
 	public void CopyTo(Int64[] array, Int32 arrayIndex)
 	{
-		elements.CopyTo(array, arrayIndex);
+		Elements.CopyTo(array, arrayIndex);
 	}
 
 	public IEnumerator<Int64> GetEnumerator()
 	{
-		return elements.GetEnumerator();
+		return Elements.GetEnumerator();
 	}
 
 	public Int32 IndexOf(Int64 item)
 	{
-		return elements.IndexOf(item);
+		return Elements.IndexOf(item);
 	}
 
 	public void Insert(Int32 index, Int64 item)
 	{
-		elements.Insert(index, item);
+		Elements.Insert(index, item);
 	}
 
 	public Boolean Remove(Int64 item)
 	{
-		return elements.Remove(item);
+		return Elements.Remove(item);
 	}
 
 	public void RemoveAt(Int32 index)
 	{
-		elements.RemoveAt(index);
+		Elements.RemoveAt(index);
 	}
 
 	IEnumerator IEnumerable.GetEnumerator()
 	{
-		return elements.GetEnumerator();
+		return Elements.GetEnumerator();
 	}
 
 	public void AddChild(Int64 token)

@@ -15,12 +15,12 @@ using System.Runtime.Versioning;
 [RequiresPreviewFeatures]
 public sealed class NbtInt32ArrayToken : IValuedComplexNbtToken<Int32>, IList<Int32>
 {
-	private readonly List<Int32> elements;
+	public List<Int32> Elements { get; set; }
 
 	public Int32 this[Int32 index]
 	{
-		get => elements[index];
-		set => elements[index] = value;
+		get => Elements[index];
+		set => Elements[index] = value;
 	}
 
 	public static Byte Declarator => 0x0B;
@@ -28,10 +28,10 @@ public sealed class NbtInt32ArrayToken : IValuedComplexNbtToken<Int32>, IList<In
 	public NbtInt32ArrayToken(Byte[] name, List<Int32> values)
 	{
 		this.Name = name;
-		this.elements = values;
+		this.Elements = values;
 	}
 
-	public Int32 Count => elements.Count;
+	public Int32 Count => Elements.Count;
 
 	public Boolean IsReadOnly => false;
 
@@ -41,52 +41,52 @@ public sealed class NbtInt32ArrayToken : IValuedComplexNbtToken<Int32>, IList<In
 
 	public void Add(Int32 item)
 	{
-		elements.Add(item);
+		Elements.Add(item);
 	}
 
 	public void Clear()
 	{
-		elements.Clear();
+		Elements.Clear();
 	}
 
 	public Boolean Contains(Int32 item)
 	{
-		return elements.Contains(item);
+		return Elements.Contains(item);
 	}
 
 	public void CopyTo(Int32[] array, Int32 arrayIndex)
 	{
-		elements.CopyTo(array, arrayIndex);
+		Elements.CopyTo(array, arrayIndex);
 	}
 
 	public IEnumerator<Int32> GetEnumerator()
 	{
-		return elements.GetEnumerator();
+		return Elements.GetEnumerator();
 	}
 
 	public Int32 IndexOf(Int32 item)
 	{
-		return elements.IndexOf(item);
+		return Elements.IndexOf(item);
 	}
 
 	public void Insert(Int32 index, Int32 item)
 	{
-		elements.Insert(index, item);
+		Elements.Insert(index, item);
 	}
 
 	public Boolean Remove(Int32 item)
 	{
-		return elements.Remove(item);
+		return Elements.Remove(item);
 	}
 
 	public void RemoveAt(Int32 index)
 	{
-		elements.RemoveAt(index);
+		Elements.RemoveAt(index);
 	}
 
 	IEnumerator IEnumerable.GetEnumerator()
 	{
-		return elements.GetEnumerator();
+		return Elements.GetEnumerator();
 	}
 
 	public void AddChild(Int32 token)
