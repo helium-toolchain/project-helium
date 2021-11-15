@@ -10,6 +10,7 @@
 	<Company>Helium Project</Company>
 	<Authors>Helium Contributors</Authors>
 	<Description>The Helium NBT library</Description>
+	<RepositoryUrl>https://github.com/helium-toolchain/project-helium</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
