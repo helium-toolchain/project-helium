@@ -189,7 +189,7 @@ public class BinaryNbtWriter
 
 		foreach(INbtToken v in list.Content)
 		{
-			this.WriteNamelessToken(v);
+			this.WriteNamelessToken(v, list.ListTokenType);
 		}
 	}
 
@@ -294,48 +294,56 @@ public class BinaryNbtWriter
 	/// <summary>
 	/// Writes any nameless <see cref="INbtToken"/> to the current stream.
 	/// </summary>
-	public void WriteNamelessToken(INbtToken token)
+	public void WriteNamelessToken(INbtToken token, NbtTokenType type)
 	{
-		switch(token)
+		switch(type)
 		{
-			case NbtByteToken t:
-				this.WriteByte(t.Value);
+			case NbtTokenType.Byte:
+				NbtByteToken.WriteNameless(this.DataStream, token);
 				break;
-			case NbtInt16Token t:
-				this.WriteInt16(t.Value);
+			case NbtTokenType.Short:
+				NbtInt16Token.WriteNameless(this.DataStream, token);
 				break;
-			case NbtInt32Token t:
-				this.WriteInt32(t.Value);
+			case NbtTokenType.Int:
+				NbtInt32Token.WriteNameless(this.DataStream, token);
 				break;
-			case NbtInt64Token t:
-				this.WriteInt64(t.Value);
+			case NbtTokenType.Long:
+				NbtInt64Token.WriteNameless(this.DataStream, token);
 				break;
-			case NbtSingleToken t:
-				this.WriteSingle(t.Value);
+			case NbtTokenType.Float:
+				NbtSingleToken.WriteNameless(this.DataStream, token);
 				break;
-			case NbtDoubleToken t:
-				this.WriteDouble(t.Value);
+			case NbtTokenType.Double:
+				NbtDoubleToken.WriteNameless(this.DataStream, token);
 				break;
-			case NbtByteArrayToken t:
-				this.WriteByteArray(t.Elements);
+			case NbtTokenType.ByteArray:
+				NbtByteArrayToken.WriteNameless(this.DataStream, token);
 				break;
-			case NbtStringToken t:
-				this.WriteString(t.Value);
+			case NbtTokenType.String:
+				NbtStringToken.WriteNameless(this.DataStream, token);
 				break;
-			case NbtCompoundToken t:
+			case NbtTokenType.Compound:
+				NbtCompoundToken t = (NbtCompoundToken)token;
 				this.WriteCompoundToken(t, false);
 				break;
-			case NbtInt32ArrayToken t:
-				this.WriteInt32Array(t.Elements);
+			case NbtTokenType.IntArray:
+				if(token is NbtInt32ArrayToken i32)
+				{
+					NbtInt32ArrayToken.WriteNameless(this.DataStream, i32);
+				} 
+				else if(token is NbtBigEndianInt32ArrayToken bei32) // its a big endian token
+				{
+					NbtBigEndianInt32ArrayToken.WriteNameless(this.DataStream, bei32);
+				}
 				break;
-			case NbtBigEndianInt32ArrayToken t:
-				this.WriteInt32ArrayBigEndian(t.Elements);
-				break;
-			case NbtInt64ArrayToken t:
-				this.WriteInt64Array(t.Elements);
-				break;
-			case NbtBigEndianInt64ArrayToken t:
-				this.WriteInt64ArrayBigEndian(t.Elements);
+			case NbtTokenType.LongArray:
+				if(token is NbtInt64ArrayToken i64)
+				{
+					NbtInt64ArrayToken.WriteNameless(this.DataStream, i64);
+				} else if(token is NbtBigEndianInt64ArrayToken bei64) // its a big endian token
+				{
+					NbtBigEndianInt64ArrayToken.WriteNameless(this.DataStream, bei64);
+				}
 				break;
 		}
 	}
