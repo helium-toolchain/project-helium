@@ -5,6 +5,11 @@
 	<Nullable>enable</Nullable>
 	<EnablePreviewFeatures>True</EnablePreviewFeatures>
 	<GenerateRequiresPreviewFeaturesAttribute>False</GenerateRequiresPreviewFeaturesAttribute>
+	<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	<Version>0.0.1</Version>
+	<Company>Helium Project</Company>
+	<Authors>Helium Contributors</Authors>
+	<Description>The Helium NBT library</Description>
   </PropertyGroup>
 
   <ItemGroup>
