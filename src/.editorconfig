@@ -10,6 +10,7 @@ insert_final_newline = true
 
 dotnet_separate_import_directive_groups = true
 dotnet_sort_system_directives_first = true
+csharp_style_namespace_declarations = file_scoped:warning
 
 dotnet_style_qualification_for_event = true:silent
 dotnet_style_qualification_for_field = true:silent
