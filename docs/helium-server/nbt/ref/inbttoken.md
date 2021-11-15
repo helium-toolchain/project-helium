@@ -32,3 +32,15 @@ public Byte[] Name { get; }
 ~~~
 
 Declares the name of this token. May be ommitted for the root `NbtCompoundToken` or tokens inside a `NbtListToken`.
+
+## Methods
+
+~~~cs
+public abstract static void WriteNameless(Stream stream, INbtToken token);
+~~~
+
+Defines a way to write a nameless instance of this token to a stream. This is not implemented in `NbtCompoundToken`, `NbtListToken` and `NbtEndToken`
+
+## See also
+
+- [`NbtCompoundToken`](./nbtcompoundtoken)
