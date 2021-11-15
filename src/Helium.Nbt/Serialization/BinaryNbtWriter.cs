@@ -206,7 +206,10 @@ public class BinaryNbtWriter
 		
 		foreach(INbtToken v in compound.Children)
 		{
-			this.WriteToken(v);
+			if(v is not NbtEndToken)
+			{
+				this.WriteToken(v);
+			}
 		}
 
 		this.WriteByte(0x00);
