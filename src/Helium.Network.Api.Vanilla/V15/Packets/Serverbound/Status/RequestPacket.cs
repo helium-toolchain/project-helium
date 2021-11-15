@@ -6,7 +6,7 @@ using Helium.Network.Api.Vanilla;
 /// <summary>
 /// Status-S0x00: Serverbound request initiation packet
 /// </summary>
-public class RequestPacket : IPacket
+public struct RequestPacket : IPacket
 {
 	public VarInt Id => 0x00;
 

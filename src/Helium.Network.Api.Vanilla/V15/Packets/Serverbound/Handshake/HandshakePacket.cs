@@ -5,7 +5,7 @@ using System;
 using Helium.Api.Mojang;
 using Helium.Network.Api.Vanilla;
 
-public class HandshakePacket : IPacket
+public struct HandshakePacket : IPacket
 {
 	public VarInt Id => 0x00;
 

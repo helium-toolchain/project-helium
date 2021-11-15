@@ -7,7 +7,7 @@ using Helium.Api.Mojang;
 /// <summary>
 /// Login-S0x01: Serverbound encryption response packet. Wholly unused by Helium.
 /// </summary>
-public class EncryptionResponsePacket : IPacket
+public struct EncryptionResponsePacket : IPacket
 {
 	public VarInt Id => 0x01;
 

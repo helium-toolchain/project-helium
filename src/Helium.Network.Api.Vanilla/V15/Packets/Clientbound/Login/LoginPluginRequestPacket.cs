@@ -8,7 +8,7 @@ using Helium.Api.Mojang;
 /// Login-C0x04: Login plugin request packet. Probably unused by Helium?
 /// Requires the packet length to be passed via constructor for the read method.
 /// </summary>
-public class LoginPluginRequestPacket : IPacket
+public struct LoginPluginRequestPacket : IPacket
 {
 	/// <summary>
 	/// Length of this packet, see <see cref="LoginPluginRequestPacket"/> documentation.

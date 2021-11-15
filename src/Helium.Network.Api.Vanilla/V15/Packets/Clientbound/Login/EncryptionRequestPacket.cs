@@ -8,7 +8,7 @@ using Helium.Api.Mojang;
 /// <summary>
 /// Login-C0x01: Clientbound encryption request packet.
 /// </summary>
-public class EncryptionRequestPacket : IPacket
+public struct EncryptionRequestPacket : IPacket
 {
 	public VarInt Id => 0x01;
 

@@ -7,7 +7,7 @@ using Helium.Api.Mojang;
 /// <summary>
 /// Login-C0x00: Clientbound disconnect-on-login packet
 /// </summary>
-public class LoginDisconnectPacket : IPacket
+public struct LoginDisconnectPacket : IPacket
 {
 	public VarInt Id => 0x00;
 

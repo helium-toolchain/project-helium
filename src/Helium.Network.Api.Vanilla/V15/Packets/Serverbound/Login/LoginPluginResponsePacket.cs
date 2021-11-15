@@ -8,7 +8,7 @@ using Helium.Api.Mojang;
 /// Login-S0x02: Login plugin response packet. Probably unused by Helium.
 /// Requires the packet length to be passed via constructor for the read method.
 /// </summary>
-public class LoginPluginResponsePacket : IPacket
+public struct LoginPluginResponsePacket : IPacket
 {
 	public Int32 PacketLength { get; private set; }
 

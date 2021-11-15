@@ -8,7 +8,7 @@ using Helium.Network.Api.Vanilla;
 /// <summary>
 /// Status-C0x01: Clientbound Ping answer packet, identifier 0x01
 /// </summary>
-public class PingAnswerPacket : IPacket
+public struct PingAnswerPacket : IPacket
 {
 	public VarInt Id => 0x01;
 

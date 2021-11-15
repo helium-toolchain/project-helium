@@ -8,7 +8,7 @@ using Helium.Network.Api.Vanilla;
 /// <summary>
 /// Legacy server-list ping packet. Pre-1.7.2 clients can still send this packet and the server should handle it correctly.
 /// </summary>
-public class LegacyServerListPingPacket : ILegacyPacket
+public struct LegacyServerListPingPacket : ILegacyPacket
 {
 	/// <summary>
 	/// Packet Identifier.
