@@ -1,6 +1,7 @@
 ﻿namespace Helium.Nbt;
 
 using System;
+using System.IO;
 using System.Runtime.Versioning;
 
 /// <summary>
@@ -23,4 +24,10 @@ public interface INbtToken
 	/// Name of this Named Binary Data Token.
 	/// </summary>
 	public Byte[] Name { get; }
+
+	/// <summary>
+	/// Writes a token of this type to the passed stream.
+	/// </summary>
+	/// <exception cref="InvalidCastException"/>
+	public abstract static void WriteNameless(Stream stream, INbtToken token);
 }

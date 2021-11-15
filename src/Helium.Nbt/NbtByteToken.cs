@@ -1,6 +1,7 @@
 ﻿namespace Helium.Nbt;
 
 using System;
+using System.IO;
 using System.Runtime.Versioning;
 
 /// <summary>
@@ -21,5 +22,11 @@ public record struct NbtByteToken : IValuedNbtToken<Byte>
 	{
 		this.Name = name;
 		this.Value = value;
+	}
+
+	public static void WriteNameless(Stream stream, INbtToken token)
+	{
+		NbtByteToken t = (NbtByteToken)token;
+		stream.WriteByte(t.Value);
 	}
 }

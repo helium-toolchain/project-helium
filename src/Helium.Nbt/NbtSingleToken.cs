@@ -1,6 +1,8 @@
 ﻿namespace Helium.Nbt;
 
 using System;
+using System.Buffers.Binary;
+using System.IO;
 using System.Runtime.Versioning;
 
 /// <summary>
@@ -21,5 +23,15 @@ public record struct NbtSingleToken : IValuedNbtToken<Single>
 	{
 		this.Name = name;
 		this.Value = value;
+	}
+
+	public static void WriteNameless(Stream stream, INbtToken token)
+	{
+		NbtSingleToken t = (NbtSingleToken)token;
+		Span<Byte> buffer = stackalloc Byte[4];
+
+		BinaryPrimitives.WriteSingleBigEndian(buffer, t.Value);
+
+		stream.Write(buffer);
 	}
 }

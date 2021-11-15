@@ -1,8 +1,10 @@
 ﻿namespace Helium.Nbt;
 
 using System;
+using System.Buffers.Binary;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.Versioning;
 
@@ -92,5 +94,22 @@ public sealed class NbtInt64ArrayToken : IValuedComplexNbtToken<Int64>, IList<In
 	public void AddChild(Int64 token)
 	{
 		this.Add(token);
+	}
+
+	public static void WriteNameless(Stream stream, INbtToken token)
+	{
+		NbtInt64ArrayToken t = (NbtInt64ArrayToken)token;
+		Span<Byte> buffer = stackalloc Byte[4], buffer2 = stackalloc Byte[8];
+
+		BinaryPrimitives.WriteInt32BigEndian(buffer, t.Count);
+
+		stream.Write(buffer);
+
+		foreach(Int64 i in t.Elements)
+		{
+			BinaryPrimitives.WriteInt64BigEndian(buffer2, i);
+
+			stream.Write(buffer2);
+		}
 	}
 }
