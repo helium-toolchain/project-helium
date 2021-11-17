@@ -36,6 +36,10 @@ public class BinaryNbtWriter
 	/// <param name="root">A <see cref="NbtCompoundToken"/>. Since this is the stream root token, the name may be omitted.</param>
 	public void WriteCompound(NbtCompoundToken root) 
 	{
+		this.DataStream.WriteByte(NbtCompoundToken.Declarator);
+
+		this.WriteName(root.Name);
+
 		foreach(INbtToken v in root.Children)
 		{
 			this.WriteToken(v);
