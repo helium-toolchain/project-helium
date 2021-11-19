@@ -112,12 +112,20 @@ public class BinaryNbtReader
 	/// <returns></returns>
 	public Byte[] ReadName()
 	{
-		Int16 length = this.ReadInt16();
+		UInt16 length = this.ReadUInt16();
 		Span<Byte> buffer = stackalloc Byte[length];
 
 		this.DataStream.Read(buffer);
 
 		return buffer.ToArray();
+	}
+
+	public UInt16 ReadUInt16()
+	{
+		Span<Byte> buffer = stackalloc Byte[2];
+		this.DataStream.Read(buffer);
+
+		return BinaryPrimitives.ReadUInt16BigEndian(buffer);
 	}
 
 	#region read primitives
@@ -187,7 +195,7 @@ public class BinaryNbtReader
 	/// </summary>
 	public String ReadString()
 	{
-		Int16 length = this.ReadInt16();
+		UInt16 length = this.ReadUInt16();
 
 		Span<Byte> buffer = new Byte[length];
 
