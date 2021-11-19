@@ -19,7 +19,7 @@
 - [`NbtInt64ArrayToken`](./ref/nbtint64arraytoken.md)
 - [`NbtInt64Token`](./ref/nbtint64token.md)
 - [`NbtListToken`](./ref/nbtlisttoken.md)
-- [`NbtSingleToken`](./ref/nbtsingletoken.md
+- [`NbtSingleToken`](./ref/nbtsingletoken.md)
 - [`NbtStringToken`](./ref/nbtstringtoken.md)
 - [`NbtTokenType`](./ref/nbttokentype.md)
 
