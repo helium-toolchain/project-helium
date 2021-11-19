@@ -42,9 +42,14 @@ public class BinaryNbtReader
 	/// <returns></returns>
 	public NbtCompoundToken ReadCompound()
 	{
-		_ = this.DataStream.ReadByte();
+		NbtCompoundToken compound = new();
 
-		NbtCompoundToken compound = this.ReadCompoundToken(this.ReadName());
+		NbtTokenType type;
+
+		while((type = this.ReadTokenType()) != NbtTokenType.End)
+		{
+			compound.AddChild(this.ReadCurrentToken(type));
+		}
 
 		return compound;
 	}
