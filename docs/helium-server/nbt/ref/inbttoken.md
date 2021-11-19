@@ -43,4 +43,4 @@ Defines a way to write a nameless instance of this token to a stream. This is no
 
 ## See also
 
-- [`NbtCompoundToken`](./nbtcompoundtoken)
+- [`NbtCompoundToken`](./nbtcompoundtoken.md)

@@ -35,6 +35,6 @@ Creates a new `BinaryNbtReader` with the specified input stream and the specifie
 
 ## See also
 
-- [`NbtCompoundToken`](./nbtcompoundtoken)
-- [`BinaryReaderEndianness`](./binaryreaderendianness)
-- [`BinaryNbtWriter`](./binarynbtwriter)
+- [`NbtCompoundToken`](./nbtcompoundtoken.md)
+- [`BinaryReaderEndianness`](./binaryreaderendianness.md)
+- [`BinaryNbtWriter`](./binarynbtwriter.md)

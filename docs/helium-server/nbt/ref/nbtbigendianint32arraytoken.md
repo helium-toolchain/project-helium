@@ -27,4 +27,4 @@ Constructs a new `NbtBigEndianInt32ArrayToken` with the specified name and the s
 
 ## See also
 
-- [`Int32BigEndian`](./int32bigendian)
+- [`Int32BigEndian`](./int32bigendian.md)

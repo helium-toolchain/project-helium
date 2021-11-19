@@ -26,7 +26,7 @@ Force big-endian; causing `BinaryNbtReader` to use `Int32BigEndian` and `Int64Bi
 
 ## See also
 
-- [`BinaryNbtReader`](./binarynbtreader)
-- [`BinaryNbtWriter`](./binarynbtwriter)
-- [`Int32BigEndian`](./int32bigendian)
-- [`Int64BigEndian`](./int64bigendian)
+- [`BinaryNbtReader`](./binarynbtreader.md)
+- [`BinaryNbtWriter`](./binarynbtwriter.md)
+- [`Int32BigEndian`](./int32bigendian.md)
+- [`Int64BigEndian`](./int64bigendian.md)

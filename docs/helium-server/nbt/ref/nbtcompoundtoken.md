@@ -27,4 +27,4 @@ Initializes a new nameless `NbtCompoundToken` without children. Used mainly if a
 
 ## See also
 
-- [`NbtEndToken`](./nbtendtoken)
+- [`NbtEndToken`](./nbtendtoken.md)

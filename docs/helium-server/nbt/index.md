@@ -25,10 +25,10 @@ Currently, Helium.NBT supports exclusively reading and writing binary NBT to and
 - [ ] stringified NBT to any C# class (source-generated)
 - [ ] any C# class to stringified NBT (source-generated)
 
-## [API Reference](./reference)
+## [API Reference](./reference.md)
 
 ## See also
 
-- [BinaryNbtReader](./ref/binarynbtreader)
-- [BinaryNbtWriter](./ref/binarynbtwriter)
-- [NbtCompoundToken](./ref/nbtcompoundtoken)
+- [BinaryNbtReader](./ref/binarynbtreader.md)
+- [BinaryNbtWriter](./ref/binarynbtwriter.md)
+- [NbtCompoundToken](./ref/nbtcompoundtoken.md)
