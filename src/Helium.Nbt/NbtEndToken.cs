@@ -16,6 +16,8 @@ public sealed class NbtEndToken : INbtToken
 
 	public Byte[] Name => null!;
 
+	public INbtToken? Parent { get; set; } = null;
+
 	[Obsolete("This token cannot be written.")]
 	public static void WriteNameless(Stream stream, INbtToken token)
 		=> throw new NotImplementedException("NbtEndTokens cannot be written and therefore cannot be written nameless.");

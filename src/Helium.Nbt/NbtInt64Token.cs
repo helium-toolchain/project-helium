@@ -19,6 +19,8 @@ public record struct NbtInt64Token : IValuedNbtToken<Int64>
 
 	public Byte[] Name { get; init; }
 
+	public INbtToken? Parent { get; set; } = null;
+
 	public NbtInt64Token(Byte[] name, Int64 value)
 	{
 		this.Name = name;

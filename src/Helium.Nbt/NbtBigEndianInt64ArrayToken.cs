@@ -44,6 +44,8 @@ public sealed class NbtBigEndianInt64ArrayToken : IValuedComplexNbtToken<Int64Bi
 
 	public Byte[] Name { get; set; }
 
+	public INbtToken? Parent { get; set; }
+
 	public void Add(Int64BigEndian item)
 	{
 		Elements.Add(item);

@@ -18,6 +18,7 @@ public record struct NbtDoubleToken : IValuedNbtToken<Double>
 	public Double Value { get; init; }
 
 	public Byte[] Name { get; init; }
+	public INbtToken? Parent { get; set; } = null;
 
 	public NbtDoubleToken(Byte[] name, Double value)
 	{

@@ -88,7 +88,7 @@ public class BinaryNbtReader
 		return tokenType switch
 		{
 			NbtTokenType.End => new NbtEndToken(),
-			NbtTokenType.Byte => new NbtByteToken(name, this.ReadByte()),
+			NbtTokenType.Byte => new NbtByteToken(name, (SByte)this.ReadByte()),
 			NbtTokenType.Short => new NbtInt16Token(name, this.ReadInt16()),
 			NbtTokenType.Int => new NbtInt32Token(name, this.ReadInt32()),
 			NbtTokenType.Long => new NbtInt64Token(name, this.ReadInt64()),
@@ -218,7 +218,7 @@ public class BinaryNbtReader
 
 		this.DataStream.Read(buffer);
 
-		return new NbtByteArrayToken(name, buffer);
+		return new NbtByteArrayToken(name, MemoryMarshal.Cast<Byte, SByte>(buffer));
 	}
 
 	/// <summary>

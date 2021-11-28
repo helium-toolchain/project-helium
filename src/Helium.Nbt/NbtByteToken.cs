@@ -17,6 +17,7 @@ public record struct NbtByteToken : IValuedNbtToken<SByte>
 	public Byte[] Name { get; init; }
 
 	public SByte Value { get; init; }
+	public INbtToken? Parent { get; set; } = null;
 
 	public NbtByteToken(Byte[] name, SByte value)
 	{

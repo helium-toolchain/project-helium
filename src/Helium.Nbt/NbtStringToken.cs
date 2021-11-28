@@ -20,6 +20,8 @@ public sealed class NbtStringToken : IValuedNbtToken<String>
 
 	public Byte[] Name { get; set; }
 
+	public INbtToken? Parent { get; set; }
+
 	public NbtStringToken(Byte[] name, Span<Byte> value)
 	{
 		this.Name = name;

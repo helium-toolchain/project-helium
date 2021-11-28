@@ -11,6 +11,7 @@
 	<Authors>Helium Contributors</Authors>
 	<Description>The Helium NBT library</Description>
 	<RepositoryUrl>https://github.com/helium-toolchain/project-helium</RepositoryUrl>
+	<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <ItemGroup>

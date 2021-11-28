@@ -42,6 +42,8 @@ public sealed class NbtByteArrayToken : IValuedComplexNbtToken<SByte>, IList<SBy
 
 	public Byte[] Name { get; init; }
 
+	public INbtToken? Parent { get; set; }
+
 	public void Add(SByte item)
 	{
 		Elements.Add(item);
@@ -106,5 +108,15 @@ public sealed class NbtByteArrayToken : IValuedComplexNbtToken<SByte>, IList<SBy
 
 		stream.Write(buffer);
 		stream.Write(MemoryMarshal.Cast<SByte, Byte>(CollectionsMarshal.AsSpan(t.Elements)));
+	}
+
+	void IValuedComplexNbtToken<SByte>.AddChild(SByte token)
+	{
+		throw new NotImplementedException();
+	}
+
+	static void INbtToken.WriteNameless(Stream stream, INbtToken token)
+	{
+		throw new NotImplementedException();
 	}
 }

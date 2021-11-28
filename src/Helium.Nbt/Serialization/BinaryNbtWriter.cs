@@ -123,12 +123,12 @@ public class BinaryNbtWriter
 	}
 
 	/// <summary>
-	/// Writes a <see cref="List{T}"/> of <see cref="Byte"/>s to the current stream.
+	/// Writes a <see cref="List{T}"/> of <see cref="SByte"/>s to the current stream.
 	/// </summary>
-	public void WriteByteArray(List<Byte> data)
+	public void WriteByteArray(List<SByte> data)
 	{
 		this.WriteInt32(data.Count);
-		this.DataStream.Write(data.ToArray());
+		this.DataStream.Write(MemoryMarshal.Cast<SByte, Byte>(CollectionsMarshal.AsSpan(data)));
 	}
 
 	/// <summary>
@@ -225,7 +225,7 @@ public class BinaryNbtWriter
 			case NbtByteToken t:
 				this.WriteByte(NbtByteToken.Declarator);
 				this.WriteName(t.Name);
-				this.WriteByte(t.Value);
+				this.WriteByte((Byte)t.Value);
 				break;
 			case NbtInt16Token t:
 				this.WriteByte(NbtInt16Token.Declarator);
