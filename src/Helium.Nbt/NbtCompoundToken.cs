@@ -3,6 +3,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Runtime.Versioning;
 
 /// <summary>
@@ -51,4 +52,8 @@ public sealed class NbtCompoundToken : IComplexNbtToken, ICollection
 	{
 		throw new NotImplementedException();
 	}
+
+	[Obsolete("Not in use. Use BinaryNbtWriter#WriteCompoundToken(NbtCompoundToken, Boolean) instead.")]
+	public static void WriteNameless(Stream stream, INbtToken token)
+		=> throw new NotImplementedException("Use BinaryNbtWriter#WriteCompoundToken(NbtCompoundToken, Boolean) instead");
 }

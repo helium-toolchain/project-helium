@@ -3,6 +3,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Runtime.Versioning;
 
 /// <summary>
@@ -100,4 +101,8 @@ public sealed class NbtListToken :
 	{
 		throw new NotImplementedException();
 	}
+
+	[Obsolete("Lists should not be nested, therefore this method does not need support")]
+	public static void WriteNameless(Stream stream, INbtToken token)
+		=> throw new NotImplementedException("Lists should not be nested.");
 }
