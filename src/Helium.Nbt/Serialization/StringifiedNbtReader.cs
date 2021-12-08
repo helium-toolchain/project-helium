@@ -134,6 +134,16 @@ public class StringifiedNbtReader
 				throw new MalformedSNbtException("Unquoted strings cannot contain any quotation marks.");
 			}
 
+			if(this.data.Peek() == 0x20)
+			{
+				if(!this.data.Expect(0x3A))
+				{
+					throw new MalformedSNbtException("Invalid unquoted string");
+				}
+
+				return buffer.ToArray();
+			}
+
 			buffer.WriteByte((Byte)this.data.ReadByte());
 		}
 
