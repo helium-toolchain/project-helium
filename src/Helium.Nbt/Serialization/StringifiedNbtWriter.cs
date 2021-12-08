@@ -16,13 +16,21 @@ public class StringifiedNbtWriter
 {
 	private MemoryStream data;
 
+	/// <summary>
+	/// Creates a new instance.
+	/// </summary>
 	public StringifiedNbtWriter()
 	{
 		this.data = new();
 	}
 
+	/// <summary>
+	/// Writes a <see cref="NbtCompoundToken"/> to a byte array.
+	/// </summary>
 	public Byte[] WriteCompound(NbtCompoundToken compound)
 	{
+		this.data = new();
+
 		this.data.WriteByte(0x7B);
 
 		for(Int32 i = 0; i < compound.Children.Count; i++)
@@ -37,11 +45,12 @@ public class StringifiedNbtWriter
 
 		this.data.WriteByte(0x7D);
 
-		Byte[] vs = data.ToArray();
-		this.data = new();
-		return vs;
+		return this.data.ToArray();
 	}
 
+	/// <summary>
+	/// Writes an <see cref="INbtToken"/> with name and value.
+	/// </summary>
 	public void WriteToken(INbtToken token)
 	{
 		this.data.WriteByte(0x22);
@@ -51,6 +60,9 @@ public class StringifiedNbtWriter
 		this.WriteTokenPayload(token);
 	}
 
+	/// <summary>
+	/// Writes only the value of a <see cref="INbtToken"/>
+	/// </summary>
 	public void WriteTokenPayload(INbtToken token)
 	{
 		switch(token)
@@ -101,6 +113,9 @@ public class StringifiedNbtWriter
 		};
 	}
 
+	/// <summary>
+	/// Writes the value of a <see cref="NbtBigEndianInt32ArrayToken"/>
+	/// </summary>
 	public void WriteBigEndianInt32ArrayToken(NbtBigEndianInt32ArrayToken token)
 	{
 		this.data.Write(new Byte[] { 0x5B, 0x49, 0x3B });
@@ -118,6 +133,9 @@ public class StringifiedNbtWriter
 		this.data.WriteByte(0x5D);
 	}
 
+	/// <summary>
+	/// Writes the value of a <see cref="NbtBigEndianInt64ArrayToken"/>
+	/// </summary>
 	public void WriteBigEndianInt64ArrayToken(NbtBigEndianInt64ArrayToken token)
 	{
 		this.data.Write(new Byte[] { 0x5B, 0x4C, 0x3B });
@@ -135,6 +153,9 @@ public class StringifiedNbtWriter
 		this.data.WriteByte(0x5D);
 	}
 
+	/// <summary>
+	/// Writes the value of a <see cref="NbtByteArrayToken"/>
+	/// </summary>
 	public void WriteByteArrayToken(NbtByteArrayToken token)
 	{
 		this.data.Write(new Byte[] { 0x5B, 0x42, 0x3B });
@@ -152,6 +173,9 @@ public class StringifiedNbtWriter
 		this.data.WriteByte(0x5D);
 	}
 
+	/// <summary>
+	/// Writes the value of a <see cref="NbtInt32ArrayToken"/>
+	/// </summary>
 	public void WriteInt32ArrayToken(NbtInt32ArrayToken token)
 	{
 		this.data.Write(new Byte[] { 0x5B, 0x49, 0x3B });
@@ -169,6 +193,9 @@ public class StringifiedNbtWriter
 		this.data.WriteByte(0x5D);
 	}
 
+	/// <summary>
+	/// Writes the value of a <see cref="NbtInt64ArrayToken"/>
+	/// </summary>
 	public void WriteInt64ArrayToken(NbtInt64ArrayToken token)
 	{
 		this.data.Write(new Byte[] { 0x5B, 0x4C, 0x3B });
@@ -186,12 +213,18 @@ public class StringifiedNbtWriter
 		this.data.WriteByte(0x5D);
 	}
 
+	/// <summary>
+	/// Writes the value of a <see cref="NbtByteToken"/>
+	/// </summary>
 	public void WriteByteToken(NbtByteToken token)
 	{
 		this.data.WriteByte((Byte)token.Value);
 		this.data.WriteByte(0x62);
 	}
 
+	/// <summary>
+	/// Writes the value of a <see cref="NbtCompoundToken"/>
+	/// </summary>
 	public void WriteCompoundToken(NbtCompoundToken compound)
 	{
 		this.data.WriteByte(0x7B);
@@ -209,35 +242,53 @@ public class StringifiedNbtWriter
 		this.data.WriteByte(0x7D);
 	}
 
+	/// <summary>
+	/// Writes the value of a <see cref="NbtDoubleToken"/>
+	/// </summary>
 	public void WriteDoubleToken(NbtDoubleToken token)
 	{
 		this.data.Write(Encoding.ASCII.GetBytes(token.Value.ToString()));
 		this.data.WriteByte(0x64);
 	}
 
+	/// <summary>
+	/// Writes the value of a <see cref="NbtInt16Token"/>
+	/// </summary>
 	public void WriteInt16Token(NbtInt16Token token)
 	{
 		this.data.Write(Encoding.ASCII.GetBytes(token.Value.ToString()));
 		this.data.WriteByte(0x73);
 	}
 
+	/// <summary>
+	/// Writes the value of a <see cref="NbtInt32Token"/>
+	/// </summary>
 	public void WriteInt32Token(NbtInt32Token token)
 	{
 		this.data.Write(Encoding.ASCII.GetBytes(token.Value.ToString()));
 	}
 
+	/// <summary>
+	/// Writes the value of a <see cref="NbtInt64Token"/>
+	/// </summary>
 	public void WriteInt64Token(NbtInt64Token token)
 	{
 		this.data.Write(Encoding.ASCII.GetBytes(token.Value.ToString()));
 		this.data.WriteByte(0x6C);
 	}
 
+	/// <summary>
+	/// Writes the value of a <see cref="NbtSingleToken"/>
+	/// </summary>
 	public void WriteSingleToken(NbtSingleToken token)
 	{
 		this.data.Write(Encoding.ASCII.GetBytes(token.Value.ToString()));
 		this.data.WriteByte(0x66);
 	}
 
+	/// <summary>
+	/// Writes the value of a <see cref="NbtStringToken"/>
+	/// </summary>
 	public void WriteStringToken(NbtStringToken token)
 	{
 		this.data.WriteByte(0x22);
@@ -245,6 +296,9 @@ public class StringifiedNbtWriter
 		this.data.WriteByte(0x22);
 	}
 
+	/// <summary>
+	/// Writes the value of a <see cref="NbtListToken"/>
+	/// </summary>
 	public void WriteListToken(NbtListToken token)
 	{
 		this.data.WriteByte(0x5B);

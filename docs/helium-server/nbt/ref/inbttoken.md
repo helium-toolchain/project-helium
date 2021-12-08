@@ -33,6 +33,14 @@ public Byte[] Name { get; }
 
 Declares the name of this token. May be ommitted for the root `NbtCompoundToken` or tokens inside a `NbtListToken`.
 
+---
+
+~~~cs
+public INbtToken? Parent { get; set; }
+~~~
+
+Unused, planned to be used in the future. Denotes the parent token of this `INbtToken`. May be `null` at any time.
+
 ## Methods
 
 ~~~cs

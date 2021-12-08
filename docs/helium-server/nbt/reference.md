@@ -6,6 +6,7 @@
 - [`INbtToken`](./ref/inbttoken.md)
 - [`IValuedComplexNbtToken`](./ref/ivaluedcomplexnbttoken.md)
 - [`IValuedNbtToken`](./ref/ivaluednbttoken.md)
+- [`MemoryStreamExtensions`](./ref/memorystreamextensions.md)
 - [`NbtBigEndianInt32ArrayToken`](./ref/nbtbigendianint32arraytoken.md)
 - [`NbtBigEndianInt64ArrayToken`](./ref/nbtbigendianint64arraytoken.md)
 - [`NbtByteArrayToken`](./ref/nbtbytearraytoken.md)
@@ -27,6 +28,7 @@
 
 - [`MalformedDataException`](./ref/malformeddataexception.md)
 - [`MalformedNbtException`](./ref/malformednbtexception.md)
+- [`MalformedSNbtException`](./ref/malformedsnbtexception.md)
 
 ## Helium.Nbt.Internal
 
@@ -38,3 +40,5 @@
 - [`BinaryNbtReader`](./ref/binarynbtreader.md)
 - [`BinaryNbtWriter`](./ref/binarynbtwriter.md)
 - [`BinaryReaderEndianness`](./ref/binaryreaderendianness.md)
+- [`StringifiedNbtReader`](./ref/stringifiednbtreader.md)
+- [`StringifiedNbtWriter`](./ref/stringifiednbtwriter.md)
