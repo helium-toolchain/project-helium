@@ -11,4 +11,4 @@ Represents the end of a `NbtCompoundToken`.
 
 ## See also
 
-- [`NbtCompoundToken`](./nbtcompoundtoken)
+- [`NbtCompoundToken`](./nbtcompoundtoken.md)

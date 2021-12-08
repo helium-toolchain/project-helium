@@ -88,7 +88,7 @@ public class BinaryNbtReader
 		return tokenType switch
 		{
 			NbtTokenType.End => new NbtEndToken(),
-			NbtTokenType.Byte => new NbtByteToken(name, this.ReadByte()),
+			NbtTokenType.Byte => new NbtByteToken(name, (SByte)this.ReadByte()),
 			NbtTokenType.Short => new NbtInt16Token(name, this.ReadInt16()),
 			NbtTokenType.Int => new NbtInt32Token(name, this.ReadInt32()),
 			NbtTokenType.Long => new NbtInt64Token(name, this.ReadInt64()),
@@ -112,12 +112,20 @@ public class BinaryNbtReader
 	/// <returns></returns>
 	public Byte[] ReadName()
 	{
-		Int16 length = this.ReadInt16();
+		UInt16 length = this.ReadUInt16();
 		Span<Byte> buffer = stackalloc Byte[length];
 
 		this.DataStream.Read(buffer);
 
 		return buffer.ToArray();
+	}
+
+	public UInt16 ReadUInt16()
+	{
+		Span<Byte> buffer = stackalloc Byte[2];
+		this.DataStream.Read(buffer);
+
+		return BinaryPrimitives.ReadUInt16BigEndian(buffer);
 	}
 
 	#region read primitives
@@ -187,7 +195,7 @@ public class BinaryNbtReader
 	/// </summary>
 	public String ReadString()
 	{
-		Int16 length = this.ReadInt16();
+		UInt16 length = this.ReadUInt16();
 
 		Span<Byte> buffer = new Byte[length];
 
@@ -210,7 +218,7 @@ public class BinaryNbtReader
 
 		this.DataStream.Read(buffer);
 
-		return new NbtByteArrayToken(name, buffer);
+		return new NbtByteArrayToken(name, MemoryMarshal.Cast<Byte, SByte>(buffer));
 	}
 
 	/// <summary>

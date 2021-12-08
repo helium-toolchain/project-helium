@@ -45,9 +45,9 @@ dotnet_style_readonly_field = true:suggestion
 dotnet_code_quality_unused_parameters = all:silent
 dotnet_remove_unnecessary_suppression_exclusions = none:silent
 
-csharp_new_line_before_catch = false
-csharp_new_line_before_else = false
-csharp_new_line_before_finally = false
+csharp_new_line_before_catch =true
+csharp_new_line_before_else =true
+csharp_new_line_before_finally =true
 csharp_new_line_before_members_in_anonymous_types = true
 csharp_new_line_before_members_in_object_initializers = true
 csharp_new_line_before_open_brace = all

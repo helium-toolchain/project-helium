@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 
 /// <summary>
@@ -15,11 +16,11 @@ using System.Runtime.Versioning;
 /// The prefix is a signed 32-bit integer.
 /// </remarks>
 [RequiresPreviewFeatures]
-public sealed class NbtByteArrayToken : IValuedComplexNbtToken<Byte>, IList<Byte>
+public sealed class NbtByteArrayToken : IValuedComplexNbtToken<SByte>, IList<SByte>
 {
-	public List<Byte> Elements { get; set; }
+	public List<SByte> Elements { get; set; }
 
-	public Byte this[Int32 index]
+	public SByte this[Int32 index]
 	{
 		get => Elements[index];
 		set => Elements[index] = value;
@@ -27,7 +28,7 @@ public sealed class NbtByteArrayToken : IValuedComplexNbtToken<Byte>, IList<Byte
 
 	public static Byte Declarator => 0x07;
 
-	public NbtByteArrayToken(Byte[] name, Span<Byte> values)
+	public NbtByteArrayToken(Byte[] name, Span<SByte> values)
 	{
 		this.Name = name;
 		this.Elements = values.ToArray().ToList();
@@ -41,7 +42,9 @@ public sealed class NbtByteArrayToken : IValuedComplexNbtToken<Byte>, IList<Byte
 
 	public Byte[] Name { get; init; }
 
-	public void Add(Byte item)
+	public INbtToken? Parent { get; set; }
+
+	public void Add(SByte item)
 	{
 		Elements.Add(item);
 	}
@@ -51,32 +54,32 @@ public sealed class NbtByteArrayToken : IValuedComplexNbtToken<Byte>, IList<Byte
 		Elements.Clear();
 	}
 
-	public Boolean Contains(Byte item)
+	public Boolean Contains(SByte item)
 	{
 		return Elements.Contains(item);
 	}
 
-	public void CopyTo(Byte[] array, Int32 arrayIndex)
+	public void CopyTo(SByte[] array, Int32 arrayIndex)
 	{
 		Elements.CopyTo(array, arrayIndex);
 	}
 
-	public IEnumerator<Byte> GetEnumerator()
+	public IEnumerator<SByte> GetEnumerator()
 	{
 		return Elements.GetEnumerator();
 	}
 
-	public Int32 IndexOf(Byte item)
+	public Int32 IndexOf(SByte item)
 	{
 		return Elements.IndexOf(item);
 	}
 
-	public void Insert(Int32 index, Byte item)
+	public void Insert(Int32 index, SByte item)
 	{
 		Elements.Insert(index, item);
 	}
 
-	public Boolean Remove(Byte item)
+	public Boolean Remove(SByte item)
 	{
 		return Elements.Remove(item);
 	}
@@ -91,7 +94,7 @@ public sealed class NbtByteArrayToken : IValuedComplexNbtToken<Byte>, IList<Byte
 		return Elements.GetEnumerator();
 	}
 
-	public void AddChild(Byte token)
+	public void AddChild(SByte token)
 	{
 		this.Add(token);
 	}
@@ -104,6 +107,16 @@ public sealed class NbtByteArrayToken : IValuedComplexNbtToken<Byte>, IList<Byte
 		BinaryPrimitives.WriteInt32BigEndian(buffer, t.Count);
 
 		stream.Write(buffer);
-		stream.Write(t.Elements.ToArray());
+		stream.Write(MemoryMarshal.Cast<SByte, Byte>(CollectionsMarshal.AsSpan(t.Elements)));
+	}
+
+	void IValuedComplexNbtToken<SByte>.AddChild(SByte token)
+	{
+		throw new NotImplementedException();
+	}
+
+	static void INbtToken.WriteNameless(Stream stream, INbtToken token)
+	{
+		throw new NotImplementedException();
 	}
 }

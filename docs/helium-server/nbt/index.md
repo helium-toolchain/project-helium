@@ -8,14 +8,16 @@ There are no plans to support Bedrock Edition NBT, however, feel free to open a 
 
 ## Usage
 
-Currently, Helium.NBT supports exclusively reading and writing binary NBT to and from a Compound. The two methods to be used for this are `NbtCompoundToken BinaryNbtReader#ReadCompound()` and `void BinaryNbtWriter#WriteCompound(NbtCompoundToken)`. All other exposed methods are use-at-your-own-risk.
+Currently, Helium.NBT supports reading and writing binary NBT to and from a Compound. The two methods to be used for this are `NbtCompoundToken BinaryNbtReader#ReadCompound()` and `void BinaryNbtWriter#WriteCompound(NbtCompoundToken)`. All other exposed methods are use-at-your-own-risk. 
+
+The library also supports stringified NBT. The methods in question are `NbtCompoundToken StringifiedNbtReader#ReadCompound(String)`, `NbtCompoundToken StringifiedNbtReader#ReadCompound(Byte[])` and `Byte[] StringifiedNbtWriter#WriteCompound(NbtCompoundToken)`
 
 ## Feature set
 
 - [x] binary NBT to Compound
 - [x] Compound to binary NBT
-- [ ] stringified NBT to Compound
-- [ ] Compound to stringified NBT
+- [x] stringified NBT to Compound
+- [x] Compound to stringified NBT
 - [ ] binary NBT to any C# class (reflective)
 - [ ] any C# class to binary NBT (reflective)
 - [ ] stringified NBT to any C# class (reflective)
@@ -25,10 +27,12 @@ Currently, Helium.NBT supports exclusively reading and writing binary NBT to and
 - [ ] stringified NBT to any C# class (source-generated)
 - [ ] any C# class to stringified NBT (source-generated)
 
-## [API Reference](./reference)
+## [API Reference](./reference.md)
 
 ## See also
 
-- [BinaryNbtReader](./ref/binarynbtreader)
-- [BinaryNbtWriter](./ref/binarynbtwriter)
-- [NbtCompoundToken](./ref/nbtcompoundtoken)
+- [`BinaryNbtReader`](./ref/binarynbtreader.md)
+- [`BinaryNbtWriter`](./ref/binarynbtwriter.md)
+- [`NbtCompoundToken`](./ref/nbtcompoundtoken.md)
+- [`StringifiedNbtReader`](./ref/stringifiednbtreader.md)
+- [`StringifiedNbtWriter`](./ref/stringifiednbtwriter.md)

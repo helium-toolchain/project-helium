@@ -19,6 +19,8 @@ public record struct NbtInt16Token : IValuedNbtToken<Int16>
 
 	public Byte[] Name { get; init; }
 
+	public INbtToken? Parent { get; set; } = null;
+
 	public NbtInt16Token(Byte[] name, Int16 value)
 	{
 		this.Name = name;

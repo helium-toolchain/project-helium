@@ -49,4 +49,4 @@ Initializes a new `NbtListToken` with the specified properties.
 
 ## See also
 
-- [`NbtTokenType`](./nbttokentype)
+- [`NbtTokenType`](./nbttokentype.md)

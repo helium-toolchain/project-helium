@@ -35,5 +35,5 @@ Creates a new `BinaryNbtReader` with the specified output stream.
 
 ## See also
 
-- [`NbtCompoundToken`](./nbtcompoundtoken)
-- [`BinaryNbtReader`](./binarynbtreader)
+- [`NbtCompoundToken`](./nbtcompoundtoken.md)
+- [`BinaryNbtReader`](./binarynbtreader.md)

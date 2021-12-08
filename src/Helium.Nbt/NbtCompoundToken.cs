@@ -37,6 +37,7 @@ public sealed class NbtCompoundToken : IComplexNbtToken, ICollection
 	public static Int32 Length => 0;
 
 	public Byte[] Name { get; init; }
+	public INbtToken? Parent { get; set; }
 
 	public void CopyTo(Array array, Int32 index)
 	{

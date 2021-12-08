@@ -19,6 +19,8 @@ public record struct NbtSingleToken : IValuedNbtToken<Single>
 
 	public Byte[] Name { get; init; }
 
+	public INbtToken? Parent { get; set; } = null;
+
 	public NbtSingleToken(Byte[] name, Single value)
 	{
 		this.Name = name;

@@ -27,4 +27,4 @@ Constructs a new `NbtBigEndianInt64ArrayToken` with the specified name and the s
 
 ## See also
 
-- [`Int64BigEndian`](./int64bigendian)
+- [`Int64BigEndian`](./int64bigendian.md)

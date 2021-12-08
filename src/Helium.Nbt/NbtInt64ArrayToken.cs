@@ -41,6 +41,8 @@ public sealed class NbtInt64ArrayToken : IValuedComplexNbtToken<Int64>, IList<In
 
 	public Byte[] Name { get; set; }
 
+	public INbtToken? Parent { get; set; }
+
 	public void Add(Int64 item)
 	{
 		Elements.Add(item);

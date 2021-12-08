@@ -30,4 +30,9 @@ public interface INbtToken
 	/// </summary>
 	/// <exception cref="InvalidCastException"/>
 	public abstract static void WriteNameless(Stream stream, INbtToken token);
+
+	/// <summary>
+	/// Internal parent token. May be <c>null</c>.
+	/// </summary>
+	public INbtToken? Parent { get; set; }
 }

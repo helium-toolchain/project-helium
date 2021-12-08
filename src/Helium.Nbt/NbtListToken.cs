@@ -47,6 +47,8 @@ public sealed class NbtListToken :
 
 	public NbtTokenType ListTokenType { get; set; }
 
+	public INbtToken? Parent { get; set; }
+
 	public void Add(INbtToken item)
 	{
 		Content.Add(item);

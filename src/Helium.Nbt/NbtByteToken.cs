@@ -8,7 +8,7 @@ using System.Runtime.Versioning;
 /// Represents a NBT Byte Token
 /// </summary>
 [RequiresPreviewFeatures]
-public record struct NbtByteToken : IValuedNbtToken<Byte>
+public record struct NbtByteToken : IValuedNbtToken<SByte>
 {
 	public static Byte Declarator => 0x01;
 
@@ -16,9 +16,10 @@ public record struct NbtByteToken : IValuedNbtToken<Byte>
 
 	public Byte[] Name { get; init; }
 
-	public Byte Value { get; init; }
+	public SByte Value { get; init; }
+	public INbtToken? Parent { get; set; } = null;
 
-	public NbtByteToken(Byte[] name, Byte value)
+	public NbtByteToken(Byte[] name, SByte value)
 	{
 		this.Name = name;
 		this.Value = value;
@@ -27,6 +28,6 @@ public record struct NbtByteToken : IValuedNbtToken<Byte>
 	public static void WriteNameless(Stream stream, INbtToken token)
 	{
 		NbtByteToken t = (NbtByteToken)token;
-		stream.WriteByte(t.Value);
+		stream.WriteByte((Byte)t.Value);
 	}
 }
