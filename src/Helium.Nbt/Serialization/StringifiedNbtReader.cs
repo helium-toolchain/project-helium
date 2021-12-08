@@ -189,9 +189,9 @@ public class StringifiedNbtReader
 	{
 		return this.data.Peek(2) switch
 		{
-			0x43 or 0x63 => ReadByteArrayTag(name),
-			0x49 or 0x69 => ReadIntArrayTag(name),
-			0x4C or 0x6C => ReadLongArrayTag(name),
+			0x43 or 0x63 => ReadByteArrayToken(name),
+			0x49 or 0x69 => ReadIntArrayToken(name),
+			0x4C or 0x6C => ReadLongArrayToken(name),
 			_ => throw new MalformedSNbtException("Invalid array identifier.")
 		};
 	}
@@ -199,7 +199,7 @@ public class StringifiedNbtReader
 	/// <summary>
 	/// Reads a byte array token from the current stream.
 	/// </summary>
-	public INbtToken ReadByteArrayTag(Byte[] name)
+	public INbtToken ReadByteArrayToken(Byte[] name)
 	{
 		List<SByte> bytes = new();
 		this.data.Skip(3);
@@ -218,7 +218,7 @@ public class StringifiedNbtReader
 			{
 				if(!SByte.TryParse(Encoding.ASCII.GetString(buffer), out SByte addition))
 				{
-					throw new MalformedSNbtException("Invalid value found in byte array tag");
+					throw new MalformedSNbtException("Invalid value found in byte array Token");
 				}
 
 				bytes.Add(addition);
@@ -232,7 +232,7 @@ public class StringifiedNbtReader
 			}
 			else
 			{
-				throw new MalformedSNbtException("Invalid character found in byte array tag");
+				throw new MalformedSNbtException("Invalid character found in byte array Token");
 			}
 		}
 	}
@@ -240,7 +240,7 @@ public class StringifiedNbtReader
 	/// <summary>
 	/// Reads an int array token from the current stream.
 	/// </summary>
-	public INbtToken ReadIntArrayTag(Byte[] name)
+	public INbtToken ReadIntArrayToken(Byte[] name)
 	{
 		List<Int32> ints = new();
 		this.data.Skip(3);
@@ -259,7 +259,7 @@ public class StringifiedNbtReader
 			{
 				if(!Int32.TryParse(Encoding.ASCII.GetString(buffer), out Int32 addition))
 				{
-					throw new MalformedSNbtException("Invalid value found in int array tag");
+					throw new MalformedSNbtException("Invalid value found in int array Token");
 				}
 
 				ints.Add(addition);
@@ -273,7 +273,7 @@ public class StringifiedNbtReader
 			}
 			else
 			{
-				throw new MalformedSNbtException("Invalid character found in int array tag");
+				throw new MalformedSNbtException("Invalid character found in int array Token");
 			}
 		}
 	}
@@ -281,7 +281,7 @@ public class StringifiedNbtReader
 	/// <summary>
 	/// Reads a long array token from the current stream.
 	/// </summary>
-	public INbtToken ReadLongArrayTag(Byte[] name)
+	public INbtToken ReadLongArrayToken(Byte[] name)
 	{
 		List<Int64> longs = new();
 		this.data.Skip(3);
@@ -300,7 +300,7 @@ public class StringifiedNbtReader
 			{
 				if(!Int64.TryParse(Encoding.ASCII.GetString(buffer), out Int64 addition))
 				{
-					throw new MalformedSNbtException("Invalid value found in long array tag");
+					throw new MalformedSNbtException("Invalid value found in long array Token");
 				}
 
 				longs.Add(addition);
@@ -314,7 +314,7 @@ public class StringifiedNbtReader
 			}
 			else
 			{
-				throw new MalformedSNbtException("Invalid character found in long array tag");
+				throw new MalformedSNbtException("Invalid character found in long array Token");
 			}
 		}
 	}
@@ -352,7 +352,7 @@ public class StringifiedNbtReader
 			NbtInt64Token => new NbtListToken(name, children, children.Count, NbtTokenType.Long),
 			NbtSingleToken => new NbtListToken(name, children, children.Count, NbtTokenType.Float),
 			NbtStringToken => new NbtListToken(name, children, children.Count, NbtTokenType.String),
-			_ => throw new MalformedSNbtException("Invalid list tag contents")
+			_ => throw new MalformedSNbtException("Invalid list Token contents")
 		};
 	}
 
