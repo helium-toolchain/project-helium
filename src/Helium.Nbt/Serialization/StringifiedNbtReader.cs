@@ -37,7 +37,7 @@ public class StringifiedNbtReader
 			throw new MalformedSNbtException("Data was not wrapped into a root compound");
 		}
 
-		return this.ReadCompound(Encoding.UTF8.GetBytes(data));
+		return this.ReadCompound(Encoding.ASCII.GetBytes(data));
 	}
 
 	/// <summary>
@@ -95,7 +95,7 @@ public class StringifiedNbtReader
 	{
 		if(this.data.Peek() == 0x22 || this.data.Peek() == 0x27)
 		{
-			return this.ReadQuotedString();
+			return this.ReadQuotedString(this.data.Peek());
 		}
 		else
 		{
@@ -106,15 +106,20 @@ public class StringifiedNbtReader
 	/// <summary>
 	/// Reads a quoted string from the current stream.
 	/// </summary>
-	public Byte[] ReadQuotedString()
+	public Byte[] ReadQuotedString(Byte openingQuotation)
 	{
 		_ = this.data.ReadByte();
 
 		MemoryStream buffer = new();
+		Byte last = 0x00, current;
 
-		while(this.data.Peek() != 0x22 && this.data.Peek() != 0x27)
+		while(this.data.Peek() != openingQuotation && last != 0x5C)
 		{
-			buffer.WriteByte((Byte)this.data.ReadByte());
+			current = (Byte)this.data.ReadByte();
+
+			buffer.WriteByte(current);
+
+			last = current;
 		}
 
 		return buffer.ToArray();
@@ -370,23 +375,23 @@ public class StringifiedNbtReader
 
 		String value = Encoding.ASCII.GetString(this.ReadUnquotedString());
 
-		if(value.EndsWith('b') && SByte.TryParse(value.AsSpan()[..(value.Length - 1)], out SByte b))
+		if((value.EndsWith('b') || value.EndsWith('B')) && SByte.TryParse(value.AsSpan()[..(value.Length - 1)], out SByte b))
 		{
 			return new NbtByteToken(name, b);
 		}
-		else if(value.EndsWith('s') && Int16.TryParse(value.AsSpan()[..(value.Length -1)], out Int16 s))
+		else if((value.EndsWith('s') || value.EndsWith('S')) && Int16.TryParse(value.AsSpan()[..(value.Length -1)], out Int16 s))
 		{
 			return new NbtInt16Token(name, s);
 		}
-		else if(value.EndsWith('l') && Int64.TryParse(value.AsSpan()[..(value.Length - 1)], out Int64 l))
+		else if((value.EndsWith('l') || value.EndsWith('L')) && Int64.TryParse(value.AsSpan()[..(value.Length - 1)], out Int64 l))
 		{
 			return new NbtInt64Token(name, l);
 		}
-		else if(value.EndsWith('f') && Single.TryParse(value.AsSpan()[..(value.Length - 1)], out Single f))
+		else if((value.EndsWith('f') || value.EndsWith('F')) && Single.TryParse(value.AsSpan()[..(value.Length - 1)], out Single f))
 		{
 			return new NbtSingleToken(name, f);
 		}
-		else if(value.EndsWith('d') && Double.TryParse(value.AsSpan()[..(value.Length - 1)], out Double d))
+		else if((value.EndsWith('d') || value.EndsWith('D')) && Double.TryParse(value.AsSpan()[..(value.Length - 1)], out Double d))
 		{
 			return new NbtDoubleToken(name, d);
 		}
