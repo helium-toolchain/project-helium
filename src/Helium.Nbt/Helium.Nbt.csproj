@@ -6,7 +6,7 @@
 	<EnablePreviewFeatures>True</EnablePreviewFeatures>
 	<GenerateRequiresPreviewFeaturesAttribute>False</GenerateRequiresPreviewFeaturesAttribute>
 	<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-	<Version>0.0.2</Version>
+	<Version>0.0.3</Version>
 	<Company>Helium Project</Company>
 	<Authors>Helium Contributors</Authors>
 	<Description>The Helium NBT library</Description>
