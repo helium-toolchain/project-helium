@@ -51,5 +51,8 @@ public struct LoginPluginRequestPacket : IPacket
 	public LoginPluginRequestPacket(Int32 packetLength)
 	{
 		this.PacketLength = packetLength;
+		this.MessageId = default;
+		this.PluginChannel = default;
+		this.RemainingData = default;
 	}
 }
