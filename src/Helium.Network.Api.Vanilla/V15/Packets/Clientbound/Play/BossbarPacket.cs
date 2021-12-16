@@ -57,9 +57,9 @@ public struct BossbarPacket : IPacket
 	{
 		return this.Action switch
 		{
-			BossbarPacketActions.Add => 51 + this.Color.Length + this.Division.Length + ((VarInt)this.Title.Length).Length + this.Title.Length,
+			BossbarPacketActions.Add => 23 + this.Color.Length + this.Division.Length + ((VarInt)this.Title.Length).Length + this.Title.Length,
 			BossbarPacketActions.Remove => 18,
-			BossbarPacketActions.UpdateHealth => 50,
+			BossbarPacketActions.UpdateHealth => 22,
 			BossbarPacketActions.UpdateTitle => 18 + ((VarInt)this.Title.Length).Length + this.Title.Length,
 			BossbarPacketActions.UpdateStyle => 20,
 			BossbarPacketActions.UpdateFlags => 19,
