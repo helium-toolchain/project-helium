@@ -1,9 +1,9 @@
-﻿namespace Helium.Network.Api.Vanilla.CommandData;
+﻿namespace Helium.Api.Mojang;
 
 using System;
 using System.Collections.Generic;
 
-public static class MojangIdentifiers
+public static class CommandIdentifiers
 {
 	public static readonly Dictionary<CommandParserTypes, String> Parsers = new()
 	{

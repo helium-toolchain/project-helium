@@ -1,4 +1,4 @@
-﻿namespace Helium.Network.Api.Vanilla.CommandData;
+﻿namespace Helium.Api.Mojang;
 
 using System;
 

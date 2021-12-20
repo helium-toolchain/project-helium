@@ -1,7 +1,10 @@
 ﻿namespace Helium.Network.Api.Vanilla.CommandData;
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
+using Helium.Api.Commands;
 using Helium.Api.Mojang;
 
 /// <summary>
@@ -58,4 +61,48 @@ public record struct CommandNode
 	/// </summary>
 	public String? SuggestionType { get; set; }
 #nullable restore
+
+	public static CommandNode FromHeliumNode(IHeliumCommandNode node)
+	{
+		return new()
+		{
+			Flags = FromHeliumFlags(node.Flags),
+			ChildrenCount = node.Children.Count(),
+
+		};
+	}
+
+	private static CommandNodeFlags FromHeliumFlags(HeliumCommandNodeFlags flags)
+	{
+		Byte t = (Byte)((Int32)flags & 0b11);
+
+		if(flags.HasFlag(HeliumCommandNodeFlags.Executable))
+		{
+			t += (Byte)CommandNodeFlags.Executable;
+		}
+
+		if(flags.HasFlag(HeliumCommandNodeFlags.Redirect))
+		{
+			t += (Byte)CommandNodeFlags.Redirects;
+		}
+
+		if(((Int32)flags & 0b1110_0000) != 0)
+		{
+			t += (Byte)CommandNodeFlags.Suggestions;
+		}
+
+		return (CommandNodeFlags)t;
+	}
+
+	private static VarInt[] FromHeliumChildren(IEnumerable<IHeliumCommandNode> nodes)
+	{
+		VarInt[] r = new VarInt[nodes.Count()];
+
+		for(Int32 i = 0; i < nodes.Count(); i++)
+		{
+			r[i] = nodes.ElementAt(i).GetHashCode();
+		}
+
+		return r;
+	}
 }

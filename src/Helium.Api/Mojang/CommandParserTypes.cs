@@ -1,4 +1,4 @@
-﻿namespace Helium.Network.Api.Vanilla.CommandData;
+﻿namespace Helium.Api.Mojang;
 
 /// <summary>
 /// Specifies all valid command parser types accepted by the vanilla client.
