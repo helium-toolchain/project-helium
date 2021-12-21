@@ -45,12 +45,18 @@ public interface IHeliumCommandNode
 	/// <summary>
 	/// Command literal or argument name.
 	/// </summary>
-	public String Command { get; set; }
+	public String? Command { get; set; }
+
+
+	/// <summary>
+	/// Unique identifier for this node.
+	/// </summary>
+	public String Identifier { get; set; }
 
 	/// <inheritdoc/>
 	public Int32 GetHashCode()
 	{
-		return Command.GetHashCode();
+		return Identifier.GetHashCode();
 	}
 #nullable restore
 }

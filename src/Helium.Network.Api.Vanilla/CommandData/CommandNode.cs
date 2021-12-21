@@ -62,13 +62,23 @@ public record struct CommandNode
 	public String? SuggestionType { get; set; }
 #nullable restore
 
-	public static CommandNode FromHeliumNode(IHeliumCommandNode node)
+	public static CommandNode FromHeliumNode(IHeliumCommandNode node, Dictionary<Int32, Int32> indices)
 	{
 		return new()
 		{
 			Flags = FromHeliumFlags(node.Flags),
 			ChildrenCount = node.Children.Count(),
-
+			Children = FromHeliumChildren(node.Children, indices),
+			RedirectNode = indices[node.Redirect.GetHashCode()],
+			Name = node.Command,
+			Parser = node.Parser == null ? CommandIdentifiers.Parsers[
+				(CommandParserTypes)node.Parser] : null,
+			Properties = node.AdditionalProperties,
+			SuggestionType = (node.Flags & HeliumCommandNodeFlags.SuggestionsAskServer) != 0 ? 
+					CommandIdentifiers.SuggestionBehaviours[CommandSuggestionBehaviourTypes.AskServer] :
+				(node.Flags & HeliumCommandNodeFlags.SuggestionsClientside) != 0 ?
+					CommandIdentifiers.SuggestionBehaviours[CommandSuggestionBehaviourTypes.AvailableEntities] :
+					null
 		};
 	}
 
@@ -94,13 +104,18 @@ public record struct CommandNode
 		return (CommandNodeFlags)t;
 	}
 
-	private static VarInt[] FromHeliumChildren(IEnumerable<IHeliumCommandNode> nodes)
+	private static VarInt[] FromHeliumChildren(IEnumerable<IHeliumCommandNode> nodes, Dictionary<Int32, Int32> indices)
 	{
+		if(nodes == null)
+		{
+			return null;
+		}
+
 		VarInt[] r = new VarInt[nodes.Count()];
 
 		for(Int32 i = 0; i < nodes.Count(); i++)
 		{
-			r[i] = nodes.ElementAt(i).GetHashCode();
+			r[i] = indices[nodes.ElementAt(i).GetHashCode()];
 		}
 
 		return r;
