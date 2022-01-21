@@ -701,11 +701,17 @@ public class PacketStream : Stream
 		return ValueTask.CompletedTask;
 	}
 
+	/// <summary>
+	/// Writes a boolean to the current stream.
+	/// </summary>
 	public void WriteBoolean(Boolean val)
 	{
 		BaseStream.WriteByte((Byte)(val ? 0x01 : 0x00));
 	}
 
+	/// <summary>
+	/// Writes a boolean to the current stream asynchronously.
+	/// </summary>
 	public ValueTask WriteBooleanAsync(Boolean val)
 	{
 		BaseStream.WriteByte((Byte)(val ? 0x01 : 0x00));

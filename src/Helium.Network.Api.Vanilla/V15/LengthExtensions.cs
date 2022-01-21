@@ -15,5 +15,17 @@ internal static class LengthExtensions
 
 		return length;
 	}
+
+	public static Int32 CalculateLength(this BlockChangeData[] data)
+	{
+		Int32 length = 2 * data.Length;
+
+		foreach(BlockChangeData b in data)
+		{
+			length += b.Blockstate.Length;
+		}
+
+		return length;
+	}
 }
 
