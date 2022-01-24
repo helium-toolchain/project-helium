@@ -16,6 +16,7 @@
 		<Description>Abstractions for the Helium Project's serialization libraries, to enable seamless data conversion.</Description>
 		<RepositoryUrl>https://github.com/helium-toolchain/project-helium</RepositoryUrl>
 		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+		<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
 	</PropertyGroup>
 
 	<ItemGroup>
