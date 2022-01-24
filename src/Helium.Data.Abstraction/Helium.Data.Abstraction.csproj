@@ -6,7 +6,6 @@
 		<LanguageVersion>preview</LanguageVersion>
 		<EnablePreviewFeatures>True</EnablePreviewFeatures>
 		<GenerateRequiresPreviewFeaturesAttribute>False</GenerateRequiresPreviewFeaturesAttribute>
-		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
 	</PropertyGroup>
 
 	<PropertyGroup>
@@ -16,6 +15,7 @@
 		<Authors>ExaInsanity, Zefyro, Helium Contributors</Authors>
 		<Description>Abstractions for the Helium Project's serialization libraries, to enable seamless data conversion.</Description>
 		<RepositoryUrl>https://github.com/helium-toolchain/project-helium</RepositoryUrl>
+		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 	</PropertyGroup>
 
 	<ItemGroup>
