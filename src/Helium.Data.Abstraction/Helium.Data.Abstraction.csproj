@@ -10,8 +10,7 @@
 
 	<PropertyGroup>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<Version>0.1.0</Version>
-		<VersionSuffix>-dev.1</VersionSuffix>
+		<Version>0.1.1</Version>
 		<Company>Helium Project</Company>
 		<Authors>ExaInsanity, Zefyro, Helium Contributors</Authors>
 		<Description>Abstractions for the Helium Project's serialization libraries, to enable seamless data conversion.</Description>
