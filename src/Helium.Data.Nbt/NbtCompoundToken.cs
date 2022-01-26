@@ -15,7 +15,7 @@ using Helium.Data.Abstraction;
 [RequiresPreviewFeatures]
 public sealed record NbtCompoundToken : ICompoundToken
 {
-	private readonly Dictionary<String, IDataToken> children;
+	private readonly Dictionary<String, IDataToken> children = new();
 
 	public IDataToken this[String key]
 	{
@@ -55,47 +55,6 @@ public sealed record NbtCompoundToken : ICompoundToken
 	public Int32 Count { get; }
 
 	public Boolean IsReadOnly { get; }
-
-	public NbtCompoundToken()
-	{
-		this.children = new();
-	}
-
-	public NbtCompoundToken(String name)
-	{
-		this.children = new();
-		this.Name = name;
-	}
-
-	public NbtCompoundToken(Dictionary<String, IDataToken> tokens)
-	{
-		this.children = tokens;
-	}
-
-	public NbtCompoundToken(String name, Dictionary<String, IDataToken> tokens)
-	{
-		this.children = tokens;
-		this.Name = name;
-	}
-
-	public NbtCompoundToken(IEnumerable<IDataToken> tokens)
-	{
-		this.children = new();
-		foreach(IDataToken token in tokens)
-		{
-			children.Add(token.Name, token);
-		}
-	}
-
-	public NbtCompoundToken(String name, IEnumerable<IDataToken> tokens) 
-	{
-		this.children = new();
-		foreach(IDataToken token in tokens)
-		{
-			children.Add(token.Name, token);
-		}
-		this.Name = name;
-	}
 
 	public void Add(String key, IDataToken value)
 	{
