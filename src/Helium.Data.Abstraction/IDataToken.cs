@@ -15,6 +15,11 @@ public interface IDataToken
 	public abstract static Byte Declarator { get; }
 
 	/// <summary>
+	/// Gets the declarator from an instance. Should always inline to <see cref="Declarator"/>.
+	/// </summary>
+	public Byte RefDeclarator { get; }
+
+	/// <summary>
 	/// Stores the name of this token instance.
 	/// </summary>
 	public String Name { get; }
