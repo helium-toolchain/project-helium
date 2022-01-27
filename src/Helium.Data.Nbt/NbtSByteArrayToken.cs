@@ -8,11 +8,11 @@ using System.Runtime.Versioning;
 using Helium.Data.Abstraction;
 
 [RequiresPreviewFeatures]
-public sealed record NbtInt32ArrayToken : IArrayToken<Int32>
+public sealed record NbtSByteArrayToken : IArrayToken<SByte>
 {
-	private readonly List<Int32> children = new();
+	private readonly List<SByte> children = new();
 
-	public Int32 this[Int32 index]
+	public SByte this[Int32 index]
 	{
 		get => children[index];
 		set => children[index] = value;
@@ -21,7 +21,7 @@ public sealed record NbtInt32ArrayToken : IArrayToken<Int32>
 	/// <summary>
 	/// Stores the binary marker for this token type.
 	/// </summary>
-	public static Byte Declarator => 0x0B;
+	public static Byte Declarator => 0x07;
 
 	/// <summary>
 	/// Provides an instance access field for this token type.
@@ -52,7 +52,7 @@ public sealed record NbtInt32ArrayToken : IArrayToken<Int32>
 
 	public Boolean IsReadOnly => false;
 
-	public void Add(Int32 item)
+	public void Add(SByte item)
 	{
 		this.children.Add(item);
 	}
@@ -62,32 +62,32 @@ public sealed record NbtInt32ArrayToken : IArrayToken<Int32>
 		this.children.Clear();
 	}
 
-	public Boolean Contains(Int32 item)
+	public Boolean Contains(SByte item)
 	{
 		return this.children.Contains(item);
 	}
 
-	public void CopyTo(Int32[] array, Int32 arrayIndex)
+	public void CopyTo(SByte[] array, Int32 arrayIndex)
 	{
 		this.children.CopyTo(array, arrayIndex);
 	}
 
-	public IEnumerator<Int32> GetEnumerator()
+	public IEnumerator<SByte> GetEnumerator()
 	{
 		return this.children.GetEnumerator();
 	}
 
-	public Int32 IndexOf(Int32 item)
+	public Int32 IndexOf(SByte item)
 	{
 		return this.children.IndexOf(item);
 	}
 
-	public void Insert(Int32 index, Int32 item)
+	public void Insert(Int32 index, SByte item)
 	{
 		this.children.Insert(index, item);
 	}
 
-	public Boolean Remove(Int32 item)
+	public Boolean Remove(SByte item)
 	{
 		return this.children.Remove(item);
 	}
