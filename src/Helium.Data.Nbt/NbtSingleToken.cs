@@ -6,20 +6,20 @@ using System.Runtime.Versioning;
 using Helium.Data.Abstraction;
 
 /// <summary>
-/// Represents a signed int64 token.
+/// Represents a signed float token.
 /// </summary>
 [RequiresPreviewFeatures]
-public record struct NbtInt64Token : IValueToken<Int64>
+public record struct NbtSingleToken : IValueToken<Single>
 {
 	/// <summary>
 	/// Stores the binary marker for this token type.
 	/// </summary>
-	public static Byte Declarator => 0x04;
+	public static Byte Declarator => 0x05;
 
 	/// <summary>
 	/// Stores the value of this token.
 	/// </summary>
-	public Int64 Value { get; set; }
+	public Single Value { get; set; }
 
 	/// <summary>
 	/// Provides an instance access field for this token type.
