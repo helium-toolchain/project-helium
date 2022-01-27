@@ -34,7 +34,7 @@ public sealed record NbtInt64ArrayToken : IArrayToken<Int64>
 	public Byte ListTypeDeclarator { get; init; }
 
 	/// <summary>
-	/// The name of this list tag. May never be null.
+	/// The name of this array token.
 	/// </summary>
 	public String Name { get; set; } = null!;
 

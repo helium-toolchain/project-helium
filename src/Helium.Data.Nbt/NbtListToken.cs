@@ -37,7 +37,7 @@ public sealed record NbtListToken : IListToken
 	public Byte ListTypeDeclarator { get; init; }
 
 	/// <summary>
-	/// The name of this list tag. May never be null.
+	/// The name of this list token. May never be null.
 	/// </summary>
 	public String Name { get; set; } = null!;
 
