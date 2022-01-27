@@ -8,11 +8,11 @@ using System.Runtime.Versioning;
 using Helium.Data.Abstraction;
 
 [RequiresPreviewFeatures]
-public sealed record NbtInt64ArrayToken : IArrayToken<Int64>
+public sealed record NbtInt32ArrayToken : IArrayToken<Int32>
 {
-	private readonly List<Int64> children = new();
+	private readonly List<Int32> children = new();
 
-	public Int64 this[Int32 index]
+	public Int32 this[Int32 index]
 	{
 		get => children[index];
 		set => children[index] = value;
@@ -52,7 +52,7 @@ public sealed record NbtInt64ArrayToken : IArrayToken<Int64>
 
 	public Boolean IsReadOnly => false;
 
-	public void Add(Int64 item)
+	public void Add(Int32 item)
 	{
 		this.children.Add(item);
 	}
@@ -62,32 +62,32 @@ public sealed record NbtInt64ArrayToken : IArrayToken<Int64>
 		this.children.Clear();
 	}
 
-	public Boolean Contains(Int64 item)
+	public Boolean Contains(Int32 item)
 	{
 		return this.children.Contains(item);
 	}
 
-	public void CopyTo(Int64[] array, Int32 arrayIndex)
+	public void CopyTo(Int32[] array, Int32 arrayIndex)
 	{
 		this.children.CopyTo(array, arrayIndex);
 	}
 
-	public IEnumerator<Int64> GetEnumerator()
+	public IEnumerator<Int32> GetEnumerator()
 	{
 		return this.children.GetEnumerator();
 	}
 
-	public Int32 IndexOf(Int64 item)
+	public Int32 IndexOf(Int32 item)
 	{
 		return this.children.IndexOf(item);
 	}
 
-	public void Insert(Int32 index, Int64 item)
+	public void Insert(Int32 index, Int32 item)
 	{
 		this.children.Insert(index, item);
 	}
 
-	public Boolean Remove(Int64 item)
+	public Boolean Remove(Int32 item)
 	{
 		return this.children.Remove(item);
 	}
@@ -102,3 +102,4 @@ public sealed record NbtInt64ArrayToken : IArrayToken<Int64>
 		return this.children.GetEnumerator();
 	}
 }
+
