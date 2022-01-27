@@ -62,51 +62,58 @@ public sealed record NbtListToken : IListToken
 
 	public void AddChildToken(IDataToken token)
 	{
-		
+		if(this.ListTypeDeclarator == token.RefDeclarator)
+		{
+			this.Add(token);
+		}
+		else
+		{
+			throw new ArgumentException($"Invalid token type: tried to add type {token.RefDeclarator} to a list of {this.ListTypeDeclarator}");
+		}
 	}
 
 	public void Clear()
 	{
-		throw new System.NotImplementedException();
+		this.children.Clear();
 	}
 
-	public System.Boolean Contains(IDataToken item)
+	public Boolean Contains(IDataToken item)
 	{
-		throw new System.NotImplementedException();
+		return this.children.Contains(item);
 	}
 
-	public void CopyTo(IDataToken[] array, System.Int32 arrayIndex)
+	public void CopyTo(IDataToken[] array, Int32 arrayIndex)
 	{
-		throw new System.NotImplementedException();
+		this.children.CopyTo(array, arrayIndex);
 	}
 
 	public IEnumerator<IDataToken> GetEnumerator()
 	{
-		throw new System.NotImplementedException();
+		return this.children.GetEnumerator();
 	}
 
-	public System.Int32 IndexOf(IDataToken item)
+	public Int32 IndexOf(IDataToken item)
 	{
-		throw new System.NotImplementedException();
+		return this.children.IndexOf(item);
 	}
 
-	public void Insert(System.Int32 index, IDataToken item)
+	public void Insert(Int32 index, IDataToken item)
 	{
-		throw new System.NotImplementedException();
+		this.children.Insert(index, item);
 	}
 
-	public System.Boolean Remove(IDataToken item)
+	public Boolean Remove(IDataToken item)
 	{
-		throw new System.NotImplementedException();
+		return this.children.Remove(item);
 	}
 
-	public void RemoveAt(System.Int32 index)
+	public void RemoveAt(Int32 index)
 	{
-		throw new System.NotImplementedException();
+		this.children.RemoveAt(index);
 	}
 
 	IEnumerator IEnumerable.GetEnumerator()
 	{
-		throw new System.NotImplementedException();
+		return this.children.GetEnumerator();
 	}
 }
