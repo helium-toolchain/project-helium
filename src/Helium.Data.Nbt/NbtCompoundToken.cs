@@ -29,6 +29,11 @@ public sealed record NbtCompoundToken : ICompoundToken
 	public static Byte Declarator => 0x0A;
 
 	/// <summary>
+	/// Provides an instance access field for this token type.
+	/// </summary>
+	public Byte RefDeclarator => Declarator;
+
+	/// <summary>
 	/// Stores all child tokens to this token.
 	/// </summary>
 	public IEnumerable<IDataToken> Children => children.Values;

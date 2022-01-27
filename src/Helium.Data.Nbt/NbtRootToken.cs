@@ -28,6 +28,11 @@ public sealed record NbtRootToken : IRootToken
 	public static Byte Declarator => 0x0A;
 
 	/// <summary>
+	/// Provides an instance access field for this token type.
+	/// </summary>
+	public Byte RefDeclarator => Declarator;
+
+	/// <summary>
 	/// Stores the binary format for this type.
 	/// </summary>
 	public static String DataFormat => "nbt";
@@ -38,7 +43,7 @@ public sealed record NbtRootToken : IRootToken
 	public IEnumerable<IDataToken> Children => children.Values;
 
 	/// <summary>
-	/// Represents the name of this token. May be <c>null</c> if your token is an element of a <see cref="NbtListToken"/>.
+	/// Represents the name of this token.
 	/// </summary>
 	public String Name { get; set; } = null!;
 
