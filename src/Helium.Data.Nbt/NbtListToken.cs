@@ -44,14 +44,14 @@ public sealed record NbtListToken : IListToken
 	/// <summary>
 	/// The root token of this tree.
 	/// </summary>
-	public IRootToken? RootToken { get; }
+	public IRootToken? RootToken { get; set; }
 
 	/// <summary>
 	/// The immediate parent for this token.
 	/// </summary>
-	public IDataToken? ParentToken { get; }
+	public IDataToken? ParentToken { get; set; }
 
-	public Int32 Count { get; }
+	public Int32 Count => this.children.Count;
 
 	public Boolean IsReadOnly => false;
 

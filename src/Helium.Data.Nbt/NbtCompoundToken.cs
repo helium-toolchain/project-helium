@@ -45,20 +45,20 @@ public sealed record NbtCompoundToken : ICompoundToken
 	/// <summary>
 	/// Represents the root of this token.
 	/// </summary>
-	public IRootToken? RootToken { get; }
+	public IRootToken? RootToken { get; set; }
 
 	/// <summary>
 	/// Represents the direct parent of this token.
 	/// </summary>
-	public IDataToken? ParentToken { get; }
+	public IDataToken? ParentToken { get; set; }
 
 	public ICollection<String> Keys => children.Keys;
 
 	public ICollection<IDataToken> Values => children.Values;
 
-	public Int32 Count { get; }
+	public Int32 Count => this.children.Count;
 
-	public Boolean IsReadOnly { get; }
+	public Boolean IsReadOnly => false;
 
 	public void Add(String key, IDataToken value)
 	{
