@@ -3,6 +3,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Versioning;
 
 using Helium.Data.Abstraction;
@@ -10,7 +11,7 @@ using Helium.Data.Abstraction;
 [RequiresPreviewFeatures]
 public sealed record NbtInt32ArrayToken : IArrayToken<Int32>
 {
-	private readonly List<Int32> children = new();
+	private List<Int32> children = new();
 
 	public Int32 this[Int32 index]
 	{
@@ -100,6 +101,11 @@ public sealed record NbtInt32ArrayToken : IArrayToken<Int32>
 	IEnumerator IEnumerable.GetEnumerator()
 	{
 		return this.children.GetEnumerator();
+	}
+
+	internal void SetChildren(Span<Int32> children)
+	{
+		this.children = children.ToArray().ToList();
 	}
 }
 
