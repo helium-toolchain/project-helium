@@ -81,7 +81,7 @@ public class BinaryNbtReader
 
 		while(true)
 		{
-			if(stateStack.Count > this.MaximumDepth)
+			if(stateStack.Count > this.MaximumDepth && this.MaximumDepth != 0)
 			{
 #if !DEBUG
 				if(this.ThrowExceptions)
