@@ -6,6 +6,7 @@
 		<LanguageVersion>preview</LanguageVersion>
 		<EnablePreviewFeatures>True</EnablePreviewFeatures>
 		<GenerateRequiresPreviewFeaturesAttribute>False</GenerateRequiresPreviewFeaturesAttribute>
+		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
 	</PropertyGroup>
 
 	<PropertyGroup>

@@ -6,12 +6,12 @@ Helium is designed to run on as much hardware as possible, with as little trade-
 
 Requirement | Recommended | Supported | Unsupported
 --------- | ----------- | --------- | -----------
-CPU Architecture | x64 | aarch64, x86 | aarch32, ia64, 
+CPU Architecture | x64 or aarch64 | x86 | ia64, aarch32, ...
 Endianness | Little Endian | Little Endian | Big Endian
 CPU Microcode Extensions for x64 | AVX2, SSSE3 | any | -
-CPU Microcode Extensions for aarch64 | - | - | -
+CPU Microcode Extensions for aarch64 | Neon | any | -
 
-Note: First-class aarch64 support is planned but currently not implemented due to framework restrictions. Once .NET implements support for aarch64-neon SIMD intrinsics, Helium will adopt aarch64-neon as alternative to x64-ssse3/avx2. Leveraging AVX-512, whenever .NET implements support, is up for discussion as the extension is still not widely implemented and most implementing CPUs, most notably Intel Alder Lake, disable the extension by default.
+Leveraging AVX-512, whenever .NET implements support, is up for discussion as the extension is still not widely implemented and most implementing CPUs, most notably Intel Alder Lake, disable the extension by default. The same applies to Helium (fittingly) on aarch64 CPUs.
 
 ## OS requirements
 
