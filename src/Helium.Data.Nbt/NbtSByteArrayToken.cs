@@ -11,7 +11,7 @@ using Helium.Data.Abstraction;
 [RequiresPreviewFeatures]
 public sealed record NbtSByteArrayToken : IArrayToken<SByte>
 {
-	private List<SByte> children = new();
+	internal List<SByte> children = new();
 
 	public SByte this[Int32 index]
 	{

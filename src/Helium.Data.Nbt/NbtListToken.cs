@@ -13,7 +13,7 @@ using Helium.Data.Abstraction;
 [RequiresPreviewFeatures]
 public sealed record NbtListToken : IListToken
 {
-	private readonly List<IDataToken> children = new();
+	internal readonly List<IDataToken> children = new();
 
 	public IDataToken this[Int32 index]
 	{

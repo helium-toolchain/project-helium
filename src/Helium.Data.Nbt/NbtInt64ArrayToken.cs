@@ -11,7 +11,7 @@ using Helium.Data.Abstraction;
 [RequiresPreviewFeatures]
 public sealed record NbtInt64ArrayToken : IArrayToken<Int64>
 {
-	private List<Int64> children = new();
+	internal List<Int64> children = new();
 
 	public Int64 this[Int32 index]
 	{

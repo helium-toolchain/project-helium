@@ -18,7 +18,7 @@ using Helium.Data.Abstraction;
 /// Provides functionality for parsing NBT from binary data.
 /// </summary>
 [RequiresPreviewFeatures]
-public class BinaryNbtReader
+public sealed class BinaryNbtReader
 {
 	/// <summary>
 	/// Stores how deep a data structure is allowed to be. 0 causes this value to be ignored.
