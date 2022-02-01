@@ -2,7 +2,6 @@
 
 using System;
 using System.IO;
-using System.Runtime.CompilerServices;
 
 /// <summary>
 /// Provides some useful extensions to <see cref="MemoryStream"/>.
@@ -69,6 +68,24 @@ public static class MemoryStreamExtensions
 	}
 
 	/// <summary>
+	/// Returns whether the next non-whitespace character matches the specified character.
+	/// </summary>
+	public static Boolean Expect(this MemoryStream stream, Char value)
+	{
+		stream.SkipWhitespace();
+
+		if(stream.Peek() == value)
+		{
+			stream.Position++;
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	/// <summary>
 	/// Checks whether the specified byte is an alphabetical letter.
 	/// </summary>
 	public static Boolean IsLetter(this Byte value)
@@ -88,6 +105,30 @@ public static class MemoryStreamExtensions
 	/// Checks whether the specified byte is an alphanumeric character.
 	/// </summary>
 	public static Boolean IsAlphanumeric(this Byte value)
+	{
+		return value.IsLetter() || value.IsNumber();
+	}
+
+	/// <summary>
+	/// Checks whether the specified char is an alphabetical letter.
+	/// </summary>
+	public static Boolean IsLetter(this Char value)
+	{
+		return (value < 0x7B && value > 0x60) || (value < 0x5B && value > 0x40);
+	}
+
+	/// <summary>
+	/// Checks whether the specified char is a numerical letter.
+	/// </summary>
+	public static Boolean IsNumber(this Char value)
+	{
+		return value < 0x3A && value > 0x2F;
+	}
+
+	/// <summary>
+	/// Checks whether the specified char is an alphanumeric character.
+	/// </summary>
+	public static Boolean IsAlphanumeric(this Char value)
 	{
 		return value.IsLetter() || value.IsNumber();
 	}
