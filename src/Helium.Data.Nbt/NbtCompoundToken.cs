@@ -35,7 +35,7 @@ public sealed record NbtCompoundToken : ICompoundToken
 	/// <summary>
 	/// Stores all child tokens to this token.
 	/// </summary>
-	public IEnumerable<IDataToken> Children => children.Values;
+	public IEnumerable<IDataToken> Children => this.children.Values;
 
 	/// <summary>
 	/// Represents the name of this token. May be <c>null</c> if your token is an element of a <see cref="NbtListToken"/>.
@@ -52,9 +52,9 @@ public sealed record NbtCompoundToken : ICompoundToken
 	/// </summary>
 	public IDataToken? ParentToken { get; set; }
 
-	public ICollection<String> Keys => children.Keys;
+	public ICollection<String> Keys => this.children.Keys;
 
-	public ICollection<IDataToken> Values => children.Values;
+	public ICollection<IDataToken> Values => this.children.Values;
 
 	public Int32 Count => this.children.Count;
 
