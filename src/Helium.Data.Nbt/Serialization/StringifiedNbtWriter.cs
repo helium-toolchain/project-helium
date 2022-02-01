@@ -1,4 +1,4 @@
-﻿namespace Helium.Data.Nbt.Serialization;
+namespace Helium.Data.Nbt.Serialization;
 
 using System;
 using System.IO;
@@ -15,6 +15,9 @@ using Helium.Data.Abstraction;
 #pragma warning disable CA1822
 public sealed class StringifiedNbtWriter
 {
+	/// <summary>
+	/// Serializes a given <see cref="NbtRootToken"/> into sNBT.
+	/// </summary>
 	public String Serialize(NbtRootToken root)
 	{
 		MemoryStream stream = new();
@@ -199,19 +202,27 @@ public sealed class StringifiedNbtWriter
 
 	private void writeList(NbtListToken token, MemoryStream stream)
 	{
-		stream.WriteByte(0x5B);
-
-		for(Int32 i = 0; i < token.children.Count; i++)
+		if(token.ListTypeDeclarator != (Byte)NbtTokenType.End)
 		{
-			this.writeTokenPayload(token.children[i], stream);
+			stream.WriteByte(0x5B);
 
-			if(i < token.children.Count - 1)
+			for(Int32 i = 0; i < token.children.Count; i++)
 			{
-				stream.WriteByte(0x2C);
-			}
-		}
+				this.writeTokenPayload(token.children[i], stream);
 
-		stream.WriteByte(0x5D);
+				if(i < token.children.Count - 1)
+				{
+					stream.WriteByte(0x2C);
+				}
+			}
+
+			stream.WriteByte(0x5D);
+		}
+		else
+		{
+			stream.WriteByte(0x5B);
+			stream.WriteByte(0x5D);
+		}
 	}
 }
 #pragma warning restore CA1822

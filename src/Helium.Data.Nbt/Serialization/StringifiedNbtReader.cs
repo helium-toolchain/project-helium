@@ -1,4 +1,4 @@
-﻿namespace Helium.Data.Nbt.Serialization;
+namespace Helium.Data.Nbt.Serialization;
 
 using System;
 using System.Collections.Generic;
@@ -16,6 +16,9 @@ using Helium.Data.Abstraction;
 #pragma warning disable CA1822
 public sealed class StringifiedNbtReader
 {
+	/// <summary>
+	/// Deserializes a <see cref="NbtRootToken"/> from stringified NBT data. Requires the given data to be valid.
+	/// </summary>
 	public NbtRootToken Deserialize(String data)
 	{
 		if(!data.StartsWith('{') || !data.EndsWith('}'))
