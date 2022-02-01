@@ -1,5 +1,18 @@
 root = true
 
+# all files
+[*]
+
+charset = utf-8
+trim_trailing_whitespace = true
+
+indent_size = tab
+indent_style = tab
+tab_width = 4
+
+end_of_line = crlf
+insert_final_newline = true
+
 [*.cs]
 
 indent_style = tab
@@ -10,7 +23,8 @@ insert_final_newline = true
 
 dotnet_separate_import_directive_groups = true
 dotnet_sort_system_directives_first = true
-csharp_style_namespace_declarations = file_scoped:warning
+csharp_style_namespace_declarations = file_scoped:error
+csharp_using_directive_placement = inside_namespace:error
 
 dotnet_style_qualification_for_event = true:silent
 dotnet_style_qualification_for_field = true:silent
@@ -53,30 +67,71 @@ csharp_new_line_before_members_in_object_initializers = true
 csharp_new_line_before_open_brace = all
 csharp_new_line_between_query_expression_clauses = true
 
-#Naming Rules
+# Naming rules
 
-dotnet_naming_rule.interface_should_begin_with_i.severity = suggestion
-dotnet_naming_rule.interface_should_begin_with_i.symbols = interface
-dotnet_naming_rule.interface_should_begin_with_i.style = begins_with_i
+dotnet_naming_rule.interface_begins_with_i.severity = error
+dotnet_naming_rule.interface_begins_with_i.symbols = interface
+dotnet_naming_rule.interface_begins_with_i.style = begins_with_i
 
-dotnet_naming_rule.types_should_be_pascal_case.severity = suggestion
-dotnet_naming_rule.types_should_be_pascal_case.symbols = types
-dotnet_naming_rule.types_should_be_pascal_case.style = pascal_case
+dotnet_naming_rule.types_pascal_case.severity = error
+dotnet_naming_rule.types_pascal_case.symbols = types
+dotnet_naming_rule.types_pascal_case.style = pascal_case
+
+dotnet_naming_rule.base_class.severity = warning
+dotnet_naming_rule.base_class.symbols = abstract
+dotnet_naming_rule.base_class.style = abstract_class
+
+dotnet_naming_rule.private_methods.severity = warning
+dotnet_naming_rule.private_methods.symbols = private_method
+dotnet_naming_rule.private_methods.style = private_method
+
+dotnet_naming_rule.non_field_members.severity = warning
+dotnet_naming_rule.non_field_members.symbols = non_field_members
+dotnet_naming_rule.non_field_members.style = pascal_case
+
+# Symbol specifications
 
 dotnet_naming_symbols.interface.applicable_kinds = interface
-dotnet_naming_symbols.interface.applicable_accessibilities = public, internal
+dotnet_naming_symbols.interface.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
+dotnet_naming_symbols.interface.required_modifiers =
 
-dotnet_naming_symbols.types.applicable_kinds = class, struct, enum
-dotnet_naming_symbols.types.applicable_accessibilities = public, internal, protected, protected_internal
+dotnet_naming_symbols.private_method.applicable_kinds = method
+dotnet_naming_symbols.private_method.applicable_accessibilities = private, protected, private_protected
+dotnet_naming_symbols.private_method.required_modifiers =
 
-#additional stuff to define what visual studio needs to do
+dotnet_naming_symbols.types.applicable_kinds = class, struct, interface, enum
+dotnet_naming_symbols.types.appplicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
+dotnet_naming_symbols.types.required_modifiers =
 
+dotnet_naming_symbols.non_field_members.applicable_kinds = property, event, method
+dotnet_naming_symbols.non_field_members.applicable_accessibilities = public, internal, protected_internal
+dotnet_naming_symbols.non_field_members.required_modifiers =
+
+dotnet_naming_symbols.abstract.applicable_kinds = class
+dotnet_naming_symbols.abstract.applicable_accessibilities = *
+dotnet_naming_symbols.abstract.required_modifiers = abstract
+
+# Naming styles
+
+dotnet_naming_style.pascal_case.required_prefix =
+dotnet_naming_style.pascal_case.required_suffix =
+dotnet_naming_style.pascal_case.word_separator =
 dotnet_naming_style.pascal_case.capitalization = pascal_case
 
-dotnet_naming_style.begins_with_i.required_prefix = I
+dotnet_naming_style.begins_with_i.required_prefix = I 
+dotnet_naming_style.begins_with_i.required_suffix =
+dotnet_naming_style.begins_with_i.word_separator =
 dotnet_naming_style.begins_with_i.capitalization = pascal_case
 
-csharp_using_directive_placement=inside_namespace:suggestion
+dotnet_naming_style.private_method.required_prefix =
+dotnet_naming_style.private_method.required_suffix =
+dotnet_naming_style.private_method.word_separator =
+dotnet_naming_style.private_method.capitalization = camel_case
+
+dotnet_naming_style.abstract_class.required_prefix = Abstract
+dotnet_naming_style.abstract_class.required_suffix = 
+dotnet_naming_style.abstract_class.word_separator =
+dotnet_naming_style.abstract_class.capitalization = pascal_case
 
 [*.json]
 
