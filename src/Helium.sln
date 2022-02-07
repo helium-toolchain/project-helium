@@ -84,6 +84,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helium.Data.Abstraction", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Helium.Data.Nbt", "Helium.Data.Nbt\Helium.Data.Nbt.csproj", "{A81E294D-143F-43E9-9B44-F4D972455289}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helium.Data.Castle", "Helium.Data.Castle\Helium.Data.Castle.csproj", "{F4954823-97EE-4EDE-A238-449FD3EC3141}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -498,6 +500,18 @@ Global
 		{A81E294D-143F-43E9-9B44-F4D972455289}.Release|x64.Build.0 = Release|Any CPU
 		{A81E294D-143F-43E9-9B44-F4D972455289}.Release|x86.ActiveCfg = Release|Any CPU
 		{A81E294D-143F-43E9-9B44-F4D972455289}.Release|x86.Build.0 = Release|Any CPU
+		{F4954823-97EE-4EDE-A238-449FD3EC3141}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F4954823-97EE-4EDE-A238-449FD3EC3141}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F4954823-97EE-4EDE-A238-449FD3EC3141}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F4954823-97EE-4EDE-A238-449FD3EC3141}.Debug|x64.Build.0 = Debug|Any CPU
+		{F4954823-97EE-4EDE-A238-449FD3EC3141}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F4954823-97EE-4EDE-A238-449FD3EC3141}.Debug|x86.Build.0 = Debug|Any CPU
+		{F4954823-97EE-4EDE-A238-449FD3EC3141}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F4954823-97EE-4EDE-A238-449FD3EC3141}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F4954823-97EE-4EDE-A238-449FD3EC3141}.Release|x64.ActiveCfg = Release|Any CPU
+		{F4954823-97EE-4EDE-A238-449FD3EC3141}.Release|x64.Build.0 = Release|Any CPU
+		{F4954823-97EE-4EDE-A238-449FD3EC3141}.Release|x86.ActiveCfg = Release|Any CPU
+		{F4954823-97EE-4EDE-A238-449FD3EC3141}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -537,6 +551,7 @@ Global
 		{0D5F3C9F-7BD8-4D3F-B09E-272496F375D1} = {4E0146F9-F079-403D-8CB2-B619CAC3CEF7}
 		{42B56942-3D38-40E0-B060-D55637F6BC24} = {EAFC9D52-8D01-450B-B635-15A104B88B58}
 		{A81E294D-143F-43E9-9B44-F4D972455289} = {EAFC9D52-8D01-450B-B635-15A104B88B58}
+		{F4954823-97EE-4EDE-A238-449FD3EC3141} = {EAFC9D52-8D01-450B-B635-15A104B88B58}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {905E50AD-16B2-4090-839B-70F4D255AB8C}
