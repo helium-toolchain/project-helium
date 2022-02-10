@@ -25,7 +25,7 @@ Each Castle token is built in the following structure:
 
 The total length field is omitted for primitive tokens (0x01 to 0x0B) as their length is already known.
 
-Each Castle file is wrapped into a compound token, the so-called Root token, which should also contain all names, indexed to their deduplication IDs. This root token should declare the total length of its string deduplication array as its total length; opening each file with `xxxxxxxx (total length of the names) 00 (root tokens are declared as 0x00) 0000 (skipping name deduplication)`, following by the name array and the payload. Any file starting differently does not conform to the specification.
+Each Castle file is wrapped into a compound token, the so-called Root token, which should also contain all names, indexed to their deduplication IDs. This root token should declare the total length of its string deduplication array as its total length; opening each file with `00 (root tokens are declared as 0x00) xxxxxxxx (total length of the names) 00  0000 (skipping name deduplication)`, following by the name array and the payload. Any file starting differently does not conform to the specification.
 
 Names can only consist of ASCII characters.
 
@@ -74,12 +74,12 @@ Booleans should be represented in C style as `Byte`s
 A valid Castle file would, for instance, be:
 
 ~~~
-07 00 00 00 00 00 00 05 00 48 65 6C 6C 6F 01 00 0C 07 00 00 00 00 00 57 6F 72 6C 64
+00 07 00 00 00 00 00 05 00 48 65 6C 6C 6F 01 00 0C 07 00 00 00 00 00 57 6F 72 6C 64
 ~~~
 
-Split up, `07 00 00 00` defines the total length of the name array (in little endian) to be 7 bytes.
+Split up, `00` declares this to be a root token.
 
-This is followed by `00` declaring this token as a root token and another `00 00`. This would be interpreted as name array index, but since this is the root token, it remains unnamed.
+This is followed by `07 00 00 00` defining the total length of the name array (in little endian) to be 7 bytes and another `00 00`. This would be interpreted as name array index, but since this is the root token, it remains unnamed.
 
 The following `05 00` defines the length of the first name, again in little endian, to be 5 bytes. This name is `48 65 6C 6C 6F`, the ASCII representation for `Hello`.
 
@@ -98,10 +98,10 @@ Since a string cannot have children, and we have already established that the ro
 Another valid Castle file would be:
 
 ~~~
-08 00 00 00 00 00 06 00 6E 75 6D 62 65 72 02 00 0A 00 00 0F 0F 0F 0F 0A 00 00 F0 F0 F0 F0
+0X 00 00 00 00 00 06 00 6E 75 6D 62 65 72 02 00 48 69 02 00 0A 00 00 0F 0F 0F 0F 0A 00 00 F0 F0 F0 F0
 ~~~
 
-This contains two float tokens, both with the name `number` (which is allowed in Castle). The first one stores `0F 0F 0F 0F`, around 7.0533; the second one stores `F0 F0 F0 F0`, -596541423374289729685825781760.
+This contains two float tokens, one with the name `number` and one with the name `Hi`. The first one stores `0F 0F 0F 0F`, around 7.0533; the second one stores `F0 F0 F0 F0`, -596541423374289729685825781760.
 
 ## Conversion to and from the NBT format
 
@@ -119,6 +119,4 @@ Fourth, `DateTime`, `Date` and `Time` tokens should be converted in the way the 
 
 Fifth, all names need to be re-duplicated from the root token into their respective tokens.
 
-Sixth, all duplicate names need to be resolved one way or another. Castle allows two identical names in the same compound, NBT does not.
-
-Seventh, the root token needs to be dissolved and replaced by a compound.
+Sixth, the root token needs to be dissolved and replaced by a compound.
