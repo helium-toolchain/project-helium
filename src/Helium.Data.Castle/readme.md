@@ -8,8 +8,7 @@ Castle is the Helium Projects own serialization format. It is designed to be fas
 2. Castle uses 16-bit integers for every length declaration instead of using a mixture of 16-bit and 32-bit integers.
 3. Castle implements unsigned integers and Half-precision floating point types.
 4. Castle declares total lengths for each token to allow for faster indexing.
-5. Castle allows two or more tokens with the same name in the same space. It is, however, not recommended. If this is encountered, the containing compound stops being order-agnostic.
-6. Castle deduplicates all token names.
+5. Castle deduplicates all token names.
 
 ## Specification
 
