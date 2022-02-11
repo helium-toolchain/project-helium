@@ -1,5 +1,6 @@
 namespace Helium.Data.Castle;
 
+using System;
 using System.Runtime.Versioning;
 
 using Helium.Data.Abstraction;
@@ -15,4 +16,9 @@ public interface ICastleToken
 	/// </summary>
 	/// <returns></returns>
 	public IDataToken ToNbtToken();
+
+	/// <summary>
+	/// Stores the ID of this tokens name in the root array.
+	/// </summary>
+	public UInt16 NameId { get; }
 }

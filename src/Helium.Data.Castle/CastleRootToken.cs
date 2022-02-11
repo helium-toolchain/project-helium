@@ -20,6 +20,8 @@ public record CastleRootToken : ICastleToken, IRootToken
 		set => Children = Children.Where(xm => xm.Name != key).Append(value);
 	}
 
+	public UInt16 NameId => 0;
+
 	public static String DataFormat => "castle";
 
 	public static Byte Declarator => 0x00;
