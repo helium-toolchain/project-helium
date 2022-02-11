@@ -9,6 +9,9 @@ using System.Runtime.Versioning;
 
 using Helium.Data.Abstraction;
 
+/// <summary>
+/// Represents a Castle root token.
+/// </summary>
 [RequiresPreviewFeatures]
 public record CastleRootToken : ICastleToken, IRootToken
 {
