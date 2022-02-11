@@ -7,13 +7,13 @@ using Helium.Data.Abstraction;
 using Helium.Data.Nbt;
 
 [RequiresPreviewFeatures]
-public record struct CastleSingleToken : ICastleToken, IValueToken<Single>
+public record struct CastleDoubleToken : ICastleToken, IValueToken<Double>
 {
-	public static Byte Declarator => 0x0A;
+	public static Byte Declarator => 0x0B;
 
 	public UInt16 NameId { get; internal set; }
 
-	public Single Value { get; set; }
+	public Double Value { get; set; }
 
 	public Byte RefDeclarator => Declarator;
 
@@ -23,7 +23,7 @@ public record struct CastleSingleToken : ICastleToken, IValueToken<Single>
 		set
 		{
 			CastleRootToken root = this.RootToken as CastleRootToken ?? throw new ArgumentException(
-				$"Root token of CastleSingleToken {NameId}:{Value} was not of type CastleRootToken");
+				$"Root token of CastleDoubleToken {NameId}:{Value} was not of type CastleRootToken");
 
 			if(!root.TokenNames.Contains(value))
 			{
@@ -40,7 +40,7 @@ public record struct CastleSingleToken : ICastleToken, IValueToken<Single>
 
 	public IDataToken ToNbtToken()
 	{
-		return new NbtSingleToken
+		return new NbtDoubleToken
 		{
 			Name = this.Name,
 			Value = this.Value
