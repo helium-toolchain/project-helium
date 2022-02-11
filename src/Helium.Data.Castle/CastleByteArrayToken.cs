@@ -3,6 +3,7 @@ namespace Helium.Data.Castle;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 
 using Helium.Data.Abstraction;
@@ -97,10 +98,13 @@ public record struct CastleByteArrayToken : ICastleToken, IArrayToken<Byte>
 
 	public IDataToken ToNbtToken()
 	{
-		return new NbtSByteArrayToken
+		NbtSByteArrayToken nbt = new()
 		{
 			Name = this.Name
 		};
+
+		nbt.SetChildren(MemoryMarshal.Cast<Byte, SByte>(CollectionsMarshal.AsSpan(this.Children)));
+		return nbt;
 	}
 
 	IEnumerator IEnumerable.GetEnumerator()
