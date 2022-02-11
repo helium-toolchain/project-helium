@@ -11,7 +11,7 @@
 
 	<PropertyGroup>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<Version>0.1.1</Version>
+		<Version>0.1.2</Version>
 		<Company>Helium Project</Company>
 		<Authors>ExaInsanity, Zefyro, Helium Contributors</Authors>
 		<Description>NBT serialization library for the Helium project.</Description>
