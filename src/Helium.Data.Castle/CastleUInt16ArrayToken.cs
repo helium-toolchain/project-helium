@@ -4,17 +4,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Runtime.Intrinsics.X86;
 using System.Runtime.Versioning;
 
 using Helium.Data.Abstraction;
 using Helium.Data.Nbt;
 
 [RequiresPreviewFeatures]
-public record struct CastleInt16ArrayToken : ICastleToken, IArrayToken<Int16>
+public record struct CastleUInt16ArrayToken : ICastleToken, IArrayToken<UInt16>
 {
-	internal List<Int16> Children { get; set; }
+	internal List<UInt16> Children { get; set; }
 
-	public Int16 this[Int32 index]
+	public UInt16 this[Int32 index]
 	{
 		get => this.Children[index];
 		set => this.Children[index] = value;
@@ -51,7 +53,7 @@ public record struct CastleInt16ArrayToken : ICastleToken, IArrayToken<Int16>
 
 	public Boolean IsReadOnly => false;
 
-	public void Add(Int16 item)
+	public void Add(UInt16 item)
 	{
 		this.Children.Add(item);
 	}
@@ -61,32 +63,32 @@ public record struct CastleInt16ArrayToken : ICastleToken, IArrayToken<Int16>
 		this.Children.Clear();
 	}
 
-	public Boolean Contains(Int16 item)
+	public Boolean Contains(UInt16 item)
 	{
 		return this.Children.Contains(item);
 	}
 
-	public void CopyTo(Int16[] array, Int32 arrayIndex)
+	public void CopyTo(UInt16[] array, Int32 arrayIndex)
 	{
 		this.Children.CopyTo(array, arrayIndex);
 	}
 
-	public IEnumerator<Int16> GetEnumerator()
+	public IEnumerator<UInt16> GetEnumerator()
 	{
 		return this.Children.GetEnumerator();
 	}
 
-	public Int32 IndexOf(Int16 item)
+	public Int32 IndexOf(UInt16 item)
 	{
 		return this.Children.IndexOf(item);
 	}
 
-	public void Insert(Int32 index, Int16 item)
+	public void Insert(Int32 index, UInt16 item)
 	{
 		this.Children.Insert(index, item);
 	}
 
-	public Boolean Remove(Int16 item)
+	public Boolean Remove(UInt16 item)
 	{
 		return this.Children.Remove(item);
 	}
@@ -106,10 +108,7 @@ public record struct CastleInt16ArrayToken : ICastleToken, IArrayToken<Int16>
 
 		Span<Int32> converted = new Int32[this.Count];
 
-		for(Int32 i = 0; i < this.Count; i++)
-		{
-			converted[i] = (this.Children[i] & 0x8000) << 16 & this.Children[i] & 0x7FFF;
-		}
+		if(RuntimeInformation.ProcessArchitecture == Architecture.X64 && Avx2.IsSupported && this.Count >= 15)
 
 		nbt.SetChildren(converted);
 
