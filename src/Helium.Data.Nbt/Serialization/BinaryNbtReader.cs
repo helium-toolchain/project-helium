@@ -1,4 +1,4 @@
-﻿namespace Helium.Data.Nbt.Serialization;
+namespace Helium.Data.Nbt.Serialization;
 
 using System;
 using System.Buffers.Binary;
@@ -247,9 +247,7 @@ public sealed class BinaryNbtReader
 										 * widely adopted and therefore a low priority for the .NET team. This code area should be
 										 * updated once those are implemented in System.Runtime.Intrinsics.
 										 */
-										Avx.Store(reshuffled, Avx2.Shuffle(Avx.LoadVector256(
-											(Byte*)Unsafe.AsPointer(ref t2.Slice(i, 32).GetPinnableReference())),
-											i32Mask));
+										Avx.Store(reshuffled, Avx2.Shuffle(Unsafe.As<Byte, Vector256<Byte>>(ref MemoryMarshal.GetReference(t2)), i32Mask));
 									}
 								}
 
@@ -294,56 +292,13 @@ public sealed class BinaryNbtReader
 										 * widely adopted and therefore a low priority for the .NET team. This code area should be
 										 * updated once those are implemented in System.Runtime.Intrinsics.
 										 */
-										Sse2.Store(reshuffled, Ssse3.Shuffle(Sse2.LoadVector128(
-											(Byte*)Unsafe.AsPointer(ref t2.Slice(i, 16).GetPinnableReference())),
-											i32Mask));
+										Sse2.Store(reshuffled, Ssse3.Shuffle(Unsafe.As<Byte, Vector128<Byte>>(ref MemoryMarshal.GetReference(t2)), i32Mask));
 									}
 								}
 
 								Span<Int32> littleEndianInt32 = MemoryMarshal.Cast<Byte, Int32>(finalInt32);
 
 								(currentToken as NbtInt32ArrayToken)!.SetChildren(littleEndianInt32);
-							}
-
-							for(Int32 i = 0; i < arrayLength % 4; i++)
-							{
-								data.Read(fourLengthSpan);
-								(currentToken as NbtInt32ArrayToken)!.Add(BinaryPrimitives.ReadInt32BigEndian(fourLengthSpan));
-							}
-						}
-						else if(RuntimeInformation.ProcessArchitecture == Architecture.Arm64 && AdvSimd.IsSupported &&
-							arrayLength > 8) // arm woo! this isnt worth it for int64 though
-						{
-							unsafe
-							{
-								arrayLengthMod4 = arrayLength - (arrayLength % 4);
-								Span<Int32> finalInt32 = new Int32[arrayLengthMod4];
-
-								// keep the GC from doing evil things
-								fixed(Int32* reshuffled = finalInt32)
-								{
-									for(Int32 i = 0; i < arrayLengthMod4; i += 16)
-									{
-										/* Load 16 bytes from our raw origin span
-										 * -
-										 * ref T Span<T>#GetPinnableReference() is actually hidden from IntelliSense and should not
-										 * be 'called by user code', well, how about we do it anyway.
-										 * -
-										 * Use the ARM hardware intrinsics to perform a endianness reverse. no need for pshufb 
-										 * (or its AVX2 equivalent) here.
-										 * -
-										 * Store this into our pointer and proceed with the next iteration
-										 * -
-										 * This is available in AVX-512 but .NET does not support AVX-512 yet either; it is not
-										 * widely adopted and therefore a low priority for the .NET team. This code area should be
-										 * updated once those are implemented in System.Runtime.Intrinsics.
-										 */
-										AdvSimd.Store(reshuffled, AdvSimd.ReverseElement16(AdvSimd.LoadVector128(
-											(Int32*)Unsafe.AsPointer(ref t2.Slice(i, 16).GetPinnableReference()))));
-									}
-								}
-
-								(currentToken as NbtInt32ArrayToken)!.SetChildren(finalInt32);
 							}
 
 							for(Int32 i = 0; i < arrayLength % 4; i++)
@@ -404,9 +359,7 @@ public sealed class BinaryNbtReader
 										 * widely adopted and therefore a low priority for the .NET team. This code area should be
 										 * updated once those are implemented in System.Runtime.Intrinsics.
 										 */
-										Avx.Store(reshuffled, Avx2.Shuffle(Avx.LoadVector256(
-											(Byte*)Unsafe.AsPointer(ref t3.Slice(i, 32).GetPinnableReference())),
-											i64Mask));
+										Avx.Store(reshuffled, Avx2.Shuffle(Unsafe.As<Byte, Vector256<Byte>>(ref MemoryMarshal.GetReference(t3)), i64Mask));
 									}
 								}
 
@@ -451,9 +404,7 @@ public sealed class BinaryNbtReader
 										 * widely adopted and therefore a low priority for the .NET team. This code area should be
 										 * updated once those are implemented in System.Runtime.Intrinsics.
 										 */
-										Sse2.Store(reshuffled, Ssse3.Shuffle(Sse2.LoadVector128(
-											(Byte*)Unsafe.AsPointer(ref t3.Slice(i, 16).GetPinnableReference())),
-											i64Mask));
+										Sse2.Store(reshuffled, Ssse3.Shuffle(Unsafe.As<Byte, Vector128<Byte>>(ref MemoryMarshal.GetReference(t3)), i64Mask));
 									}
 								}
 
