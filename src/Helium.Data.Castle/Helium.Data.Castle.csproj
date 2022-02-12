@@ -26,7 +26,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Helium.Data.Abstraction" Version="0.1.1" />
-		<PackageReference Include="Helium.Data.Nbt" Version="0.1.2" />
+		<PackageReference Include="Helium.Data.Nbt" Version="0.1.3" />
 	</ItemGroup>
 
 </Project>
