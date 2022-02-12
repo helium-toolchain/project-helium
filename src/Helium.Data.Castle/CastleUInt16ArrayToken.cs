@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.X86;
 using System.Runtime.Versioning;
 
@@ -109,8 +110,45 @@ public record struct CastleUInt16ArrayToken : ICastleToken, IArrayToken<UInt16>
 		Span<Int32> converted = new Int32[this.Count];
 
 		if(RuntimeInformation.ProcessArchitecture == Architecture.X64 && Avx2.IsSupported && this.Count >= 15)
+		{
+			unsafe
+			{
+				Vector256<Byte> firstMask = Vector256.Create(
+					(Byte)0, 0, 31, 30, 0, 0, 29, 28, 0, 0, 27, 26, 0, 0, 25, 24,
+					0, 0, 23, 22, 0, 0, 21, 20, 0, 0, 19, 18, 0, 0, 17, 16);
+				Vector256<Byte> secondMask = Vector256.Create(
+					(Byte)0, 0, 15, 14, 0, 0, 13, 12, 0, 0, 11, 10, 0, 0, 9, 8,
+					0, 0, 7, 6, 0, 0, 5, 4, 0, 0, 3, 2, 0, 0, 0, 0);
 
-		nbt.SetChildren(converted);
+				Int32 vectorLength = this.Count - (this.Count % 15);
+				Span<Byte> finalIntegers = new Byte[vectorLength * 2];
+				Span<Byte> source = MemoryMarshal.Cast<UInt16, Byte>(CollectionsMarshal.AsSpan(this.Children));
+
+				fixed(Byte* reshuffled = finalIntegers)
+				{
+					Byte* toAssign = reshuffled;
+					Vector256<Byte> buffer;
+
+					for(Int32 i = 0; i < vectorLength; i += 30)
+					{
+						buffer = Unsafe.As<Byte, Vector256<Byte>>(ref MemoryMarshal.GetReference(source.Slice(i, 32)))
+							.WithElement(0, (Byte)0);
+
+						Avx.Store(toAssign, Avx2.Shuffle(buffer, firstMask));
+						Avx.Store(toAssign, Avx2.Shuffle(buffer, secondMask));
+
+						toAssign -= 4;
+					}
+				}
+
+				nbt.SetChildren(MemoryMarshal.Cast<Byte, Int32>(finalIntegers));
+
+				for(Int32 i = vectorLength; i < this.Count; i++)
+				{
+					nbt.Add(this.Children[i]);
+				}
+			}
+		}
 
 		return nbt;
 	}
