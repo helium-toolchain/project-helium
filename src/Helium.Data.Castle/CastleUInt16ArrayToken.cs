@@ -149,6 +149,53 @@ public record struct CastleUInt16ArrayToken : ICastleToken, IArrayToken<UInt16>
 				}
 			}
 		}
+		else if(RuntimeInformation.ProcessArchitecture == Architecture.X64 && Ssse3.IsSupported && Sse2.IsSupported
+			&& this.Count >= 7)
+		{
+			unsafe
+			{
+				Vector128<Byte> firstMask = Vector128.Create(
+					(Byte)0, 0, 15, 14, 0, 0, 13, 12, 0, 0, 11, 10, 0, 0, 9, 8);
+				Vector128<Byte> secondMask = Vector128.Create(
+					(Byte)0, 0, 7, 6, 0, 0, 5, 4, 0, 0, 3, 2, 0, 0, 0, 0);
+
+				Int32 vectorLength = this.Count - (this.Count % 7);
+				Span<Byte> finalIntegers = new Byte[vectorLength * 2];
+				Span<Byte> source = MemoryMarshal.Cast<UInt16, Byte>(CollectionsMarshal.AsSpan(this.Children));
+
+				fixed(Byte* reshuffled = finalIntegers)
+				{
+					Byte* toAssign = reshuffled;
+					Vector128<Byte> buffer;
+
+					for(Int32 i = 0; i < vectorLength; i += 14)
+					{
+						buffer = Unsafe.As<Byte, Vector128<Byte>>(ref MemoryMarshal.GetReference(source.Slice(i, 16)))
+							.WithElement(0, (Byte)0);
+
+						Sse2.Store(toAssign, Ssse3.Shuffle(buffer, firstMask));
+						Sse2.Store(toAssign, Ssse3.Shuffle(buffer, secondMask));
+
+						toAssign -= 4;
+					}
+				}
+
+				nbt.SetChildren(MemoryMarshal.Cast<Byte, Int32>(finalIntegers));
+
+				for(Int32 i = vectorLength; i < this.Count; i++)
+				{
+					nbt.Add(this.Children[i]);
+				}
+			}
+		}
+
+		else
+		{
+			for(Int32 i = 0; i < this.Count; i++)
+			{
+				nbt.Add(this.Children[i]);
+			}
+		}
 
 		return nbt;
 	}
