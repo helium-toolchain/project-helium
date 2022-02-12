@@ -221,7 +221,7 @@ public sealed class BinaryNbtReader
 
 						// we can switch the endianness up
 						if(RuntimeInformation.ProcessArchitecture == Architecture.X64 && Avx2.IsSupported &&
-							arrayLength > 8) // avx2 places a hard dependency on avx, we dont need to check that
+							arrayLength >= 8) // avx2 places a hard dependency on avx, we dont need to check that
 						{
 							unsafe
 							{
@@ -247,7 +247,7 @@ public sealed class BinaryNbtReader
 										 * widely adopted and therefore a low priority for the .NET team. This code area should be
 										 * updated once those are implemented in System.Runtime.Intrinsics.
 										 */
-										Avx.Store(reshuffled, Avx2.Shuffle(Unsafe.As<Byte, Vector256<Byte>>(ref MemoryMarshal.GetReference(t2)), i32Mask));
+										Avx.Store(reshuffled, Avx2.Shuffle(Unsafe.As<Byte, Vector256<Byte>>(ref MemoryMarshal.GetReference(t2.Slice(i, 32))), i32Mask));
 									}
 								}
 
@@ -264,7 +264,7 @@ public sealed class BinaryNbtReader
 						}
 						// oh woo, we can switch it up, but differently
 						else if(RuntimeInformation.ProcessArchitecture == Architecture.X64 && Ssse3.IsSupported &&
-							Sse2.IsSupported && arrayLength > 8) // its only faster when doing this twice
+							Sse2.IsSupported && arrayLength >= 8) // its only faster when doing this twice
 						{
 							unsafe
 							{
@@ -292,7 +292,7 @@ public sealed class BinaryNbtReader
 										 * widely adopted and therefore a low priority for the .NET team. This code area should be
 										 * updated once those are implemented in System.Runtime.Intrinsics.
 										 */
-										Sse2.Store(reshuffled, Ssse3.Shuffle(Unsafe.As<Byte, Vector128<Byte>>(ref MemoryMarshal.GetReference(t2)), i32Mask));
+										Sse2.Store(reshuffled, Ssse3.Shuffle(Unsafe.As<Byte, Vector128<Byte>>(ref MemoryMarshal.GetReference(t2.Slice(i, 16))), i32Mask));
 									}
 								}
 
@@ -332,7 +332,7 @@ public sealed class BinaryNbtReader
 
 						// we can switch the endianness up
 						if(RuntimeInformation.ProcessArchitecture == Architecture.X64 && Avx2.IsSupported &&
-							arrayLength > 4) // avx2 places a hard dependency on avx, we dont need to check that
+							arrayLength >= 4) // avx2 places a hard dependency on avx, we dont need to check that
 						{
 							unsafe
 							{
@@ -359,7 +359,7 @@ public sealed class BinaryNbtReader
 										 * widely adopted and therefore a low priority for the .NET team. This code area should be
 										 * updated once those are implemented in System.Runtime.Intrinsics.
 										 */
-										Avx.Store(reshuffled, Avx2.Shuffle(Unsafe.As<Byte, Vector256<Byte>>(ref MemoryMarshal.GetReference(t3)), i64Mask));
+										Avx.Store(reshuffled, Avx2.Shuffle(Unsafe.As<Byte, Vector256<Byte>>(ref MemoryMarshal.GetReference(t3.Slice(i, 32))), i64Mask));
 									}
 								}
 
@@ -376,7 +376,7 @@ public sealed class BinaryNbtReader
 						}
 						// oh woo, we can switch it up, but differently
 						else if(RuntimeInformation.ProcessArchitecture == Architecture.X64 && Ssse3.IsSupported &&
-							Sse2.IsSupported && arrayLength > 32) // its only faster when doing this twice
+							Sse2.IsSupported && arrayLength >= 4) // its only faster when doing this twice
 						{
 							unsafe
 							{
@@ -404,7 +404,7 @@ public sealed class BinaryNbtReader
 										 * widely adopted and therefore a low priority for the .NET team. This code area should be
 										 * updated once those are implemented in System.Runtime.Intrinsics.
 										 */
-										Sse2.Store(reshuffled, Ssse3.Shuffle(Unsafe.As<Byte, Vector128<Byte>>(ref MemoryMarshal.GetReference(t3)), i64Mask));
+										Sse2.Store(reshuffled, Ssse3.Shuffle(Unsafe.As<Byte, Vector128<Byte>>(ref MemoryMarshal.GetReference(t3.Slice(i, 16))), i64Mask));
 									}
 								}
 
