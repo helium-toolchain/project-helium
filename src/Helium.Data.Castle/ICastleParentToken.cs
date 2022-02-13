@@ -6,7 +6,7 @@ using System.Runtime.Versioning;
 using Helium.Data.Abstraction;
 
 [RequiresPreviewFeatures]
-public interface ICastleParentToken : ICastleToken
+public interface ICastleParentToken : ICastleToken, IDataToken
 {
 	public void AddChildToken(IDataToken child);
 
