@@ -24,7 +24,7 @@ Each Castle token is built in the following structure:
 
 The total length field is omitted for primitive tokens (0x01 to 0x0B) as their length is already known.
 
-Each Castle file is wrapped into a compound token, the so-called Root token, which should also contain all names, indexed to their deduplication IDs. This root token should declare the total length of its string deduplication array as its total length; opening each file with `00 (root tokens are declared as 0x00) xxxxxxxx (total length of the names) 00  0000 (skipping name deduplication)`, following by the name array and the payload. Any file starting differently does not conform to the specification.
+Each Castle file is wrapped into a compound token, the so-called Root token, which should also contain all names, indexed to their deduplication IDs. This root token should declare the total length of its string deduplication array as its total length; opening each file with `00 (root tokens are declared as 0x00) xxxxxxxx (total length of the names) 0000 (skipping name deduplication)`, following by the name array and the payload. Any file starting differently does not conform to the specification.
 
 Names can only consist of ASCII characters.
 
@@ -97,7 +97,7 @@ Since a string cannot have children, and we have already established that the ro
 Another valid Castle file would be:
 
 ~~~
-0X 00 00 00 00 00 06 00 6E 75 6D 62 65 72 02 00 48 69 02 00 0A 00 00 0F 0F 0F 0F 0A 00 00 F0 F0 F0 F0
+0C 00 00 00 00 00 06 00 6E 75 6D 62 65 72 02 00 48 69 02 00 0A 00 00 0F 0F 0F 0F 0A 00 00 F0 F0 F0 F0
 ~~~
 
 This contains two float tokens, one with the name `number` and one with the name `Hi`. The first one stores `0F 0F 0F 0F`, around 7.0533; the second one stores `F0 F0 F0 F0`, -596541423374289729685825781760.
