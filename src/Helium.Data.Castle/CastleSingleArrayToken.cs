@@ -8,17 +8,17 @@ using System.Runtime.Versioning;
 using Helium.Data.Abstraction;
 
 [RequiresPreviewFeatures]
-public record struct CastleHalfArrayToken : ICastleToken, IArrayToken<Half>
+public record struct CastleSingleArrayToken : ICastleToken, IArrayToken<Single>
 {
-	internal List<Half> Children { get; set; }
+	internal List<Single> Children { get; set; }
 
-	public Half this[Int32 index]
+	public Single this[Int32 index]
 	{
 		get => this.Children[index];
 		set => this.Children[index] = value;
 	}
 
-	public static Byte Declarator => 0x19;
+	public static Byte Declarator => 0x1A;
 
 	public UInt16 NameId { get; internal set; }
 
@@ -30,7 +30,7 @@ public record struct CastleHalfArrayToken : ICastleToken, IArrayToken<Half>
 		set
 		{
 			CastleRootToken root = this.RootToken as CastleRootToken ?? throw new ArgumentException(
-				$"Root token of CastleHalfArrayToken {NameId} was not of type CastleRootToken");
+				$"Root token of CastleSingleArrayToken {NameId} was not of type CastleRootToken");
 
 			if(!root.TokenNames.Contains(value))
 			{
@@ -49,7 +49,7 @@ public record struct CastleHalfArrayToken : ICastleToken, IArrayToken<Half>
 
 	public Boolean IsReadOnly => false;
 
-	public void Add(Half item)
+	public void Add(Single item)
 	{
 		this.Children.Add(item);
 	}
@@ -59,32 +59,32 @@ public record struct CastleHalfArrayToken : ICastleToken, IArrayToken<Half>
 		this.Children.Clear();
 	}
 
-	public Boolean Contains(Half item)
+	public Boolean Contains(Single item)
 	{
 		return this.Children.Contains(item);
 	}
 
-	public void CopyTo(Half[] array, Int32 arrayIndex)
+	public void CopyTo(Single[] array, Int32 arrayIndex)
 	{
 		this.Children.CopyTo(array, arrayIndex);
 	}
 
-	public IEnumerator<Half> GetEnumerator()
+	public IEnumerator<Single> GetEnumerator()
 	{
 		return this.Children.GetEnumerator();
 	}
 
-	public Int32 IndexOf(Half item)
+	public Int32 IndexOf(Single item)
 	{
 		return this.Children.IndexOf(item);
 	}
 
-	public void Insert(Int32 index, Half item)
+	public void Insert(Int32 index, Single item)
 	{
 		this.Children.Insert(index, item);
 	}
 
-	public Boolean Remove(Half item)
+	public Boolean Remove(Single item)
 	{
 		return this.Children.Remove(item);
 	}
@@ -96,7 +96,7 @@ public record struct CastleHalfArrayToken : ICastleToken, IArrayToken<Half>
 
 	public IDataToken ToNbtToken()
 	{
-		throw new NotImplementedException("The NBT specification does not contain a valid datatype to convert a HalfArrayToken to");
+		throw new NotImplementedException("The NBT specification does not contain a valid datatype to convert a SingleArrayToken to");
 	}
 
 	IEnumerator IEnumerable.GetEnumerator()
