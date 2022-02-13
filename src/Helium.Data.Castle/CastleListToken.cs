@@ -9,7 +9,7 @@ using Helium.Data.Abstraction;
 using Helium.Data.Nbt;
 
 [RequiresPreviewFeatures]
-public record CastleListToken : ICastleToken, IListToken
+public record CastleListToken : ICastleParentToken, IListToken
 {
 	internal List<IDataToken> Children { get; set; } = new();
 
@@ -51,6 +51,8 @@ public record CastleListToken : ICastleToken, IListToken
 	public Int32 Count => this.Children.Count;
 
 	public Boolean IsReadOnly => false;
+
+	public UInt16 DeclaredLength { get; init; }
 
 	public void Add(IDataToken item)
 	{

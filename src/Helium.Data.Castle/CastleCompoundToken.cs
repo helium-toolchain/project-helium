@@ -13,7 +13,7 @@ using Helium.Data.Abstraction;
 /// Represents a Castle root token.
 /// </summary>
 [RequiresPreviewFeatures]
-public record CastleCompoundToken : ICastleToken, ICompoundToken
+public record CastleCompoundToken : ICastleParentToken, ICompoundToken
 {
 	public IDataToken this[String key]
 	{
@@ -59,6 +59,8 @@ public record CastleCompoundToken : ICastleToken, ICompoundToken
 	public Int32 Count => this.Children.Count();
 
 	public Boolean IsReadOnly => (this.Children as IList)?.IsReadOnly ?? true;
+
+	public UInt16 DeclaredLength { get; init; }
 
 	public void Add(String key, IDataToken value)
 	{
