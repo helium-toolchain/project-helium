@@ -10,17 +10,17 @@ using Helium.Data.Abstraction;
 using Helium.Data.Nbt;
 
 [RequiresPreviewFeatures]
-public record struct CastleUInt32ArrayToken : ICastleToken, IArrayToken<UInt32>
+public record struct CastleUInt64ArrayToken : ICastleToken, IArrayToken<UInt64>
 {
-	internal List<UInt32> Children { get; set; }
+	internal List<UInt64> Children { get; set; }
 
-	public UInt32 this[Int32 index]
+	public UInt64 this[Int32 index]
 	{
 		get => this.Children[index];
 		set => this.Children[index] = value;
 	}
 
-	public static Byte Declarator => 0x16;
+	public static Byte Declarator => 0x18;
 
 	public UInt16 NameId { get; internal set; }
 
@@ -32,7 +32,7 @@ public record struct CastleUInt32ArrayToken : ICastleToken, IArrayToken<UInt32>
 		set
 		{
 			CastleRootToken root = this.RootToken as CastleRootToken ?? throw new ArgumentException(
-				$"Root token of CastleUInt32ArrayToken {NameId} was not of type CastleRootToken");
+				$"Root token of CastleUInt64ArrayToken {NameId} was not of type CastleRootToken");
 
 			if(!root.TokenNames.Contains(value))
 			{
@@ -51,7 +51,7 @@ public record struct CastleUInt32ArrayToken : ICastleToken, IArrayToken<UInt32>
 
 	public Boolean IsReadOnly => false;
 
-	public void Add(UInt32 item)
+	public void Add(UInt64 item)
 	{
 		this.Children.Add(item);
 	}
@@ -61,32 +61,32 @@ public record struct CastleUInt32ArrayToken : ICastleToken, IArrayToken<UInt32>
 		this.Children.Clear();
 	}
 
-	public Boolean Contains(UInt32 item)
+	public Boolean Contains(UInt64 item)
 	{
 		return this.Children.Contains(item);
 	}
 
-	public void CopyTo(UInt32[] array, Int32 arrayIndex)
+	public void CopyTo(UInt64[] array, Int32 arrayIndex)
 	{
 		this.Children.CopyTo(array, arrayIndex);
 	}
 
-	public IEnumerator<UInt32> GetEnumerator()
+	public IEnumerator<UInt64> GetEnumerator()
 	{
 		return this.Children.GetEnumerator();
 	}
 
-	public Int32 IndexOf(UInt32 item)
+	public Int32 IndexOf(UInt64 item)
 	{
 		return this.Children.IndexOf(item);
 	}
 
-	public void Insert(Int32 index, UInt32 item)
+	public void Insert(Int32 index, UInt64 item)
 	{
 		this.Children.Insert(index, item);
 	}
 
-	public Boolean Remove(UInt32 item)
+	public Boolean Remove(UInt64 item)
 	{
 		return this.Children.Remove(item);
 	}
@@ -103,7 +103,7 @@ public record struct CastleUInt32ArrayToken : ICastleToken, IArrayToken<UInt32>
 			Name = this.Name
 		};
 
-		nbt.SetChildren(MemoryMarshal.Cast<UInt32, Int32>(CollectionsMarshal.AsSpan(this.Children)));
+		nbt.SetChildren(MemoryMarshal.Cast<UInt64, Int32>(CollectionsMarshal.AsSpan(this.Children)));
 
 		return nbt;
 	}
