@@ -23,7 +23,7 @@ public record struct CastleUInt16ArrayToken : ICastleToken, IArrayToken<UInt16>
 		set => this.Children[index] = value;
 	}
 
-	public static Byte Declarator => 0x11;
+	public static Byte Declarator => 0x14;
 
 	public UInt16 NameId { get; internal set; }
 
@@ -35,7 +35,7 @@ public record struct CastleUInt16ArrayToken : ICastleToken, IArrayToken<UInt16>
 		set
 		{
 			CastleRootToken root = this.RootToken as CastleRootToken ?? throw new ArgumentException(
-				$"Root token of CastleByteArrayToken {NameId} was not of type CastleRootToken");
+				$"Root token of CastleUInt16ArrayToken {NameId} was not of type CastleRootToken");
 
 			if(!root.TokenNames.Contains(value))
 			{

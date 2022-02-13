@@ -3,23 +3,24 @@ namespace Helium.Data.Castle;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 
 using Helium.Data.Abstraction;
 using Helium.Data.Nbt;
 
 [RequiresPreviewFeatures]
-public record struct CastleSByteArrayToken : ICastleToken, IArrayToken<SByte>
+public record struct CastleInt32ArrayToken : ICastleToken, IArrayToken<Int32>
 {
-	internal List<SByte> Children { get; set; }
+	internal List<Int32> Children { get; set; }
 
-	public SByte this[Int32 index]
+	public Int32 this[Int32 index]
 	{
 		get => this.Children[index];
 		set => this.Children[index] = value;
 	}
 
-	public static Byte Declarator => 0x12;
+	public static Byte Declarator => 0x15;
 
 	public UInt16 NameId { get; internal set; }
 
@@ -31,7 +32,7 @@ public record struct CastleSByteArrayToken : ICastleToken, IArrayToken<SByte>
 		set
 		{
 			CastleRootToken root = this.RootToken as CastleRootToken ?? throw new ArgumentException(
-				$"Root token of CastleSByteArrayToken {NameId} was not of type CastleRootToken");
+				$"Root token of CastleInt32ArrayToken {NameId} was not of type CastleRootToken");
 
 			if(!root.TokenNames.Contains(value))
 			{
@@ -50,7 +51,7 @@ public record struct CastleSByteArrayToken : ICastleToken, IArrayToken<SByte>
 
 	public Boolean IsReadOnly => false;
 
-	public void Add(SByte item)
+	public void Add(Int32 item)
 	{
 		this.Children.Add(item);
 	}
@@ -60,32 +61,32 @@ public record struct CastleSByteArrayToken : ICastleToken, IArrayToken<SByte>
 		this.Children.Clear();
 	}
 
-	public Boolean Contains(SByte item)
+	public Boolean Contains(Int32 item)
 	{
 		return this.Children.Contains(item);
 	}
 
-	public void CopyTo(SByte[] array, Int32 arrayIndex)
+	public void CopyTo(Int32[] array, Int32 arrayIndex)
 	{
 		this.Children.CopyTo(array, arrayIndex);
 	}
 
-	public IEnumerator<SByte> GetEnumerator()
+	public IEnumerator<Int32> GetEnumerator()
 	{
 		return this.Children.GetEnumerator();
 	}
 
-	public Int32 IndexOf(SByte item)
+	public Int32 IndexOf(Int32 item)
 	{
 		return this.Children.IndexOf(item);
 	}
 
-	public void Insert(Int32 index, SByte item)
+	public void Insert(Int32 index, Int32 item)
 	{
 		this.Children.Insert(index, item);
 	}
 
-	public Boolean Remove(SByte item)
+	public Boolean Remove(Int32 item)
 	{
 		return this.Children.Remove(item);
 	}
@@ -97,12 +98,13 @@ public record struct CastleSByteArrayToken : ICastleToken, IArrayToken<SByte>
 
 	public IDataToken ToNbtToken()
 	{
-		NbtSByteArrayToken nbt = new()
+		NbtInt32ArrayToken nbt = new()
 		{
 			Name = this.Name
 		};
 
-		nbt.children = this.Children;
+		nbt.SetChildren(CollectionsMarshal.AsSpan(this.Children));
+
 		return nbt;
 	}
 
