@@ -98,7 +98,7 @@ public unsafe ref struct BinaryCastleReader
 				}
 				else
 				{
-					stringId = 0;	// dummy name deduplication ID. we know 0 exists, so it wont cause issues.
+					stringId = 0;		// dummy name deduplication ID. we know 0 exists, so it wont cause issues.
 										// 0 exists in any compound token that contains a list, for the record, since the list
 				}						// will need a name, so therefore even if there are no other tokens, 0 will be assigned.
 

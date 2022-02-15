@@ -22,7 +22,7 @@ Each Castle token is built in the following structure:
 > 
 > payload
 
-The total length field is omitted for primitive tokens (0x01 to 0x0B) as their length is already known.
+The total length field is omitted for primitive tokens (0x01 to 0x1C) as their length is already known.
 
 Each Castle file is wrapped into a compound token, the so-called Root token, which should also contain all names, indexed to their deduplication IDs. This root token should declare the total length of its string deduplication array as its total length; opening each file with `00 (root tokens are declared as 0x00) xxxxxxxx (total length of the names) 0000 (skipping name deduplication)`, following by the name array and the payload. Any file starting differently does not conform to the specification.
 
