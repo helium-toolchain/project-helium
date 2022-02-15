@@ -52,7 +52,7 @@ public unsafe ref struct BinaryCastleReader
 
 			while(true)
 			{
-				twoLengthSpan = new(handle, 2);		// assign the next length to our two-length span
+				twoLengthSpan = new(handle, 2);				// assign the next length to our two-length span
 				handle += 2;                                // and increment the pointer because it doesnt do that automatically
 
 				stringLength = BinaryPrimitives.ReadUInt16LittleEndian(twoLengthSpan);
