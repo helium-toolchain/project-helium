@@ -684,7 +684,7 @@ public unsafe ref struct BinaryCastleWriter
 	{
 		Int32 byteCount = Encoding.UTF8.GetByteCount(token.Value);
 
-		this.incrementBufferIfNecessary(3 + byteCount);
+		this.incrementBufferIfNecessary(5 + byteCount);
 
 		*(this.bufferPointer + offset + 1) = token.RefDeclarator;
 		offset++;
@@ -698,14 +698,14 @@ public unsafe ref struct BinaryCastleWriter
 		access = new(this.bufferPointer + offset + 2, byteCount);
 		Encoding.UTF8.GetBytes(token.Value).AsSpan().CopyTo(access);
 
-		offset += 2 + byteCount;
+		offset += 4 + byteCount;
 	}
 
 	private void writeString16Token(CastleString16Token token, ref Int32 offset)
 	{
 		Int32 byteCount = Encoding.Unicode.GetByteCount(token.Value);
 
-		this.incrementBufferIfNecessary(3 + byteCount);
+		this.incrementBufferIfNecessary(5 + byteCount);
 
 		*(this.bufferPointer + offset + 1) = token.RefDeclarator;
 		offset++;
@@ -719,7 +719,7 @@ public unsafe ref struct BinaryCastleWriter
 		access = new(this.bufferPointer + offset + 2, byteCount);
 		Encoding.Unicode.GetBytes(token.Value).CopyTo(access);
 
-		offset += 2 + byteCount;
+		offset += 4 + byteCount;
 	}
 
 	private void writeGuidToken(CastleGuidToken token, ref Int32 offset)
@@ -746,6 +746,9 @@ public unsafe ref struct BinaryCastleWriter
 		*(this.bufferPointer + offset + 1) = CastleListToken.Declarator;
 
 		Span<Byte> access = new(this.bufferPointer + offset + 5, 2);
+		BinaryPrimitives.WriteUInt16LittleEndian(access, token.NameId);
+
+		access = new(this.bufferPointer + offset + 7, 2);
 		BinaryPrimitives.WriteInt16LittleEndian(access, (Int16)token.Count);
 
 		foreach(ICastleToken child in token.Children)
@@ -767,6 +770,9 @@ public unsafe ref struct BinaryCastleWriter
 		*(this.bufferPointer + offset + 1) = CastleCompoundToken.Declarator;
 
 		Span<Byte> access = new(this.bufferPointer + offset + 5, 2);
+		BinaryPrimitives.WriteUInt16LittleEndian(access, token.NameId);
+
+		access = new(this.bufferPointer + offset + 7, 2);
 		BinaryPrimitives.WriteInt16LittleEndian(access, (Int16)token.Count);
 
 		foreach(ICastleToken child in token.Children)
@@ -1052,10 +1058,7 @@ public unsafe ref struct BinaryCastleWriter
 			case CastleTokenType.DateTime:
 
 				CastleDateTimeToken cdtt = (CastleDateTimeToken)token;
-				this.incrementBufferIfNecessary(11);
-
-				*(this.bufferPointer + offset + 1) = token.RefDeclarator;
-				offset++;
+				this.incrementBufferIfNecessary(10);
 
 				access = new(this.bufferPointer + offset + 2, 8);
 				BinaryPrimitives.WriteInt64LittleEndian(access, cdtt.Value.Ticks);
@@ -1069,10 +1072,7 @@ public unsafe ref struct BinaryCastleWriter
 			case CastleTokenType.Date:
 
 				CastleDateToken cdt = (CastleDateToken)token;
-				this.incrementBufferIfNecessary(5);
-
-				*(this.bufferPointer + offset + 1) = token.RefDeclarator;
-				offset++;
+				this.incrementBufferIfNecessary(4);
 
 				access = new(this.bufferPointer + offset + 2, 4);
 				BinaryPrimitives.WriteInt32LittleEndian(access, cdt.Value.DayNumber);
@@ -1083,10 +1083,7 @@ public unsafe ref struct BinaryCastleWriter
 			case CastleTokenType.Time:
 
 				CastleTimeToken ctt = (CastleTimeToken)token;
-				this.incrementBufferIfNecessary(9);
-
-				*(this.bufferPointer + offset + 1) = token.RefDeclarator;
-				offset++;
+				this.incrementBufferIfNecessary(8);
 
 				access = new(this.bufferPointer + offset + 2, 8);
 				BinaryPrimitives.WriteInt64LittleEndian(access, ctt.Value.Ticks);
@@ -1099,10 +1096,7 @@ public unsafe ref struct BinaryCastleWriter
 				CastleStringToken cst = (CastleStringToken)token;
 				byteCount = Encoding.UTF8.GetByteCount(cst.Value);
 
-				this.incrementBufferIfNecessary(1 + byteCount);
-
-				*(this.bufferPointer + offset + 1) = token.RefDeclarator;
-				offset++;
+				this.incrementBufferIfNecessary(2 + byteCount);
 
 				access = new(this.bufferPointer + offset + 2, 2);
 				BinaryPrimitives.WriteInt16LittleEndian(access, (Int16)byteCount);
@@ -1118,10 +1112,7 @@ public unsafe ref struct BinaryCastleWriter
 				CastleStringToken cs16t = (CastleStringToken)token;
 				byteCount = Encoding.Unicode.GetByteCount(cs16t.Value);
 
-				this.incrementBufferIfNecessary(1 + byteCount);
-
-				*(this.bufferPointer + offset + 1) = token.RefDeclarator;
-				offset++;
+				this.incrementBufferIfNecessary(2 + byteCount);
 
 				access = new(this.bufferPointer + offset + 2, 2);
 				BinaryPrimitives.WriteInt16LittleEndian(access, (Int16)byteCount);
@@ -1135,14 +1126,11 @@ public unsafe ref struct BinaryCastleWriter
 			case CastleTokenType.Guid:
 
 				CastleGuidToken cgt = (CastleGuidToken)token;
-				this.incrementBufferIfNecessary(17);
-
-				*(this.bufferPointer + offset + 1) = token.RefDeclarator;
-				offset++;
+				this.incrementBufferIfNecessary(16);
 
 				access = new(this.bufferPointer + offset + 2, 16);
 				cgt.Value.ToByteArray().CopyTo(access);
-				offset += 17;
+				offset += 16;
 
 				break;
 
@@ -1153,8 +1141,10 @@ public unsafe ref struct BinaryCastleWriter
 				CastleCompoundToken cct = (CastleCompoundToken)token;
 				this.incrementBufferIfNecessary(7);
 
-				Int32 offsetSnapshot = offset + 2;
-				*(this.bufferPointer + offset + 1) = CastleCompoundToken.Declarator;
+				Int32 offsetSnapshot = ++offset;
+
+				access = new(this.bufferPointer + offset + 4, 2);
+				BinaryPrimitives.WriteInt16LittleEndian(access, (Int16)cct.Count);
 
 				foreach(ICastleToken child in cct.Children)
 				{
