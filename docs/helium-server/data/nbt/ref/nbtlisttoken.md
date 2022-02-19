@@ -13,4 +13,4 @@ Declarator: `0x09`
 
 ## See also
 
-- [IListToken](../../abstraction/ref/ilisttoken)
+- [IListToken](../../abstraction/ref/ilisttoken.md)

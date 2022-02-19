@@ -13,6 +13,6 @@ Declarator: `0x0A`
 
 ## See also
 
-- [IRootToken](../../abstraction/ref/iroottoken)
-- [NbtCompoundToken](./nbtcompoundtoken)
-- [ICompoundToken](../../abstraction/ref/icompoundtoken)
+- [IRootToken](../../abstraction/ref/iroottoken.md)
+- [NbtCompoundToken](./nbtcompoundtoken.md)
+- [ICompoundToken](../../abstraction/ref/icompoundtoken.md)

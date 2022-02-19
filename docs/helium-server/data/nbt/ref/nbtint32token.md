@@ -13,4 +13,4 @@ Declarator: `0x03`
 
 ## See also
 
-- [IValueToken](../../abstraction/ref/ivaluetoken)
+- [IValueToken](../../abstraction/ref/ivaluetoken.md)

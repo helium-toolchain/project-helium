@@ -13,4 +13,4 @@ Declarator: `0x0A`
 
 ## See also
 
-- [ICompoundToken](../../abstraction/ref/icompoundtoken)
+- [ICompoundToken](../../abstraction/ref/icompoundtoken.md)
