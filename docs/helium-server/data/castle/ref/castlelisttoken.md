@@ -7,7 +7,9 @@ namespace Helium.Data.Castle;
 public sealed record CastleListToken : ICastleParentToken, IListToken
 ~~~
 
-Represents a Castle list token
+Represents a Castle list token.
+
+Declarator: `0x1D`
 
 ## See also
 
