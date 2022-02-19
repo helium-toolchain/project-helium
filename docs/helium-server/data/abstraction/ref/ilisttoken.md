@@ -29,4 +29,4 @@ Adds a child token of the same type as the existing list to the list.
 
 ## See also
 
-- [IDataToken](./idatatoken)
+- [IDataToken](./idatatoken.md)

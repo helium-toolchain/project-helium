@@ -21,4 +21,4 @@ The primitive value of this token.
 
 ## See also
 
-- [IDataToken](./idatatoken)
+- [IDataToken](./idatatoken.md)

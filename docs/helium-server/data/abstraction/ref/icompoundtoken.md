@@ -31,5 +31,5 @@ Adds a child token to this compound.
 
 ## See also
 
-- [IDataToken](./idatatoken)
-- [IRootToken](./iroottoken)
+- [IDataToken](./idatatoken.md)
+- [IRootToken](./iroottoken.md)

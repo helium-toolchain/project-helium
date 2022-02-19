@@ -21,4 +21,4 @@ Stores this data structure's concrete type as string. This should be `nbt` for N
 
 ## See also
 
-- [ICompoundToken](./icompoundtoken)
+- [ICompoundToken](./icompoundtoken.md)

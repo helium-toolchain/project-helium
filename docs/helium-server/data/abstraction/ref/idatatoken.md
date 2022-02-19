@@ -51,4 +51,4 @@ Stores the immediate parent token for this token. Implementing this is optional.
 
 ## See also
 
-- [IRootToken](./iroottoken)
+- [IRootToken](./iroottoken.md)
