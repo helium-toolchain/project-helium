@@ -8,8 +8,6 @@ using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using System.Text;
 
-using Helium.Data.Abstraction;
-
 [RequiresPreviewFeatures]
 public unsafe ref struct BinaryCastleWriter
 {
@@ -95,11 +93,6 @@ public unsafe ref struct BinaryCastleWriter
 		this.bufferGCHandle = underlyingBuffer.Pin();
 	}
 
-	public void Dispose()
-	{
-		this.bufferGCHandle.Dispose();
-	}
-
 	[MethodImpl(MethodImplOptions.AggressiveOptimization)]
 	public void Serialize()
 	{
@@ -149,6 +142,9 @@ public unsafe ref struct BinaryCastleWriter
 
 		// slice away all trailing zeroes, we dont need those
 		this.underlyingBuffer = this.underlyingBuffer[..totalOffset];
+
+		// we can now move this, now that we no longer rely on offsets
+		this.bufferGCHandle.Dispose();
 	}
 
 	// one-size-fits-all writer for any given token. uses the declared token type to route this call.
