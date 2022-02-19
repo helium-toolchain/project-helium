@@ -13,6 +13,11 @@ using Helium.Data.Abstraction;
 
 public unsafe ref struct BinaryCastleReader
 {
+	public BinaryCastleReader(Span<Byte> blob)
+	{
+		this.Blob = blob;
+	}
+
 	public Int32 MaximumDepth { get; set; } = 512;
 
 	public Span<Byte> Blob { get; init; }

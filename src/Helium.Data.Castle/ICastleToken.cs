@@ -9,7 +9,7 @@ using Helium.Data.Abstraction;
 /// Base interface for Castle-type tokens.
 /// </summary>
 [RequiresPreviewFeatures]
-public interface ICastleToken
+public interface ICastleToken : IDataToken
 {
 	/// <summary>
 	/// Returns a NBT representation of this token. This is only intended for rudimentary converters.

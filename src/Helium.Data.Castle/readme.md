@@ -97,7 +97,7 @@ Since a string cannot have children, and we have already established that the ro
 Another valid Castle file would be:
 
 ~~~
-0C 00 00 00 00 00 06 00 6E 75 6D 62 65 72 02 00 48 69 02 00 0A 00 00 0F 0F 0F 0F 0A 00 00 F0 F0 F0 F0
+00 0C 00 00 00 00 06 00 6E 75 6D 62 65 72 02 00 48 69 02 00 0A 00 00 0F 0F 0F 0F 0A 00 00 F0 F0 F0 F0
 ~~~
 
 This contains two float tokens, one with the name `number` and one with the name `Hi`. The first one stores `0F 0F 0F 0F`, around 7.0533; the second one stores `F0 F0 F0 F0`, -596541423374289729685825781760.
