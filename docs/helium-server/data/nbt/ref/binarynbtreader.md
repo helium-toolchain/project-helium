@@ -58,5 +58,5 @@ Links to the main reader method, providing convenience by allowing to deserializ
 
 ## See also
 
-- [NbtRootToken](./nbtroottoken)
-- [BinaryNbtWriter](./binarynbtwriter)
+- [NbtRootToken](./nbtroottoken.md)
+- [BinaryNbtWriter](./binarynbtwriter.md)

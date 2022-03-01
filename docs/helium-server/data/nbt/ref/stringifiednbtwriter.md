@@ -21,5 +21,5 @@ Writes the given NBT data to sNBT.
 
 ## See also
 
-- [NbtRootToken](./nbtroottoken)
-- [StringifiedNbtReader](./stringifiednbtreader)
+- [NbtRootToken](./nbtroottoken.md)
+- [StringifiedNbtReader](./stringifiednbtreader.md)

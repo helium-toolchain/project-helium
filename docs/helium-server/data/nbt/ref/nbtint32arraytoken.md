@@ -13,4 +13,4 @@ Declarator: `0x0B`
 
 ## See also
 
-- [IArrayToken](../../abstraction/ref/iarraytoken)
+- [IArrayToken](../../abstraction/ref/iarraytoken.md)

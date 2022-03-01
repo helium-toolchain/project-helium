@@ -2,9 +2,9 @@
 
 ## Helium.Data.Abstraction
 
-- [IArrayToken](./ref/iarraytoken)
-- [ICompoundToken](./ref/icompoundtoken)
-- [IDataToken](./ref/idatatoken)
-- [IListToken](./ref/ilisttoken)
-- [IRootToken](./ref/iroottoken)
-- [IValueToken](./ref/ivaluetoken)
+- [IArrayToken](./ref/iarraytoken.md)
+- [ICompoundToken](./ref/icompoundtoken.md)
+- [IDataToken](./ref/idatatoken.md)
+- [IListToken](./ref/ilisttoken.md)
+- [IRootToken](./ref/iroottoken.md)
+- [IValueToken](./ref/ivaluetoken.md)

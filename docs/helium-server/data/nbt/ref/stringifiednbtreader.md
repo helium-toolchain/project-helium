@@ -21,5 +21,5 @@ Deserializes the given string according to the sNBT specification.
 
 ## See also
 
-- [NbtRootToken](./nbtroottoken)
-- [StringifiedNbtWriter](./stringifiednbtwriter)
+- [NbtRootToken](./nbtroottoken.md)
+- [StringifiedNbtWriter](./stringifiednbtwriter.md)

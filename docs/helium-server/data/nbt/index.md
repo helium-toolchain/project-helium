@@ -23,13 +23,13 @@ There are no plans to support Bedrock Edition NBT, however, feel free to open a 
 
 *Not implemented yet.*
 
-## [API Reference](./reference)
+## [API Reference](./reference.md)
 
 ## See also
 
-- [BinaryNbtReader](./ref/binarynbtreader)
-- [BinaryNbtWriter](./ref/binarynbtwriter)
-- [StringifiedNbtReader](./ref/stringifiednbtreader)
-- [StringifiedNbtWriter](./ref/stringifiednbtwriter)
-- [NbtRootToken](./ref/nbtroottoken)
-- [NbtCompoundToken](./ref/nbtcompoundtoken)
+- [BinaryNbtReader](./ref/binarynbtreader.md)
+- [BinaryNbtWriter](./ref/binarynbtwriter.md)
+- [StringifiedNbtReader](./ref/stringifiednbtreader.md)
+- [StringifiedNbtWriter](./ref/stringifiednbtwriter.md)
+- [NbtRootToken](./ref/nbtroottoken.md)
+- [NbtCompoundToken](./ref/nbtcompoundtoken.md)

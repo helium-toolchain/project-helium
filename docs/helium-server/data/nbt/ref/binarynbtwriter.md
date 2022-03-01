@@ -21,5 +21,5 @@ The main serializer.
 
 ## See also
 
-- [NbtRootToken](./nbtroottoken)
-- [BinaryNbtReader](./binarynbtreader)
+- [NbtRootToken](./nbtroottoken.md)
+- [BinaryNbtReader](./binarynbtreader.md)

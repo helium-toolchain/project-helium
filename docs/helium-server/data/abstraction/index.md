@@ -7,11 +7,11 @@ Helium.Data.Abstraction is a minimalist abstraction library intended for use wit
 - [x] Abstractions for in-memory data structures
 - [ ] Abstractions for Document Object Model structures
 
-## [API Reference](./reference)
+## [API Reference](./reference.md)
 
 ## See also
 
-- [IDataToken](./ref/idatatoken)
-- [IListToken](./ref/ilisttoken)
-- [ICompoundToken](./ref/icompoundtoken)
-- [IRootToken](./ref/iroottoken)
+- [IDataToken](./ref/idatatoken.md)
+- [IListToken](./ref/ilisttoken.md)
+- [ICompoundToken](./ref/icompoundtoken.md)
+- [IRootToken](./ref/iroottoken.md)
