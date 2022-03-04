@@ -1,0 +1,36 @@
+namespace Helium.Data.Castle.Serialization;
+
+public enum CastleTokenType
+{
+	Root,
+	Byte,
+	SByte,
+	Int16,
+	UInt16,
+	Int32,
+	UInt32,
+	Int64,
+	UInt64,
+	Half,
+	Single,
+	Double,
+	String,
+	UTF16String,
+	DateTime,
+	Date,
+	Time,
+	ByteArray,
+	SByteArray,
+	Int16Array,
+	UInt16Array,
+	Int32Array,
+	UInt32Array,
+	Int64Array,
+	UInt64Array,
+	HalfArray,
+	SingleArray,
+	DoubleArray,
+	Guid,
+	List,
+	Compound
+}

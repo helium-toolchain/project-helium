@@ -452,6 +452,7 @@ public sealed class BinaryNbtReader
 							RootToken = root
 						};
 
+						(activeToken as ICompoundToken)!.AddChildToken(currentToken);
 						activeToken = currentToken;
 
 						stateStack.Push(new()
@@ -470,6 +471,7 @@ public sealed class BinaryNbtReader
 							RootToken = root
 						};
 
+						(activeToken as ICompoundToken)!.AddChildToken(currentToken);
 						activeToken = currentToken;
 
 						stateStack.Push(new()
@@ -894,6 +896,7 @@ public sealed class BinaryNbtReader
 							RootToken = root
 						};
 
+						(activeToken as IListToken)!.AddChildToken(currentToken);
 						activeToken = currentToken;
 
 						stateStack.Push(new()
