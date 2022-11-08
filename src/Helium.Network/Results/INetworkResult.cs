@@ -16,4 +16,14 @@ public interface INetworkResult
 	/// An exception describing the failure, if applicable and possible.
 	/// </summary>
 	public Exception? Exception { get; }
+
+	/// <summary>
+	/// Indicates whether this result was successful.
+	/// </summary>
+	public Boolean IsSuccess { get; }
+
+	/// <summary>
+	/// Throws the exception stored in this result, if applicable.
+	/// </summary>
+	public void Throw();
 }

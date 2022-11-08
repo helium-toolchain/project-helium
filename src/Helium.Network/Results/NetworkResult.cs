@@ -1,6 +1,8 @@
 namespace Helium.Network.Results;
 
 using System;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 
 /// <summary>
 /// Represents a no-return result of a Helium networking operation.
@@ -12,4 +14,19 @@ public readonly struct NetworkResult : INetworkResult
 
 	/// <inheritdoc/>
 	public Exception? Exception { get; init; }
+
+	/// <inheritdoc/>
+	public Boolean IsSuccess
+	{
+		get => this.Outcome is OperationOutcome.Success or OperationOutcome.NoOperation;
+	}
+
+	[StackTraceHidden]
+	public void Throw()
+	{
+		if(this.Exception is not null)
+		{
+			throw this.Exception;
+		}
+	}
 }
