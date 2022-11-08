@@ -50,6 +50,23 @@ public readonly struct NetworkResult<TReturn> : INetworkResult
 		}
 	}
 
+	/// <summary>
+	/// Returns a new successful result.
+	/// </summary>
+	/// <param name="value">The return value for this result.</param>
+	public static NetworkResult<TReturn> FromSuccess
+	(
+		TReturn value
+	)
+	{
+		return new()
+		{
+			Exception = null,
+			ReturnValue = value,
+			Outcome = OperationOutcome.Success,
+		};
+	}
+
 	[StackTraceHidden]
 	public void Throw()
 	{

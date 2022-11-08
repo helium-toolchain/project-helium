@@ -1,11 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Helium.Api\Helium.Api.csproj" />
+    <ProjectReference Include="..\Helium.Network\Helium.Network.csproj" />
   </ItemGroup>
 
 </Project>

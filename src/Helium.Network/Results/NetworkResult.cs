@@ -21,6 +21,18 @@ public readonly struct NetworkResult : INetworkResult
 		get => this.Outcome is OperationOutcome.Success or OperationOutcome.NoOperation;
 	}
 
+	/// <summary>
+	/// Returns a new successful result.
+	/// </summary>
+	public static NetworkResult FromSuccess()
+	{
+		return new()
+		{
+			Exception = null,
+			Outcome = OperationOutcome.Success,
+		};
+	}
+
 	[StackTraceHidden]
 	public void Throw()
 	{
