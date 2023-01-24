@@ -1,4 +1,4 @@
-﻿namespace Helium.Network.Api.Vanilla.V15.Packets.Clientbound.Login;
+namespace Helium.Network.Api.Vanilla.V15.Packets.Clientbound.Login;
 
 using System;
 using System.Runtime.CompilerServices;
@@ -35,7 +35,7 @@ public struct EncryptionRequestPacket : IPacket
 	/// <summary>
 	/// Server ID. Always empty with the notchian protocol (the data field is 0x00, a VarInt signaling a string length of 0)
 	/// </summary>
-	public String ServerId { get; set; } = null!;
+	public String ServerId { get; set; } 
 
 	/// <summary>
 	/// Calculates the length of this packet. We're just hoping this gets inlined...

@@ -1,4 +1,4 @@
-﻿namespace Helium.Network.Api.Vanilla.V15.Packets.Clientbound.Login;
+namespace Helium.Network.Api.Vanilla.V15.Packets.Clientbound.Login;
 
 using Helium.Api.Mojang;
 
@@ -12,7 +12,7 @@ public struct SetCompressionPacket : IPacket
 	/// <summary>
 	/// Compression limit
 	/// </summary>
-	public VarInt CompressionSize { get; set; } = 0;
+	public VarInt CompressionSize { get; set; }
 
 	public void Read(PacketStream stream)
 	{

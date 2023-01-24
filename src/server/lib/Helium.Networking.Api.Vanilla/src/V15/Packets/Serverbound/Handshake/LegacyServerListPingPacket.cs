@@ -1,4 +1,4 @@
-﻿namespace Helium.Network.Api.Vanilla.V15.Packets.Serverbound.Handshake;
+namespace Helium.Network.Api.Vanilla.V15.Packets.Serverbound.Handshake;
 
 using System;
 using System.Diagnostics.CodeAnalysis;
@@ -19,7 +19,7 @@ public struct LegacyServerListPingPacket : ILegacyPacket
 	/// <summary>
 	/// Packet payload. This is always 0x01.
 	/// </summary>
-	public Byte Payload { get; set; } = 0x01;
+	public Byte Payload { get; set; } 
 
 	public void Read(PacketStream stream)
 	{

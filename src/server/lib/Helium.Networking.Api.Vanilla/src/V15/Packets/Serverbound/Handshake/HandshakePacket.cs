@@ -1,4 +1,4 @@
-﻿namespace Helium.Network.Api.Vanilla.V15.Packets.Serverbound.Handshake;
+namespace Helium.Network.Api.Vanilla.V15.Packets.Serverbound.Handshake;
 
 using System;
 
@@ -23,7 +23,7 @@ public struct HandshakePacket : IPacket
 	/// <summary>
 	/// Port number this packet was sent to.
 	/// </summary>
-	public UInt16 Port { get; set; } = 25565;
+	public UInt16 Port { get; set; }
 
 	/// <summary>
 	/// 255-char string of the address, either hostname or IP, this packet was sent to.
