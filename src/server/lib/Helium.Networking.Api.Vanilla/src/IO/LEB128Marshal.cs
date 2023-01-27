@@ -1,8 +1,6 @@
 namespace Helium.Networking.Api.Vanilla.IO;
 
 using System;
-using System.Diagnostics;
-using System.Numerics;
 using System.Runtime.CompilerServices;
 
 /// <summary>
@@ -273,24 +271,5 @@ public unsafe static class LEB128Marshal
 		} while (*p++ >= 128);
 
 		return (UInt32)(origin - p);
-	}
-}
-
-file static class ValidationAndThrowHelper
-{
-	private static UInt64 container = UInt64.MaxValue;
-
-	[StackTraceHidden]
-	public static void ThrowIfIntegerExceedsSizeLimit<T>()
-		where T : IBinaryInteger<T>, IMinMaxValue<T>
-	{
-		if(T.MaxValue > Unsafe.As<UInt64, T>(ref container))
-		{
-			throw new ArgumentException
-			(
-				"The specified integer type is too large to be marshalled to LEB-128 in concordance with " +
-				"Minecraft's protocol rules."
-			);
-		}
 	}
 }
