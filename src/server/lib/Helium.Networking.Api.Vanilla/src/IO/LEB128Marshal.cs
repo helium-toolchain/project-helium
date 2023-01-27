@@ -18,29 +18,108 @@ public unsafe static class LEB128Marshal
 	/// This treats all integers as unsigned integers, meaning that it is only compatible with signed integers
 	/// by reinterpret-casting after decoding again.
 	/// </remarks>
-	/// <typeparam name="T">
-	/// The integer type to encode. An exception will be thrown on invocation if this integer is larger than UInt64.
-	/// </typeparam>
 	/// <param name="buffer">The buffer to encode into. Up to 10 bytes will be populated.</param>
 	/// <param name="value">The value to encode.</param>
 	/// <returns>The amount of bytes the encoding operation populated.</returns>
-	public static UInt32 Encode<T>
+	public static UInt32 Encode
 	(
 		Span<Byte> buffer,
-		T value
+		Int32 value
 	)
-		where T : unmanaged, IBinaryInteger<T>, IMinMaxValue<T>
-	{
-		ValidationAndThrowHelper.ThrowIfIntegerExceedsSizeLimit<T>();
+		=> encodeUnified
+		(
+			buffer,
+			(UInt32)value
+		);
 
-		fixed(Byte* origin = buffer)
-		{
-			return encodeLEB128
-			(
-				*(UInt64*)&value,
-				origin
-			);
-		}
+	/// <summary>
+	/// Encodes the given integer as LEB-128.
+	/// </summary>
+	/// <remarks>
+	/// This treats all integers as unsigned integers, meaning that it is only compatible with signed integers
+	/// by reinterpret-casting after decoding again.
+	/// </remarks>
+	/// <param name="buffer">The buffer to encode into. Up to 10 bytes will be populated.</param>
+	/// <param name="value">The value to encode.</param>
+	/// <returns>The amount of bytes the encoding operation populated.</returns>
+	public static UInt32 Encode
+	(
+		Span<Byte> buffer,
+		UInt32 value
+	)
+		=> encodeUnified
+		(
+			buffer,
+			value
+		);
+
+	/// <summary>
+	/// Encodes the given integer as LEB-128.
+	/// </summary>
+	/// <remarks>
+	/// This treats all integers as unsigned integers, meaning that it is only compatible with signed integers
+	/// by reinterpret-casting after decoding again.
+	/// </remarks>
+	/// <param name="buffer">The buffer to encode into. Up to 10 bytes will be populated.</param>
+	/// <param name="value">The value to encode.</param>
+	/// <returns>The amount of bytes the encoding operation populated.</returns>
+	public static UInt32 Encode
+	(
+		Span<Byte> buffer,
+		Int64 value
+	)
+		=> encodeUnified
+		(
+			buffer,
+			(UInt64)value
+		);
+
+	/// <summary>
+	/// Encodes the given integer as LEB-128.
+	/// </summary>
+	/// <remarks>
+	/// This treats all integers as unsigned integers, meaning that it is only compatible with signed integers
+	/// by reinterpret-casting after decoding again.
+	/// </remarks>
+	/// <param name="buffer">The buffer to encode into. Up to 10 bytes will be populated.</param>
+	/// <param name="value">The value to encode.</param>
+	/// <returns>The amount of bytes the encoding operation populated.</returns>
+	public static UInt32 Encode
+	(
+		Span<Byte> buffer,
+		UInt64 value
+	)
+		=> encodeUnified
+		(
+			buffer,
+			value
+		);
+
+	/// <summary>
+	/// Decodes a LEB-128 integer from the given buffer.
+	/// </summary>
+	/// <remarks>
+	/// This treats all data as unsigned LEB-128, meaning that it is only compatible with signed integers
+	/// by reinterpret-casting before encoding.
+	/// </remarks>
+	/// <param name="buffer">The buffer to read from. Up to 10 bytes will be consumed.</param>
+	/// <param name="value">The decoded value.</param>
+	/// <returns>The amount of bytes that have been read.</returns>
+	public static UInt32 Decode
+	(
+		Span<Byte> buffer,
+		out Int32 value
+	)
+	{
+		UInt32 length = decodeUnified
+		(
+			buffer,
+			out UInt64 result
+		);
+
+		value = (Int32)(Int64)result;
+
+		return length;
 	}
 
 	/// <summary>
@@ -50,29 +129,104 @@ public unsafe static class LEB128Marshal
 	/// This treats all data as unsigned LEB-128, meaning that it is only compatible with signed integers
 	/// by reinterpret-casting before encoding.
 	/// </remarks>
-	/// <typeparam name="T">
-	/// The integer type to decode. An exception will be thrown on invocation if this integer is larger than UInt64.
-	/// </typeparam>
 	/// <param name="buffer">The buffer to read from. Up to 10 bytes will be consumed.</param>
 	/// <param name="value">The decoded value.</param>
 	/// <returns>The amount of bytes that have been read.</returns>
-	public static UInt32 Decode<T>
+	public static UInt32 Decode
 	(
 		Span<Byte> buffer,
-		out T value
+		out UInt32 value
 	)
-		where T : unmanaged, IBinaryInteger<T>, IMinMaxValue<T>
 	{
-		ValidationAndThrowHelper.ThrowIfIntegerExceedsSizeLimit<T>();
+		UInt32 length = decodeUnified
+		(
+			buffer,
+			out UInt64 result
+		);
 
-		value = T.Zero;
+		value = (UInt32)result;
+
+		return length;
+	}
+
+	/// <summary>
+	/// Decodes a LEB-128 integer from the given buffer.
+	/// </summary>
+	/// <remarks>
+	/// This treats all data as unsigned LEB-128, meaning that it is only compatible with signed integers
+	/// by reinterpret-casting before encoding.
+	/// </remarks>
+	/// <param name="buffer">The buffer to read from. Up to 10 bytes will be consumed.</param>
+	/// <param name="value">The decoded value.</param>
+	/// <returns>The amount of bytes that have been read.</returns>
+	public static UInt32 Decode
+	(
+		Span<Byte> buffer,
+		out Int64 value
+	)
+	{
+		UInt32 length = decodeUnified
+		(
+			buffer,
+			out UInt64 result
+		);
+
+		value = (Int64)result;
+
+		return length;
+	}
+
+	/// <summary>
+	/// Decodes a LEB-128 integer from the given buffer.
+	/// </summary>
+	/// <remarks>
+	/// This treats all data as unsigned LEB-128, meaning that it is only compatible with signed integers
+	/// by reinterpret-casting before encoding.
+	/// </remarks>
+	/// <param name="buffer">The buffer to read from. Up to 10 bytes will be consumed.</param>
+	/// <param name="value">The decoded value.</param>
+	/// <returns>The amount of bytes that have been read.</returns>
+	public static UInt32 Decode
+	(
+		Span<Byte> buffer,
+		out UInt64 value
+	)
+	    => decodeUnified
+		(
+			buffer,
+			out value
+		);
+
+	private static UInt32 encodeUnified
+	(
+		Span<Byte> buffer,
+		UInt64 value
+	)
+	{
+		fixed(Byte* origin = buffer)
+		{
+			return encodeLEB128
+			(
+				value,
+				origin
+			);
+		}
+	}
+
+	private static UInt32 decodeUnified
+	(
+		Span<Byte> buffer,
+		out UInt64 value
+	)
+	{
+		value = 0;
 
 		fixed(Byte* origin = buffer)
 		{
 			return decodeLEB128
 			(
 				origin,
-				ref Unsafe.As<T, UInt64>(ref value)
+				ref value
 			);
 		}
 	}
